@@ -168,7 +168,7 @@ const Signup = () => {
         />
       </Head>
       <section className="relative h-screen bg-white flex items-center justify-center">
-        <div className="absolute inset-0 bg-cover bg-center z-0">
+        <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
           <img
             src="/stad.jpg"
             alt="Signup Image"
@@ -273,7 +273,7 @@ const Signup = () => {
           <p className="text-center text-base font-bold text-black">
             Already registered?{" "}
             <Link href="/login" legacyBehavior>
-              <a className=" text-blue-950 text-primary-600 hover:underline">
+              <a className=" text-blue-950 text-primary-600 hover:underline underline-offset-4 ">
                 Login
               </a>
             </Link>

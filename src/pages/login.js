@@ -153,7 +153,7 @@ const Login = ({ user }) => {
         />
       </Head>
       <section className="relative min-h-screen bg-white flex items-center justify-center">
-        <div className="absolute inset-0 bg-cover bg-center z-0">
+        <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
           <img
             src="/stad.jpg"
             alt="Login Image"
@@ -238,7 +238,7 @@ const Login = ({ user }) => {
                       Forgot password?
                     </p>
                   ) : (
-                    <p className="text-sm font-bold text-blue-950 cursor-not-allowed">
+                    <p className="text-sm font-bold text-blue-950 cursor-not-allowed hover:underline underline-offset-4 ">
                       Forgot password?
                     </p>
                   )}
@@ -261,7 +261,7 @@ const Login = ({ user }) => {
           <p className=" mt-4 text-center text-base font-bold text-black ">
             Not registered yet?{" "}
             <Link href="/signup" legacyBehavior>
-              <a className="font-bold text-blue-950 hover:underline ">
+              <a className="font-bold text-blue-950 underline-offset-4 hover:underline ">
                 Sign up
               </a>
             </Link>
