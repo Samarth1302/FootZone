@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,13 +34,78 @@ const Signup = () => {
     color: "#172554",
   };
 
+  useEffect(() => {
+    const { token, email } = router.query;
+
+    if (token && email) {
+      const verifyUser = async () => {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URI}/auth/verify?token=${token}&email=${email}`,
+            {
+              method: "POST",
+              mode: "cors",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+            }
+          );
+
+          const data = await response.json();
+
+          if (data.token) {
+            localStorage.setItem("myUser", JSON.stringify(data.token));
+            toast.success("User verification complete", {
+              position: "top-left",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setTimeout(() => {
+              router.push("/");
+            }, 1000);
+          } else {
+            toast.error(data.error, {
+              position: "top-left",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Verification failed", {
+            position: "top-left",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      };
+
+      verifyUser();
+    }
+  }, [router.query]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URI}/signup`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URI}/auth/signup`,
         {
           body: JSON.stringify({ username, email, password }),
+          mode: "cors",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
           method: "POST",
@@ -48,9 +113,8 @@ const Signup = () => {
       );
 
       const data = await response.json();
-      if (data.token) {
-        localStorage.setItem("myUser", JSON.stringify(data.token));
-        toast.success("Registered successfully", {
+      if (data.message) {
+        toast.success(data.message, {
           position: "top-left",
           autoClose: 1500,
           hideProgressBar: false,
@@ -60,9 +124,6 @@ const Signup = () => {
           progress: undefined,
           theme: "light",
         });
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
       } else {
         toast.error(data.error, {
           position: "top-left",
@@ -118,7 +179,7 @@ const Signup = () => {
         <form
           id="signupForm"
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-6 relative z-10"
+          className="md:w-96 sm:w-72 bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-2 relative z-10"
           method="POST"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -204,13 +265,13 @@ const Signup = () => {
               type="submit"
               ref={buttonRef}
               disabled={!username || !password || !email}
-              className="w-auto text-white bg-blue-950 hover:bg-blue-800 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
             >
               Sign Up
             </button>
           </div>
-          <p className="text-center text-md font-bold text-black">
-            Already have an account?{" "}
+          <p className="text-center text-base font-bold text-black">
+            Already registered?{" "}
             <Link href="/login" legacyBehavior>
               <a className=" text-blue-950 text-primary-600 hover:underline">
                 Login

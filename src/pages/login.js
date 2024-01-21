@@ -1,12 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/Tooltip";
 
-const Login = () => {
+const Login = ({ user }) => {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +28,44 @@ const Login = () => {
     }
   };
 
-  const handleForgotPassword = () => {};
+  const handleForgotPassword = async () => {
+    if (email) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/security/forgot`,
+          {
+            method: "POST",
+            body: JSON.stringify({ email }),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        const data = await response.json();
+        if (data.success) {
+          toast.success(data.message, {
+            position: "top-left",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      } catch (error) {
+        toast.error(error.message, {
+          position: "top-left",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+  };
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -31,13 +74,20 @@ const Login = () => {
     color: "#172554",
   };
 
+  useEffect(() => {
+    if (user.user_id) {
+      router.push("/");
+    }
+  }, [user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URI}/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URI}/auth/login`,
         {
           method: "POST",
+          mode: "cors",
           body: JSON.stringify({ email, password }),
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -102,7 +152,7 @@ const Login = () => {
           content="football soccer stadium players athletes sport"
         />
       </Head>
-      <section className="relative h-screen bg-white flex items-center justify-center">
+      <section className="relative min-h-screen bg-white flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0">
           <img
             src="/stad.jpg"
@@ -114,8 +164,8 @@ const Login = () => {
         <form
           id="loginForm"
           onSubmit={handleSubmit}
-          className="w-96 max-w-lg bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-6
-           relative z-10"
+          className="md:w-96 sm:w-72  bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-2
+          relative z-10"
           method="POST"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -125,7 +175,7 @@ const Login = () => {
             }
           }}
         >
-          <h1 className="text-xl text-center font-medium text-black leading-tight tracking-tight text-orange-5 md:text-2xl ">
+          <h1 className="text-xl text-center font-medium text-black leading-tight tracking-tight md:text-2xl ">
             Login
           </h1>
 
@@ -177,27 +227,39 @@ const Login = () => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <button
-              type="button"
-              onClick={handleForgotPassword}
-              disabled={!email}
-              className="text-sm font-bold text-blue-950 hover:underline cursor-pointer disabled:hover:cursor-not-allowed"
-            >
-              Forgot password?
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  {email ? (
+                    <p
+                      onClick={handleForgotPassword}
+                      className="text-sm font-bold text-blue-950 hover:underline cursor-pointer"
+                    >
+                      Forgot password?
+                    </p>
+                  ) : (
+                    <p className="text-sm font-bold text-blue-950 cursor-not-allowed">
+                      Forgot password?
+                    </p>
+                  )}
+                </TooltipTrigger>
+                <TooltipContent>Enter email to click here</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <div className="flex justify-center">
             <button
               type="submit"
               ref={buttonRef}
               disabled={!password || !email}
-              className="w-auto text-white bg-blue-950 hover:bg-blue-800 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
             >
               Login
             </button>
           </div>
-          <p className="text-center text-sm font-bold text-black ">
-            Don't have an account yet?{" "}
+
+          <p className=" mt-4 text-center text-base font-bold text-black ">
+            Not registered yet?{" "}
             <Link href="/signup" legacyBehavior>
               <a className="font-bold text-blue-950 hover:underline ">
                 Sign up

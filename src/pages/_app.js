@@ -25,17 +25,31 @@ export default function App({ Component, pageProps }) {
           process.env.NEXT_PUBLIC_JWT_SECRET
         );
         const sanitizedUser = {
-          email: DOMPurify.sanitize(decodedToken.email),
-          username: DOMPurify.sanitize(decodedToken.username),
           user_id: DOMPurify.sanitize(decodedToken.user_id),
+          username: DOMPurify.sanitize(decodedToken.username),
         };
         setUser(sanitizedUser);
       } catch (error) {
+        console.error("Error verifying token:", error.message);
         localStorage.removeItem("myUser");
       }
     }
     setKey(Math.random());
   }, [router.query]);
+
+  const confirmLogout = () => {
+    localStorage.removeItem("myUser");
+    setUser({});
+    setKey(Math.random());
+    router.push("/");
+    setShowLogoutConfirmation(false);
+  };
+  const cancelLogout = () => {
+    setShowLogoutConfirmation(false);
+  };
+  const handleLogout = () => {
+    setShowLogoutConfirmation(true);
+  };
 
   return (
     <>
@@ -54,27 +68,15 @@ export default function App({ Component, pageProps }) {
         theme="light"
       />
 
-      {key && (
-        <Navbar
-          user={user}
-          key={key}
-          logout={() => setShowLogoutConfirmation(true)}
-        />
-      )}
+      {key && <Navbar user={user} key={key} logout={handleLogout} />}
 
       <Component user={user} {...pageProps} />
       <Footer />
       {showLogoutConfirmation && (
         <Confirm
           message="Are you sure you want to logout?"
-          onConfirm={() => {
-            localStorage.removeItem("myUser");
-            setUser({});
-            setKey(Math.random());
-            router.push("/");
-            setShowLogoutConfirmation(false);
-          }}
-          onCancel={() => setShowLogoutConfirmation(false)}
+          onConfirm={confirmLogout}
+          onCancel={cancelLogout}
         />
       )}
     </>

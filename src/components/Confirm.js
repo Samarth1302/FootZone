@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 const Confirm = ({ message, onConfirm, onCancel }) => {
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-95 flex items-center justify-center">
+    <div className="fixed inset-0 bg-blue-950 bg-opacity-95 flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="bg-blue-700 rounded-lg shadow-md p-6">
+        <div className="bg-black rounded-lg shadow-md p-6">
           <div className="flex justify-end mb-1">
             <button
               onClick={onCancel}
