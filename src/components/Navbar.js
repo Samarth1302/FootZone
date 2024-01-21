@@ -25,14 +25,14 @@ const Navbar = ({ user, logout }) => {
   return (
     <>
       <div
-        className={`flex flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-4 pt-4 bg-blue-100  ${
+        className={`flex flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-3 pt-4 bg-blue-100  ${
           !sidebar && "overflow-hidden"
         }`}
       >
         <div className="relative left-5 mx-2 flex content-end md:mx-2">
-          <div className="text-2xl items-center py-1 mr-5">
+          <div className="text-2xl items-center mr-5">
             <FiAlignJustify
-              className={`text-xl md:text-3xl ${hamHovered ? "hovered" : ""}`}
+              className={`text-lg md:text-2xl ${hamHovered ? "hovered" : ""}`}
               style={{
                 color: hamHovered ? "#177abf" : "#172554",
                 cursor: "pointer",
@@ -81,18 +81,18 @@ const Navbar = ({ user, logout }) => {
               <Image
                 src="/logo.png"
                 alt="FootZone logo"
-                width={200}
+                width={160}
                 height={100}
               />
             </div>
           </Link>
         </div>
-        <div className="items-center cursor-pointer absolute md:right-4 md:top-5 sm:top-6 ml-72  flex">
+        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-4 ml-72 flex">
           {user.user_id && (
             <div className="-mt-1">
-              <span className="flex text-xl flex-col">
+              <span className="flex text-base md:text-xl flex-col">
                 <MdAccountCircle style={{ color: "#172554" }} />
-                <p className="text-sm -ml-2 font-medium text-blue-950">
+                <p className="text-xs md:text-sm -ml-2 font-medium text-blue-950">
                   {user.username}
                 </p>
               </span>

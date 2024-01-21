@@ -30,13 +30,8 @@ export default function Carousel({ slides }) {
       setIsMobile(window.innerWidth < 640);
     };
 
-    // Initial check on mount
     handleResize();
-
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -57,7 +52,6 @@ export default function Carousel({ slides }) {
           >
             <Image
               className="opacity-40 rounded-lg"
-              layout="responsive"
               width={1500}
               height={600}
               src={slide.imgsrc}
@@ -67,20 +61,19 @@ export default function Carousel({ slides }) {
               className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-30`}
             >
               <div
-                className={`max-w-[80%] md:max-w-[60%] lg:max-w-[40%] mx-auto`}
+                className={`max-w-[60%] md:max-w-[60%] lg:max-w-[40%] mx-auto`}
               >
                 <h2
-                  className={`text-base md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
+                  className={`text-base text-blue-100 md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
                 >
                   {slide.content}
                 </h2>
-                {!isMobile ? (
-                  <p
-                    className={`text-sm md:text-base lg:text-xl font-semibold whitespace-normal`}
-                  >
-                    {slide.text}
-                  </p>
-                ) : null}
+
+                <p
+                  className={`text-xs md:text-base lg:text-xl font-normal md:font-semibold whitespace-normal`}
+                >
+                  {slide.text}
+                </p>
                 <button
                   className={`w-auto mt-8 mb-4 text-white bg-blue-700 hover:bg-blue-900 font-medium rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
                 >
