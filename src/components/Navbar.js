@@ -25,7 +25,7 @@ const Navbar = ({ user, logout }) => {
   return (
     <>
       <div
-        className={`flex flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-3 pt-4 bg-blue-100  ${
+        className={`flex sticky flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-3 pt-4 bg-blue-200  ${
           !sidebar && "overflow-hidden"
         }`}
       >
