@@ -43,6 +43,7 @@ const Login = ({ user }) => {
         if (data.success) {
           toast.success(data.message, {
             position: "top-left",
+            toastId: "forgot",
             autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
@@ -55,6 +56,7 @@ const Login = ({ user }) => {
       } catch (error) {
         toast.error(error.message, {
           position: "top-left",
+          toastId: "erforget",
           autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
@@ -82,23 +84,55 @@ const Login = ({ user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URI}/auth/login`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({ email, password }),
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        }
-      );
+    if (email && password) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/auth/login`,
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
 
-      const data = await response.json();
-      if (data.token) {
-        localStorage.setItem("myUser", JSON.stringify(data.token));
-        toast.success("Logged in successfully", {
+        const data = await response.json();
+        if (data.token) {
+          localStorage.setItem("myUser", JSON.stringify(data.token));
+          toast.success("Logged in successfully", {
+            position: "top-left",
+            autoClose: 1500,
+            toastId: "login",
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setEmail("");
+          setPass("");
+          setTimeout(() => {
+            router.push("/");
+          }, 1000);
+        } else {
+          toast.error(data.error, {
+            position: "top-left",
+            toastId: "er1login",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      } catch (error) {
+        toast.error(error.message, {
           position: "top-left",
+          toastId: "erlogin",
           autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
@@ -107,35 +141,8 @@ const Login = ({ user }) => {
           progress: undefined,
           theme: "light",
         });
-        setEmail("");
         setPass("");
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
-      } else {
-        toast.error(data.error, {
-          position: "top-left",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
       }
-    } catch (error) {
-      toast.error(error.message, {
-        position: "top-left",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      setPass("");
     }
   };
 
@@ -182,9 +189,9 @@ const Login = ({ user }) => {
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-bold text-black"
+              className="block mt-4 mb-2 text-sm font-bold text-black"
             >
-              Email
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               onChange={handleChange}
@@ -194,15 +201,15 @@ const Login = ({ user }) => {
               value={email}
               className="bg-white border-black border-2 font-medium text-base text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5 "
               placeholder="name@company.com"
-              required=""
+              required
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="block mb-2 text-sm font-bold text-black "
+              className="block mt-4 mb-2 text-sm font-bold text-black "
             >
-              Password
+              Password <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <input
@@ -212,7 +219,7 @@ const Login = ({ user }) => {
                 id="password"
                 value={password}
                 className="bg-white border-black border-2 font-medium text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pr-10 p-2.5"
-                required=""
+                required
               />
               <span
                 onClick={handlePasswordVisibility}
@@ -248,14 +255,21 @@ const Login = ({ user }) => {
             </TooltipProvider>
           </div>
           <div className="flex justify-center">
-            <button
-              type="submit"
-              ref={buttonRef}
-              disabled={!password || !email}
-              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
-            >
-              Login
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <button
+                    type="submit"
+                    ref={buttonRef}
+                    disabled={!password || !email}
+                    className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+                  >
+                    Login
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>Enter email and password </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           <p className=" mt-4 text-center text-base font-bold text-black ">

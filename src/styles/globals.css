@@ -57,6 +57,11 @@
     background-color: var(--tertiary);
   }
 
+  ::selection {
+    color: black;
+    background: rgb(54, 178, 255);
+  }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;

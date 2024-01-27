@@ -5,6 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/Tooltip";
 
 const Signup = () => {
   const [username, setUname] = useState("");
@@ -57,6 +63,7 @@ const Signup = () => {
             toast.success("User verification complete", {
               position: "top-left",
               autoClose: 1500,
+              toastId: "verif",
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -70,6 +77,7 @@ const Signup = () => {
           } else {
             toast.error(data.error, {
               position: "top-left",
+              toastId: "erverif",
               autoClose: 1500,
               hideProgressBar: false,
               closeOnClick: true,
@@ -84,6 +92,7 @@ const Signup = () => {
           toast.error("Verification failed", {
             position: "top-left",
             autoClose: 1500,
+            toastId: "verifail",
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -116,6 +125,7 @@ const Signup = () => {
       if (data.message) {
         toast.success(data.message, {
           position: "top-left",
+          toastId: "signup",
           autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
@@ -128,6 +138,7 @@ const Signup = () => {
         toast.error(data.error, {
           position: "top-left",
           autoClose: 1500,
+          toastId: "ersignup",
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -140,6 +151,7 @@ const Signup = () => {
       toast.error(error.message, {
         position: "top-left",
         autoClose: 1500,
+        toastId: "er1signup",
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -179,7 +191,7 @@ const Signup = () => {
         <form
           id="signupForm"
           onSubmit={handleSubmit}
-          className="md:w-96 sm:w-72 bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-2 relative z-10"
+          className="md:w-96 sm:w-72 bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-1 relative z-10"
           method="POST"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -196,9 +208,9 @@ const Signup = () => {
           <div>
             <label
               htmlFor="username"
-              className="block mb-2 text-sm font-bold text-black"
+              className="block mt-4 mb-2 text-sm font-bold text-black"
             >
-              Username
+              Username <span className="text-red-500">*</span>
             </label>
             <input
               onChange={handleChange}
@@ -208,15 +220,15 @@ const Signup = () => {
               value={username}
               className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5"
               placeholder="user12"
-              required=""
+              required
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-bold text-black"
+              className="block mb-2 text-sm font-bold text-black mt-4"
             >
-              Email
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               onChange={handleChange}
@@ -226,15 +238,15 @@ const Signup = () => {
               value={email}
               className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5"
               placeholder="name@company.com"
-              required=""
+              required
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="block mb-2 text-sm font-bold text-black"
+              className="block mb-2 mt-4 text-sm font-bold text-black"
             >
-              Password
+              Password <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <input
@@ -246,7 +258,7 @@ const Signup = () => {
                 className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm 
                 placeholder-blue-200 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pr-10 p-2.5"
                 placeholder="********"
-                required=""
+                required
               />
               <span
                 onClick={handlePasswordVisibility}
@@ -260,15 +272,22 @@ const Signup = () => {
               </span>
             </div>
           </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              ref={buttonRef}
-              disabled={!username || !password || !email}
-              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
-            >
-              Sign Up
-            </button>
+          <div className="flex justify-center ">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <button
+                    type="submit"
+                    ref={buttonRef}
+                    disabled={!username || !password || !email}
+                    className="w-auto mt-5 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+                  >
+                    Sign Up
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>Enter all the required fields</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <p className="text-center text-base font-bold text-black">
             Already registered?{" "}

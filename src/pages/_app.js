@@ -8,7 +8,8 @@ import Navbar from "@/components/Navbar";
 import Confirm from "@/components/Confirm";
 import RouteLoader from "@/components/Loader";
 import "@/styles/globals.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({});
@@ -43,6 +44,17 @@ export default function App({ Component, pageProps }) {
     setKey(Math.random());
     router.push("/");
     setShowLogoutConfirmation(false);
+    toast.success("User logged out.", {
+      position: "top-left",
+      autoClose: 1500,
+      toastId: "logout",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   const cancelLogout = () => {
     setShowLogoutConfirmation(false);
