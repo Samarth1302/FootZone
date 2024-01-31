@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
@@ -161,10 +162,13 @@ const Login = ({ user }) => {
       </Head>
       <section className="relative min-h-screen bg-white flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
-          <img
+          <Image
             src="/stad.jpg"
             alt="Login Image"
             className="w-full h-full object-cover"
+            width={1920}
+            height={500}
+            quality={100}
           />
         </div>
 
@@ -182,7 +186,7 @@ const Login = ({ user }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center font-medium text-black leading-tight tracking-tight md:text-2xl ">
+          <h1 className="text-xl text-center font-semibold text-black leading-tight tracking-tight md:text-2xl ">
             Login
           </h1>
 
@@ -255,21 +259,15 @@ const Login = ({ user }) => {
             </TooltipProvider>
           </div>
           <div className="flex justify-center">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
                   <button
                     type="submit"
                     ref={buttonRef}
-                    disabled={!password || !email}
+                    
                     className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
                   >
                     Login
                   </button>
-                </TooltipTrigger>
-                <TooltipContent>Enter email and password </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+              
           </div>
 
           <p className=" mt-4 text-center text-base font-bold text-black ">

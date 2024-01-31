@@ -10,6 +10,12 @@ import RouteLoader from "@/components/Loader";
 import "@/styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Raleway } from 'next/font/google'
+
+const font = Raleway({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({});
@@ -65,6 +71,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+    <main className={font.className}>
       <RouteLoader />
       <ToastContainer
         position="top-left"
@@ -81,8 +88,9 @@ export default function App({ Component, pageProps }) {
       />
 
       {key && <Navbar user={user} key={key} logout={handleLogout} />}
-
+      
       <Component user={user} {...pageProps} />
+      
       <Footer />
       {showLogoutConfirmation && (
         <Confirm
@@ -91,6 +99,7 @@ export default function App({ Component, pageProps }) {
           onCancel={cancelLogout}
         />
       )}
+      </main>
     </>
   );
 }

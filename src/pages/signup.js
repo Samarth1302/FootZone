@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
@@ -181,10 +182,13 @@ const Signup = () => {
       </Head>
       <section className="relative h-screen bg-white flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
-          <img
+        <Image
             src="/stad.jpg"
-            alt="Signup Image"
+            alt="Login Image"
             className="w-full h-full object-cover"
+            width={1920}
+            height={500}
+            quality={100}
           />
         </div>
 
@@ -273,21 +277,14 @@ const Signup = () => {
             </div>
           </div>
           <div className="flex justify-center ">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
                   <button
                     type="submit"
-                    ref={buttonRef}
-                    disabled={!username || !password || !email}
+                    ref={buttonRef} 
                     className="w-auto mt-5 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
                   >
                     Sign Up
                   </button>
-                </TooltipTrigger>
-                <TooltipContent>Enter all the required fields</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                
           </div>
           <p className="text-center text-base font-bold text-black">
             Already registered?{" "}
