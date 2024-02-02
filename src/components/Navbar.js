@@ -59,17 +59,40 @@ const Navbar = ({ user, logout }) => {
                       style={{ color: "#172554" }}
                     />
                   </span>
-                  <ul className="space-y-6 mt-10 text-center justify-evenly text-lg text-blue-900 font-medium">
+                  <ul className="space-y-6 mt-10 text-center justify-evenly text-base text-blue-700 font-semibold">
                     {" "}
+                    {true && (
+                      <Link href={"/"}>
+                        <li
+                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md"
+                          
+                        >
+                          Home
+                        </li>
+                      </Link>
+                      
+                    )}
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-full "
+                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md "
                           onClick={logout}
                         >
                           Logout
                         </li>
                       </Link>
+                      
+                    )}
+                    {true && (
+                      <Link href={"/league"}>
+                        <li
+                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md"
+                          
+                        >
+                          Leagues
+                        </li>
+                      </Link>
+                      
                     )}
                   </ul>
                 </div>

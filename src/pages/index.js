@@ -1,25 +1,35 @@
 import Head from "next/head";
 import Carousel from "@/components/Carousel";
 import Typewriter from "typewriter-effect";
+import Loader from "@/components/Loader"
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImagesLoaded(true);
+  };
   let slides = [
     {
       imgsrc: "/comp.jpg",
+      page: "league",
       content: "Soccer stats",
       text: "Check out the latest match fixtures, player stats, and more.",
       buttonText: "Explore",
     },
     {
       imgsrc: "/play.jpg",
+      page: "league",
       content: "Latest News",
       text: "Stay updated with the latest football news from around the world.",
       buttonText: "Discover",
     },
     {
       imgsrc: "/save.jpg",
+      page: "league",
       content: "Fan Discussion",
       text: "Join the discussion! Read and share comments from passionate football fans.",
       buttonText: "Connect",
@@ -39,12 +49,14 @@ export default function Home() {
         />
       </Head>
       <div className="absolute bg-black top-30 left-0 -z-10">
+      {!imagesLoaded && <Loader />}
         <Image
           className="opacity-30"
           src="/ball.jpg"
           width={2000}
           height={200}
           alt="Background image"
+          onLoad={handleImageLoad}
         />
       </div>
       <div
