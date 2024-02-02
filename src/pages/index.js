@@ -7,11 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  const handleImageLoad = () => {
-    setImagesLoaded(true);
-  };
   let slides = [
     {
       imgsrc: "/comp.jpg",
@@ -49,14 +45,13 @@ export default function Home() {
         />
       </Head>
       <div className="absolute bg-black top-30 left-0 -z-10">
-      {!imagesLoaded && <Loader />}
         <Image
           className="opacity-30"
           src="/ball.jpg"
           width={2000}
           height={200}
           alt="Background image"
-          onLoad={handleImageLoad}
+          
         />
       </div>
       <div
@@ -65,7 +60,7 @@ export default function Home() {
       >
         <div className="text-2xl md:text-4xl font-semibold">
           <p>
-            Welcome to <span className="text-blue-500">FootZone</span>{" "}
+            Welcome to <span className="text-blue-400">FootZone</span>{" "}
           </p>
         </div>
         <div className="pt-2 md:pt-10 text-cyan-100">

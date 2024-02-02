@@ -10,9 +10,9 @@ import RouteLoader from "@/components/Loader";
 import "@/styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Raleway } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 
-const font = Raleway({
+const font = Nunito({
   weight: '400',
   subsets: ['latin'],
 })
