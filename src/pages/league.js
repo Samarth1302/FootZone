@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -21,8 +21,19 @@ const leagues = [
       },
   ];
 const League = (/*{ leagues }*/) => {
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredLeagues, setFilteredLeagues] = useState(leagues);
+  const filterLeagues = () => {
+    const filtered = leagues.filter((league) =>
+      league.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setFilteredLeagues(filtered);
+  };
+  useEffect(() => {
+    filterLeagues();
+  }, [searchInput]);
   return (
-    <div>
+    <div className='min-h-screen'>
       <Head>
         <title>Leagues - FootZone</title>
         <meta
@@ -36,10 +47,19 @@ const League = (/*{ leagues }*/) => {
         />
       </Head>
     <section className="text-gray-600 body-font">
-    <h1 className='text-3xl font-bold mb-4 text-blue-900'></h1>
-      <div className="container px-5 py-24 mx-auto">
+    <div className="container px-5 pt-4 mx-auto flex justify-between items-center">
+  <h1 className='text-3xl font-bold  text-blue-900'>Leagues</h1>
+  <input
+    type="text"
+    placeholder="Search a league.."
+    value={searchInput}
+    onChange={(e) => setSearchInput(e.target.value)}
+    className="border-2 px-3 border-gray-300 p-2 rounded-md"
+  />
+</div>
+      <div className="container px-5 py-12 mx-auto">
         <div className="flex flex-wrap -m-4">
-          {leagues.map((league, index) => (
+          {filteredLeagues.map((league, index) => (
             <Link key={index} href={`/leagues/${league.name}`} legacyBehavior>
             <a className="p-4 md:w-1/2 lg:w-1/4 block">
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:bg-slate-300 hover:bg-opacity-20">
