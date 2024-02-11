@@ -10,7 +10,7 @@ import {
 
 export default function Carousel({ slides }) {
   const [current, setCurrent] = useState(0);
-  const router= useRouter();
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
   const previousSlide = () => {
@@ -22,9 +22,9 @@ export default function Carousel({ slides }) {
     if (current === slides.length - 1) setCurrent(0);
     else setCurrent(current + 1);
   };
-  const handlePage = (page)=>{
-    router.push(page)
-  }
+  const handlePage = (page) => {
+    router.push(page);
+  };
 
   const handleCircleClick = (index) => {
     setCurrent(index);
@@ -63,24 +63,26 @@ export default function Carousel({ slides }) {
               alt={`Slide ${index + 1}`}
             />
             <div
-              className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-30`}
+              className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-50`}
             >
               <div
                 className={`max-w-[60%] md:max-w-[60%] lg:max-w-[40%] mx-auto`}
               >
                 <h2
-                  className={`text-base text-blue-100 md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
+                  className={`text-base text-blue-50 md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
                 >
                   {slide.content}
                 </h2>
 
                 <p
-                  className={`text-xs md:text-base lg:text-xl font-normal md:font-semibold whitespace-normal`}
+                  className={`text-xs md:text-base lg:text-xl font-normal md:font-normal whitespace-normal`}
                 >
                   {slide.text}
                 </p>
                 <button
-                  onClick={()=> {handlePage(slide.page)}}
+                  onClick={() => {
+                    handlePage(slide.page);
+                  }}
                   className={`w-auto mt-8 mb-4 text-white bg-blue-700 hover:bg-blue-900 font-medium rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
                 >
                   {slide.buttonText}

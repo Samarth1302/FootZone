@@ -44,7 +44,7 @@ const Navbar = ({ user, logout }) => {
             {hamMenu && (
               <aside
                 id="sidebar-multi-level-sidebar"
-                className={`fixed top-0 left-0 z-50 w-44 h-screen transition-transform -translate-x-full sm:translate-x-0 left-ham-menu ${
+                className={`fixed top-0 left-0 z-50 w-32 md:w-44 h-screen transition-transform -translate-x-full sm:translate-x-0 left-ham-menu ${
                   hamMenu ? "translate-x-0" : ""
                 }`}
                 aria-label="Sidebar"
@@ -63,36 +63,27 @@ const Navbar = ({ user, logout }) => {
                     {" "}
                     {true && (
                       <Link href={"/"}>
-                        <li
-                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md"
-                          
-                        >
+                        <li className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md">
                           Home
                         </li>
                       </Link>
-                      
+                    )}
+                    {true && (
+                      <Link href={"/league"}>
+                        <li className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md">
+                          Leagues
+                        </li>
+                      </Link>
                     )}
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md "
+                          className="my-3 text-red-600 hover:text-red-600 hover:bg-blue-200 rounded-md "
                           onClick={logout}
                         >
                           Logout
                         </li>
                       </Link>
-                      
-                    )}
-                    {true && (
-                      <Link href={"/league"}>
-                        <li
-                          className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md"
-                          
-                        >
-                          Leagues
-                        </li>
-                      </Link>
-                      
                     )}
                   </ul>
                 </div>
@@ -100,7 +91,7 @@ const Navbar = ({ user, logout }) => {
             )}
           </div>
           <Link href={"/"}>
-            <div className={hamMenu ? "ml-32" : ""}>
+            <div className={hamMenu ? "ml-32 hidden md:block" : ""}>
               <Image
                 src="/logo.png"
                 alt="FootZone logo"
@@ -110,19 +101,19 @@ const Navbar = ({ user, logout }) => {
             </div>
           </Link>
         </div>
-        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-4 ml-72 flex">
+        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-2 ml-72 flex">
           {user.user_id && (
             <div className="-mt-1">
               <span className="flex text-base md:text-xl flex-col">
                 <MdAccountCircle style={{ color: "#172554" }} />
-                <p className="text-xs md:text-sm -ml-2 font-medium text-blue-950">
+                <p className="text-sm md:text-sm -ml-1 font-semibold text-black">
                   {user.username}
                 </p>
               </span>
             </div>
           )}
           {!user.user_id && (
-            <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-bold text-white ">
+            <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
               <Link href={"/login"}>Login</Link>
             </button>
           )}{" "}

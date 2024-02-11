@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Carousel from "@/components/Carousel";
 import Typewriter from "typewriter-effect";
-import Loader from "@/components/Loader"
+import Loader from "@/components/Loader";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-
   let slides = [
     {
       imgsrc: "/comp.jpg",
@@ -51,16 +50,15 @@ export default function Home() {
           width={2000}
           height={200}
           alt="Background image"
-          
         />
       </div>
       <div
         className="text-center md:pr-10 text-white text-lg md:text-2xl
       font-medium pt-14 md:pt-20 z-20"
       >
-        <div className="text-2xl md:text-4xl font-semibold">
+        <div className="text-2xl md:text-4xl font-medium">
           <p>
-            Welcome to <span className="text-blue-400">FootZone</span>{" "}
+            Welcome to <span className="text-blue-300">FootZone</span>{" "}
           </p>
         </div>
         <div className="pt-2 md:pt-10 text-cyan-100">
