@@ -24,8 +24,8 @@ const LeagueDetails = () => {
         )
         .finally(() => setLoading(false));
     }
+    
   }, [leagueId]);
-
   if (loading) {
     return <Loader />;
   }
@@ -78,7 +78,7 @@ const LeagueDetails = () => {
           </Link>
           <div className="flex flex-row items-center">
             {" "}
-            <Image src={leagueDetails.logo} alt="" width={60} height={30} />
+            <Image src={leagueDetails.logo} alt="" width={60} height={60} />
             <h1 className="ml-4 text-3xl text-blue-950 font-bold ">
               {leagueDetails.name}
             </h1>
@@ -159,12 +159,13 @@ const LeagueDetails = () => {
                     >
                       <td className="text-left p-1">{index + 1}</td>
                       <td className="text-left p-1 flex items-center">
-                        <img
+                        <Image
                           src={team.team.logo}
                           alt={team.team.name}
-                          className="h-6 mr-2"
+                          width={20}
+                          height={20}
                         />
-                        {team.team.name}
+                        <p className="ml-4">{team.team.name}</p>
                       </td>
                       <td className="text-center p-1">{team.all.played}</td>
                       <td className="text-center p-1">{team.all.win}</td>
@@ -201,7 +202,7 @@ const LeagueDetails = () => {
             </section>
           )}
           <hr className="my-8 border-t-4 border-gray-300" />
-          {leagueDetails.teams && (
+          {leagueDetails.teams.length!==0 && (
             <section>
               <h2 className="text-2xl text-blue-900 text-center font-bold mb-4">
                 Teams
@@ -214,19 +215,20 @@ const LeagueDetails = () => {
                     legacyBehavior
                   >
                     <a className="flex flex-col items-center">
-                      <img
+                      <Image
                         src={team.logo}
                         alt={team.name}
-                        className="w-20 h-20 mb-2"
+                        width={80}
+                        height={80}
                       />
                       <span className="text-sm">{team.name}</span>
                     </a>
                   </Link>
                 ))}
               </div>
+              <hr className="my-8 border-t-4 border-gray-300" />
             </section>
           )}
-          <hr className="my-8 border-t-4 border-gray-300" />
         </main>
       )}
     </div>

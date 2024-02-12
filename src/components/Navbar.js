@@ -4,22 +4,15 @@ import Link from "next/link";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { MdAccountCircle } from "react-icons/md";
 import { FiAlignJustify } from "react-icons/fi";
-import { useRouter } from "next/router";
 
 const Navbar = ({ user, logout }) => {
   const [sidebar, setSidebar] = useState(false);
-  const router = useRouter();
   const [hamMenu, setHam] = useState(false);
   const [hamHovered, setHamHovered] = useState(false);
 
   const toggleHam = () => {
     setHam(!hamMenu);
     setSidebar(false);
-  };
-
-  const iconStyle = {
-    color: "#177abf",
-    marginTop: "-8px",
   };
 
   return (
@@ -101,7 +94,7 @@ const Navbar = ({ user, logout }) => {
             </div>
           </Link>
         </div>
-        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-2 ml-72 flex">
+        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
           {user.user_id && (
             <div className="-mt-1">
               <span className="flex text-base md:text-xl flex-col">
@@ -113,10 +106,10 @@ const Navbar = ({ user, logout }) => {
             </div>
           )}
           {!user.user_id && (
-            <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
-              <Link href={"/login"}>Login</Link>
-            </button>
-          )}{" "}
+             <Link href={"/login"}><button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
+             Login
+            </button></Link>
+          )}
         </div>
       </div>
     </>

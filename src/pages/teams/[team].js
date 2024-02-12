@@ -72,7 +72,7 @@ const TeamDetails = () => {
               <p className="text-xl font-semibold">{teamDetails.country}</p>
               <p>Established: {teamDetails.foundedYear}</p>
             </div>
-            <div className="flex items-center mb-4">
+            {teamDetails.venue.name && <div className="flex items-center mb-4">
               {teamDetails.venue.image ? (
                 <Image
                   src={teamDetails.venue.image}
@@ -96,7 +96,7 @@ const TeamDetails = () => {
                 <p>{teamDetails.venue.city}</p>
                 <p>Capacity: {teamDetails.venue.capacity}</p>
               </div>
-            </div>
+            </div>}
             {teamDetails.standings && (
               <div className="mt-10 mb-4 text-base md:text-xl flex flex-col md:flex-row md:space-x-14 lg:space-x-20 text-center justify-center">
                 <div className="flex flex-row space-x-8 md:space-x-14 lg:space-x-20">
@@ -178,9 +178,9 @@ const TeamDetails = () => {
               </div>
             )}
             <hr className="my-8 border-t-4 border-gray-300" />
-            <div className="flex mt-10 flex-col">
+            {players && <div className="flex mt-10 flex-col">
               <h2 className="text-2xl my-8 text-center font-semibold ">
-                Key Players
+                Some Players
               </h2>
               <div className="flex flex-wrap justify-center">
                 {players.map((player) => (
@@ -205,7 +205,7 @@ const TeamDetails = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>}
           </div>
         </main>
       )}
