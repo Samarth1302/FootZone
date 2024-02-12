@@ -59,18 +59,18 @@ const Navbar = ({ user, logout }) => {
                       style={{ color: "#172554" }}
                     />
                   </span>
-                  <ul className="space-y-6 mt-10 text-center justify-evenly text-base text-blue-700 font-semibold">
+                  <ul className="space-y-4 mt-10 text-center justify-evenly text-lg font-semibold">
                     {" "}
                     {true && (
                       <Link href={"/"}>
-                        <li className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md">
+                        <li className="my-2  hover:bg-blue-100 rounded-md">
                           Home
                         </li>
                       </Link>
                     )}
                     {true && (
                       <Link href={"/league"}>
-                        <li className="my-3 hover:text-blue-900 hover:bg-blue-200 rounded-md">
+                        <li className="my-2 hover:bg-blue-100 rounded-md">
                           Leagues
                         </li>
                       </Link>
@@ -78,7 +78,7 @@ const Navbar = ({ user, logout }) => {
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-3 text-red-600 hover:text-red-600 hover:bg-blue-200 rounded-md "
+                          className="my-2 text-red-600 hover:bg-blue-100 rounded-md "
                           onClick={logout}
                         >
                           Logout

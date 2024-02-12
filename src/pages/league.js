@@ -67,7 +67,7 @@ const League = () => {
         />
       </Head>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 pt-4 mx-auto flex justify-between items-center">
+        <div className="px-5 pt-4 mx-auto flex justify-between items-center">
           <h1 className="text-3xl font-bold  text-blue-900">Leagues</h1>
           <input
             type="text"

@@ -83,7 +83,7 @@ const LeagueDetails = () => {
               {leagueDetails.name}
             </h1>
           </div>
-          <hr className="my-8 border-t border-gray-300" />
+          <hr className="my-8 border-t-4 border-gray-300" />
           {leagueDetails.standings && (
             <section className="mb-8">
               <h2 className="text-2xl text-blue-900 font-bold mb-4">
@@ -200,10 +200,12 @@ const LeagueDetails = () => {
               </table>
             </section>
           )}
-          <hr className="my-8 border-t border-gray-300" />
+          <hr className="my-8 border-t-4 border-gray-300" />
           {leagueDetails.teams && (
             <section>
-              <h2 className="text-2xl text-blue-900 font-bold mb-4">Teams</h2>
+              <h2 className="text-2xl text-blue-900 text-center font-bold mb-4">
+                Teams
+              </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {leagueDetails.teams.map((team) => (
                   <Link
@@ -224,7 +226,7 @@ const LeagueDetails = () => {
               </div>
             </section>
           )}
-          <hr className="my-8 border-t border-gray-300" />
+          <hr className="my-8 border-t-4 border-gray-300" />
         </main>
       )}
     </div>
