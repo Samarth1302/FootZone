@@ -68,6 +68,19 @@ const Login = ({ user }) => {
         });
       }
     }
+    else{
+      toast.error("Fill the email address", {
+        position: "top-left",
+        toastId: "errorforget",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
