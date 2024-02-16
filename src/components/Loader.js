@@ -13,7 +13,8 @@ export default function RouteLoader() {
 
   useEffect(() => {
     const handleStart = (url) => setLoading(true);
-    const handleComplete = (url) => setLoading(false);
+    const handleComplete = (url) => 
+    setLoading(false);
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);

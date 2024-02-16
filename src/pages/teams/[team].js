@@ -9,7 +9,7 @@ const TeamDetails = () => {
   const router = useRouter();
   const { team, leagueId } = router.query;
   const [teamDetails, setTeamDetails] = useState(null);
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(null);
 
   useEffect(() => {
     if (team && leagueId) {
@@ -28,6 +28,7 @@ const TeamDetails = () => {
     }
   }, [team, leagueId]);
 
+  console.log(players)
   return (
     <div className="min-h-screen bg-gray-100">
       <Head>
@@ -53,7 +54,7 @@ const TeamDetails = () => {
                 <path d="M19 12H5"></path>
                 <path d="M12 19l-7-7 7-7"></path>
               </svg>
-              Back to League
+              Back
             </a>
           </Link>
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -178,9 +179,9 @@ const TeamDetails = () => {
               </div>
             )}
             <hr className="my-8 border-t-4 border-gray-300" />
-            {players && <div className="flex mt-10 flex-col">
+            {players && (<div className="flex mt-10 flex-col">
               <h2 className="text-2xl my-8 text-center font-semibold ">
-                Some Players
+                Key Players
               </h2>
               <div className="flex flex-wrap justify-center">
                 {players.map((player) => (
@@ -205,7 +206,7 @@ const TeamDetails = () => {
                   </div>
                 ))}
               </div>
-            </div>}
+            </div>)}
           </div>
         </main>
       )}

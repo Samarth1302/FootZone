@@ -68,13 +68,13 @@ const League = () => {
       </Head>
       <section className="text-gray-600 body-font">
         <div className="px-5 pt-4 mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold  text-blue-900">Leagues</h1>
+          <h1 className="text-3xl font-bold  text-blue-900">Choose a League</h1>
           <input
             type="text"
             placeholder="Search a league.."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="border-2 px-3 border-gray-300 p-2 rounded-md"
+            className="border-2 px-3 border-gray-400 p-2 rounded-md"
           />
         </div>
         <div className="container px-5 py-12 mx-auto">
@@ -82,7 +82,7 @@ const League = () => {
             {filteredLeagues.map((league, index) => (
               <Link key={index} href={`/leagues/${league.id}`} legacyBehavior>
                 <a className="p-4 md:w-1/2 lg:w-1/4 block">
-                  <div className="flex h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:bg-slate-300 hover:bg-opacity-20 items-center">
+                  <div className="flex h-full border-2 border-blue-200 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 hover:bg-opacity-20 items-center">
                     <div className="w-1/3">
                       <Image
                         src={league.logo}

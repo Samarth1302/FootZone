@@ -73,7 +73,7 @@ const LeagueDetails = () => {
                 <path d="M19 12H5"></path>
                 <path d="M12 19l-7-7 7-7"></path>
               </svg>
-              Back to League List
+              Back
             </a>
           </Link>
           <div className="flex flex-row items-center">
@@ -87,7 +87,7 @@ const LeagueDetails = () => {
           {leagueDetails.standings && (
             <section className="mb-8">
               <h2 className="text-2xl text-blue-900 font-bold mb-4">
-                Standings
+                Points Table
               </h2>
               <table className="w-full text-base">
                 <thead>

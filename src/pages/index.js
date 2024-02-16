@@ -47,8 +47,8 @@ export default function Home() {
         <Image
           className="opacity-30"
           src="/ball.jpg"
-          width={2000}
-          height={200}
+          width={4000}
+          height={3000}
           alt="Background image"
         />
       </div>
@@ -80,27 +80,27 @@ export default function Home() {
         <Carousel slides={slides} />
       </div>
       <footer className="text-gray-600 bg-slate-100 body-font">
-        <div className="pl-3 py-24 mx-auto flex text-center md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div className="pl-3 py-24 mx-auto flex text-center md:items-center max-2xl:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-auto flex-shrink-0 md:mx-0 text-center md:text-left">
             <Link
               href="#"
-              className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+              className="flex title-font font-medium items-center md:justify-start justify-center 2xl: text-gray-900"
             >
               <Image src="/logo.png" width={320} height={100} alt="Logo" />
             </Link>
           </div>
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 mt-10 md:mt-0 justify-end pr-10 md:text-right text-center ">
             <div className="w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-1">
+              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1">
                 QUICK LINKS
               </h2>
               <nav className="list-none">
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-600 hover:text-gray-900 hover:underline underline-offset-2"
+                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2"
                   >
-                    First Link
+                    News
                   </Link>
                 </li>
               </nav>

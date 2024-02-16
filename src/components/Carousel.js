@@ -66,7 +66,7 @@ export default function Carousel({ slides }) {
               className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-50`}
             >
               <div
-                className={`max-w-[60%] md:max-w-[60%] lg:max-w-[40%] mx-auto`}
+                className={`max-w-[60%] lg:max-w-[70%] mx-auto`}
               >
                 <h2
                   className={`text-base text-blue-50 md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
@@ -83,7 +83,7 @@ export default function Carousel({ slides }) {
                   onClick={() => {
                     handlePage(slide.page);
                   }}
-                  className={`w-auto mt-8 mb-4 text-white bg-blue-700 hover:bg-blue-900 font-medium rounded-lg focus:outline-none focus:ring focus:border-blue-500 text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
+                  className={`w-auto mt-8 mb-4 text-white bg-blue-800 hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium rounded-lg focus:outline-none focus:ring text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
                 >
                   {slide.buttonText}
                 </button>
@@ -98,13 +98,13 @@ export default function Carousel({ slides }) {
       >
         <button
           onClick={previousSlide}
-          className={`text-3xl md:text-4xl lg:text-5xl text-white pointer-events-auto`}
+          className={`text-3xl md:text-4xl text-white pointer-events-auto`}
         >
           <BsFillArrowLeftCircleFill style={{ color: "white" }} />
         </button>
         <button
           onClick={nextSlide}
-          className={`text-3xl md:text-4xl lg:text-5xl text-white pointer-events-auto`}
+          className={`text-3xl md:text-4xl text-white pointer-events-auto`}
         >
           <BsFillArrowRightCircleFill style={{ color: "white" }} />
         </button>
@@ -118,8 +118,8 @@ export default function Carousel({ slides }) {
             <div
               onClick={() => handleCircleClick(i)}
               key={"circle" + i}
-              className={`rounded-full w-1 md:w-3 lg:w-5 h-1 md:h-3 lg:h-5 cursor-pointer ${
-                i === current ? "bg-white" : "bg-blue-500"
+              className={`rounded-full w-1 md:w-3 lg:w-4 h-1 md:h-3 lg:h-4 cursor-pointer ${
+                i === current ? "bg-white" : "bg-blue-800"
               }`}
             ></div>
           ))}

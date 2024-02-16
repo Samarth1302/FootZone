@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { FiAlignJustify } from "react-icons/fi";
 
@@ -9,6 +9,7 @@ const Navbar = ({ user, logout }) => {
   const [sidebar, setSidebar] = useState(false);
   const [hamMenu, setHam] = useState(false);
   const [hamHovered, setHamHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const toggleHam = () => {
     setHam(!hamMenu);
@@ -45,33 +46,35 @@ const Navbar = ({ user, logout }) => {
                 <div className="h-full px-3 py-4 overflow-y-auto bg-blue-50">
                   <span
                     onClick={toggleHam}
+                    onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
                     className="absolute top-5 right-2 cursor-pointer text-base"
                   >
-                    <AiOutlineCloseCircle
-                      size={30}
-                      style={{ color: "#172554" }}
-                    />
+                   <IoClose
+        size={isHovered ? 23 : 20}
+        style={{ color: isHovered ? "red" : "#172554", transition: "all 0.3s ease" }}
+      />
                   </span>
-                  <ul className="space-y-4 mt-10 text-center justify-evenly text-lg font-semibold">
+                  <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold">
                     {" "}
                     {true && (
                       <Link href={"/"}>
-                        <li className="my-2  hover:bg-blue-100 rounded-md">
+                        <li className="my-2  hover:bg-blue-100 hover:text-blue-900 rounded-md">
                           Home
                         </li>
                       </Link>
                     )}
                     {true && (
                       <Link href={"/league"}>
-                        <li className="my-2 hover:bg-blue-100 rounded-md">
-                          Leagues
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 rounded-md">
+                          Soccer
                         </li>
                       </Link>
                     )}
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-2 text-red-600 hover:bg-blue-100 rounded-md "
+                          className="my-2 hover:text-red-600 hover:bg-blue-100 rounded-md "
                           onClick={logout}
                         >
                           Logout
@@ -88,7 +91,7 @@ const Navbar = ({ user, logout }) => {
               <Image
                 src="/logo.png"
                 alt="FootZone logo"
-                width={160}
+                width={140}
                 height={100}
               />
             </div>
