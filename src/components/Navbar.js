@@ -47,13 +47,16 @@ const Navbar = ({ user, logout }) => {
                   <span
                     onClick={toggleHam}
                     onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+                    onMouseLeave={() => setIsHovered(false)}
                     className="absolute top-5 right-2 cursor-pointer text-base"
                   >
-                   <IoClose
-        size={isHovered ? 23 : 20}
-        style={{ color: isHovered ? "red" : "#172554", transition: "all 0.3s ease" }}
-      />
+                    <IoClose
+                      size={isHovered ? 23 : 20}
+                      style={{
+                        color: isHovered ? "red" : "#172554",
+                        transition: "all 0.3s ease",
+                      }}
+                    />
                   </span>
                   <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold">
                     {" "}
@@ -109,9 +112,11 @@ const Navbar = ({ user, logout }) => {
             </div>
           )}
           {!user.user_id && (
-             <Link href={"/login"}><button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
-             Login
-            </button></Link>
+            <Link href={"/login"}>
+              <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
+                Login
+              </button>
+            </Link>
           )}
         </div>
       </div>

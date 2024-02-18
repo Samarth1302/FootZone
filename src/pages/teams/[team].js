@@ -28,7 +28,7 @@ const TeamDetails = () => {
     }
   }, [team, leagueId]);
 
-  console.log(players)
+  console.log(players);
   return (
     <div className="min-h-screen bg-gray-100">
       <Head>
@@ -73,31 +73,33 @@ const TeamDetails = () => {
               <p className="text-xl font-semibold">{teamDetails.country}</p>
               <p>Established: {teamDetails.foundedYear}</p>
             </div>
-            {teamDetails.venue.name && <div className="flex items-center mb-4">
-              {teamDetails.venue.image ? (
-                <Image
-                  src={teamDetails.venue.image}
-                  alt="Stadium Icon"
-                  width={100}
-                  height={100}
-                />
-              ) : (
-                <Image
-                  src={"/stadicon.png"}
-                  alt="Stadium Icon"
-                  width={100}
-                  height={100}
-                />
-              )}
-              <div className="ml-8">
-                <p className="font-semibold">
-                  Home Stadium: {teamDetails.venue.name}
-                </p>
-                <p>{teamDetails.venue.address},</p>
-                <p>{teamDetails.venue.city}</p>
-                <p>Capacity: {teamDetails.venue.capacity}</p>
+            {teamDetails.venue.name && (
+              <div className="flex items-center mb-4">
+                {teamDetails.venue.image ? (
+                  <Image
+                    src={teamDetails.venue.image}
+                    alt="Stadium Icon"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src={"/stadicon.png"}
+                    alt="Stadium Icon"
+                    width={100}
+                    height={100}
+                  />
+                )}
+                <div className="ml-8">
+                  <p className="font-semibold">
+                    Home Stadium: {teamDetails.venue.name}
+                  </p>
+                  <p>{teamDetails.venue.address},</p>
+                  <p>{teamDetails.venue.city}</p>
+                  <p>Capacity: {teamDetails.venue.capacity}</p>
+                </div>
               </div>
-            </div>}
+            )}
             {teamDetails.standings && (
               <div className="mt-10 mb-4 text-base md:text-xl flex flex-col md:flex-row md:space-x-14 lg:space-x-20 text-center justify-center">
                 <div className="flex flex-row space-x-8 md:space-x-14 lg:space-x-20">
@@ -179,34 +181,36 @@ const TeamDetails = () => {
               </div>
             )}
             <hr className="my-8 border-t-4 border-gray-300" />
-            {players && (<div className="flex mt-10 flex-col">
-              <h2 className="text-2xl my-8 text-center font-semibold ">
-                Key Players
-              </h2>
-              <div className="flex flex-wrap justify-center">
-                {players.map((player) => (
-                  <div
-                    key={player.name}
-                    className="flex flex-col items-center justify-center mr-4 mb-4 w-1/4 md:w-1/6 lg:w-1/12 w-"
-                  >
-                    <div className="w-20 h-20 rounded-full overflow-hidden">
-                      <Image
-                        src={player.photo}
-                        alt={player.lastname}
-                        width={80}
-                        height={80}
-                        className="object-cover"
-                      />
+            {players && (
+              <div className="flex mt-10 flex-col">
+                <h2 className="text-2xl my-8 text-center font-semibold ">
+                  Key Players
+                </h2>
+                <div className="flex flex-wrap justify-center">
+                  {players.map((player) => (
+                    <div
+                      key={player.name}
+                      className="flex flex-col items-center justify-center mr-4 mb-4 w-1/4 md:w-1/6 lg:w-1/12 w-"
+                    >
+                      <div className="w-20 h-20 rounded-full overflow-hidden">
+                        <Image
+                          src={player.photo}
+                          alt={player.lastname}
+                          width={80}
+                          height={80}
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="mt-2">
+                        {player.lastname.substring(
+                          player.lastname.lastIndexOf(" ") + 1
+                        )}
+                      </p>
                     </div>
-                    <p className="mt-2">
-                      {player.lastname.substring(
-                        player.lastname.lastIndexOf(" ") + 1
-                      )}
-                    </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>)}
+            )}
           </div>
         </main>
       )}

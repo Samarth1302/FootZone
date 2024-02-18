@@ -71,7 +71,7 @@ const League = () => {
           <h1 className="text-3xl font-bold  text-blue-900">Choose a League</h1>
           <input
             type="text"
-            placeholder="Search a league.."
+            placeholder="Search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             className="border-2 px-3 border-gray-400 p-2 rounded-md"

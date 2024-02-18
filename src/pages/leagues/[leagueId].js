@@ -24,7 +24,6 @@ const LeagueDetails = () => {
         )
         .finally(() => setLoading(false));
     }
-    
   }, [leagueId]);
   if (loading) {
     return <Loader />;
@@ -202,7 +201,7 @@ const LeagueDetails = () => {
             </section>
           )}
           <hr className="my-8 border-t-4 border-gray-300" />
-          {leagueDetails.teams.length!==0 && (
+          {leagueDetails.teams.length !== 0 && (
             <section>
               <h2 className="text-2xl text-blue-900 text-center font-bold mb-4">
                 Teams

@@ -67,8 +67,7 @@ const Login = ({ user }) => {
           theme: "light",
         });
       }
-    }
-    else{
+    } else {
       toast.error("Fill the email address", {
         position: "top-left",
         toastId: "errorforget",
@@ -272,15 +271,13 @@ const Login = ({ user }) => {
             </TooltipProvider>
           </div>
           <div className="flex justify-center">
-                  <button
-                    type="submit"
-                    ref={buttonRef}
-                    
-                    className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
-                  >
-                    Login
-                  </button>
-              
+            <button
+              type="submit"
+              ref={buttonRef}
+              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+            >
+              Login
+            </button>
           </div>
 
           <p className=" mt-4 text-center text-base font-bold text-black ">

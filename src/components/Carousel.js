@@ -65,9 +65,7 @@ export default function Carousel({ slides }) {
             <div
               className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-50`}
             >
-              <div
-                className={`max-w-[60%] lg:max-w-[70%] mx-auto`}
-              >
+              <div className={`max-w-[60%] lg:max-w-[70%] mx-auto`}>
                 <h2
                   className={`text-base text-blue-50 md:text-3xl lg:text-4xl font-medium mb-4 break-words`}
                 >
