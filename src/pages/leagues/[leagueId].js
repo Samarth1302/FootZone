@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import Loader from "../../components/Loader";
 
-const LeagueDetails = () => {
+const LeagueDetails = ({ dark }) => {
   const router = useRouter();
   const { leagueId } = router.query;
   const [leagueDetails, setLeagueDetails] = useState(null);
@@ -38,7 +38,7 @@ const LeagueDetails = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: dark ? "dark" : "light",
     });
   }
   return (

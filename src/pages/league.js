@@ -5,7 +5,7 @@ import Head from "next/head";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const League = () => {
+const League = ({ dark }) => {
   const [searchInput, setSearchInput] = useState("");
   const [originalLeagues, setOriginalLeagues] = useState([]);
   const [filteredLeagues, setFilteredLeagues] = useState([]);
@@ -28,7 +28,7 @@ const League = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: dark ? "dark" : "light",
       });
     }
   };

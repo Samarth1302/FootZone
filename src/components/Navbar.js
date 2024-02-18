@@ -5,7 +5,7 @@ import { IoClose } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { FiAlignJustify } from "react-icons/fi";
 
-const Navbar = ({ user, logout }) => {
+const Navbar = ({ user, logout, dark }) => {
   const [sidebar, setSidebar] = useState(false);
   const [hamMenu, setHam] = useState(false);
   const [hamHovered, setHamHovered] = useState(false);
@@ -74,6 +74,13 @@ const Navbar = ({ user, logout }) => {
                         </li>
                       </Link>
                     )}
+                    {true && (
+                      <Link href={"/news"}>
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 rounded-md">
+                          News
+                        </li>
+                      </Link>
+                    )}
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
@@ -95,7 +102,7 @@ const Navbar = ({ user, logout }) => {
                 src="/logo.png"
                 alt="FootZone logo"
                 width={140}
-                height={100}
+                height={140}
               />
             </div>
           </Link>

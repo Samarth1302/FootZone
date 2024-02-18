@@ -13,7 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/Tooltip";
 
-const Login = ({ user }) => {
+const Login = ({ user, dark }) => {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +51,7 @@ const Login = ({ user }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: dark ? "dark" : "light",
           });
         }
       } catch (error) {
@@ -64,7 +64,7 @@ const Login = ({ user }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: dark ? "dark" : "light",
         });
       }
     } else {
@@ -77,7 +77,7 @@ const Login = ({ user }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: dark ? "dark" : "light",
       });
     }
   };
@@ -122,7 +122,7 @@ const Login = ({ user }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: dark ? "dark" : "light",
           });
           setEmail("");
           setPass("");
@@ -139,7 +139,7 @@ const Login = ({ user }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: dark ? "dark" : "light",
           });
         }
       } catch (error) {
@@ -152,7 +152,7 @@ const Login = ({ user }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: dark ? "dark" : "light",
         });
         setPass("");
       }

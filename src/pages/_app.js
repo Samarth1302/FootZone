@@ -20,6 +20,7 @@ const font = Inria_Sans({
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({});
   const [key, setKey] = useState();
+  const [dark, setDark] = useState(true);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const router = useRouter();
 
@@ -59,7 +60,7 @@ export default function App({ Component, pageProps }) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "light",
+      theme: dark ? "dark" : "light",
     });
   };
   const cancelLogout = () => {
@@ -87,9 +88,11 @@ export default function App({ Component, pageProps }) {
           theme="light"
         />
 
-        {key && <Navbar user={user} key={key} logout={handleLogout} />}
+        {key && (
+          <Navbar user={user} key={key} logout={handleLogout} dark={dark} />
+        )}
 
-        <Component user={user} {...pageProps} />
+        <Component user={user} dark={dark} {...pageProps} />
 
         <Footer />
         {showLogoutConfirmation && (

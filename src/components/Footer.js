@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Footer = () => {
+const Footer = ({ dark }) => {
   const router = useRouter();
   const [foot, setFoot] = useState(true);
 
@@ -10,6 +10,8 @@ const Footer = () => {
     let nonFoot = ["/signup", "/login"];
     if (nonFoot.includes(router.pathname)) {
       setFoot(false);
+    } else {
+      setFoot(true);
     }
   }, [router]);
 

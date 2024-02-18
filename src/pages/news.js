@@ -8,7 +8,7 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString("en-GB", options);
 };
 
-const News = () => {
+const News = ({ dark }) => {
   const [news, setNews] = useState([]);
 
   const fetchNews = async () => {
@@ -28,7 +28,7 @@ const News = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: dark ? "dark" : "light",
       });
     }
   };

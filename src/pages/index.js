@@ -1,12 +1,11 @@
 import Head from "next/head";
 import Carousel from "@/components/Carousel";
 import Typewriter from "typewriter-effect";
-import Loader from "@/components/Loader";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Home() {
+export default function Home({ dark }) {
   let slides = [
     {
       imgsrc: "/comp.jpg",
@@ -31,7 +30,7 @@ export default function Home() {
     },
   ];
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen ${dark ? "dark" : ""} dark:bg-black`}>
       <Head>
         <title>Home - FootZone</title>
         <meta
@@ -66,7 +65,7 @@ export default function Home() {
             options={{
               strings: [
                 "Explore soccer stats",
-                "Get to know latest football  news",
+                "Get to know latest football news",
                 "Join the fan discussion",
               ],
               delay: 100,
@@ -76,29 +75,29 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="w-[90%] lg:w-[50%] lg:z-20 m-auto rounded-lg bg-gray-600 mb-10 mt-32 md:mt-80 lg:mt-16">
+      <div className="w-[90%] lg:w-[50%] lg:z-20 m-auto rounded-lg bg-gray-600 mb-10 mt-32 md:mt-80 lg:mt-16 ">
         <Carousel slides={slides} />
       </div>
-      <footer className="text-gray-600 bg-slate-100 body-font">
+      <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900">
         <div className="pl-3 py-24 mx-auto flex text-center md:items-center max-2xl:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-auto flex-shrink-0 md:mx-0 text-center md:text-left">
             <Link
               href="#"
-              className="flex title-font font-medium items-center md:justify-start justify-center 2xl: text-gray-900"
+              className="flex title-font font-medium items-center md:justify-start justify-center 2xl: text-gray-900 dark:text-white"
             >
               <Image src="/logo.png" width={320} height={100} alt="Logo" />
             </Link>
           </div>
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 mt-10 md:mt-0 justify-end pr-10 md:text-right text-center ">
             <div className="w-full px-4">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1">
+              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1 dark:text-white">
                 QUICK LINKS
               </h2>
               <nav className="list-none">
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2"
+                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
                   >
                     News
                   </Link>

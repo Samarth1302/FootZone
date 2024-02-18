@@ -5,7 +5,7 @@ import Loader from "../../components/Loader";
 import Image from "next/image";
 import Link from "next/link";
 
-const TeamDetails = () => {
+const TeamDetails = ({ dark }) => {
   const router = useRouter();
   const { team, leagueId } = router.query;
   const [teamDetails, setTeamDetails] = useState(null);

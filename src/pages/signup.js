@@ -6,14 +6,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/Tooltip";
 
-const Signup = () => {
+const Signup = ({ dark }) => {
   const [username, setUname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
@@ -70,7 +64,7 @@ const Signup = () => {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: dark ? "dark" : "light",
             });
             setTimeout(() => {
               router.push("/");
@@ -85,7 +79,7 @@ const Signup = () => {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: dark ? "dark" : "light",
             });
           }
         } catch (error) {
@@ -99,7 +93,7 @@ const Signup = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: dark ? "dark" : "light",
           });
         }
       };
@@ -133,7 +127,7 @@ const Signup = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: dark ? "dark" : "light",
         });
       } else {
         toast.error(data.error, {
@@ -145,7 +139,7 @@ const Signup = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: dark ? "dark" : "light",
         });
       }
     } catch (error) {
@@ -158,7 +152,7 @@ const Signup = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: dark ? "dark" : "light",
       });
     } finally {
       setEmail("");
@@ -182,7 +176,7 @@ const Signup = () => {
       </Head>
       <section className="relative h-screen bg-white flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
-        <Image
+          <Image
             src="/stad.jpg"
             alt="Login Image"
             className="w-full h-full object-cover"
@@ -277,14 +271,13 @@ const Signup = () => {
             </div>
           </div>
           <div className="flex justify-center ">
-                  <button
-                    type="submit"
-                    ref={buttonRef} 
-                    className="w-auto mt-5 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
-                  >
-                    Sign Up
-                  </button>
-                
+            <button
+              type="submit"
+              ref={buttonRef}
+              className="w-auto mt-5 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+            >
+              Sign Up
+            </button>
           </div>
           <p className="text-center text-base font-bold text-black">
             Already registered?{" "}
