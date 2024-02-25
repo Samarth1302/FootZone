@@ -20,7 +20,7 @@ const font = Inria_Sans({
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({});
   const [key, setKey] = useState();
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const router = useRouter();
 
@@ -73,7 +73,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <main className={font.className}>
-        <RouteLoader />
+        <RouteLoader dark={dark} />
         <ToastContainer
           position="top-left"
           limit={1}
@@ -85,16 +85,22 @@ export default function App({ Component, pageProps }) {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+          theme={dark ? "dark" : "light"}
         />
 
         {key && (
-          <Navbar user={user} key={key} logout={handleLogout} dark={dark} />
+          <Navbar
+            user={user}
+            key={key}
+            logout={handleLogout}
+            dark={dark}
+            setDark={setDark}
+          />
         )}
 
         <Component user={user} dark={dark} {...pageProps} />
 
-        <Footer />
+        <Footer dark={dark} />
         {showLogoutConfirmation && (
           <Confirm
             message="Are you sure you want to logout?"

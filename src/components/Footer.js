@@ -18,8 +18,12 @@ const Footer = ({ dark }) => {
   return (
     <>
       {foot && (
-        <footer className="flex flex-col gap-2 sm:flex-row py-4 font-semibold w-full items-center px-3 md:px-6 border-t bg-blue-200 dark:bg-black">
-          <p className="text-base text-black dark:text-white">
+        <footer
+          className={`flex flex-col gap-2 sm:flex-row py-4 font-semibold w-full items-center px-3 md:px-6 border-t ${
+            dark ? "dark" : ""
+          } ${dark ? "bg-black" : "bg-blue-200"}`}
+        >
+          <p className={`text-base text-black dark:text-white`}>
             © 2024 FootZone. All rights reserved.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">

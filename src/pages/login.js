@@ -86,7 +86,7 @@ const Login = ({ user, dark }) => {
   };
 
   const iconStyle = {
-    color: "#172554",
+    color: dark ? "white" : "#172554",
   };
 
   useEffect(() => {
@@ -160,7 +160,7 @@ const Login = ({ user, dark }) => {
   };
 
   return (
-    <div>
+    <div className={dark ? "dark" : ""}>
       <Head>
         <title>Login - FootZone</title>
         <meta
@@ -172,7 +172,7 @@ const Login = ({ user, dark }) => {
           content="football soccer stadium players athletes sport"
         />
       </Head>
-      <section className="relative min-h-screen bg-white flex items-center justify-center">
+      <section className="relative min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
           <Image
             src="/stad.jpg"
@@ -187,7 +187,7 @@ const Login = ({ user, dark }) => {
         <form
           id="loginForm"
           onSubmit={handleSubmit}
-          className="md:w-96 sm:w-72  bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-2
+          className="md:w-96 sm:w-72 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-80 border-2 border-black dark:border-white rounded-lg shadow p-8 space-y-2
           relative z-10"
           method="POST"
           onKeyDown={(e) => {
@@ -198,14 +198,14 @@ const Login = ({ user, dark }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center font-semibold text-black leading-tight tracking-tight md:text-2xl ">
+          <h1 className="text-xl text-center font-semibold text-black dark:text-white leading-tight tracking-tight md:text-2xl ">
             Login
           </h1>
 
           <div>
             <label
               htmlFor="email"
-              className="block mt-4 mb-2 text-sm font-bold text-black"
+              className="block mt-4 mb-2 text-sm font-bold text-black dark:text-white"
             >
               Email <span className="text-red-500">*</span>
             </label>
@@ -215,7 +215,7 @@ const Login = ({ user, dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white border-black border-2 font-medium text-base text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="name@company.com"
               required
             />
@@ -223,7 +223,7 @@ const Login = ({ user, dark }) => {
           <div>
             <label
               htmlFor="password"
-              className="block mt-4 mb-2 text-sm font-bold text-black "
+              className="block mt-4 mb-2 text-sm font-bold text-black  dark:text-white"
             >
               Password <span className="text-red-500">*</span>
             </label>
@@ -234,12 +234,12 @@ const Login = ({ user, dark }) => {
                 name="password"
                 id="password"
                 value={password}
-                className="bg-white border-black border-2 font-medium text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pr-10 p-2.5"
+                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
                 required
               />
               <span
                 onClick={handlePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5 text-xl  cursor-pointer"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center leading-5 text-xl cursor-pointer"
               >
                 {showPassword ? (
                   <AiFillEye style={iconStyle} />
@@ -261,7 +261,7 @@ const Login = ({ user, dark }) => {
                       Forgot password?
                     </p>
                   ) : (
-                    <p className="text-sm font-bold text-blue-950 cursor-not-allowed hover:underline underline-offset-4 ">
+                    <p className="text-sm font-bold text-blue-950 dark:text-blue-200 cursor-not-allowed hover:underline underline-offset-4 ">
                       Forgot password?
                     </p>
                   )}
@@ -274,16 +274,16 @@ const Login = ({ user, dark }) => {
             <button
               type="submit"
               ref={buttonRef}
-              className="w-auto mt-2 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+              className="w-auto mt-2 mb-4 text-white bg-blue-950  hover:bg-blue-900  focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium rounded-lg text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed dark:focus:border-blue-200"
             >
               Login
             </button>
           </div>
 
-          <p className=" mt-4 text-center text-base font-bold text-black ">
+          <p className=" mt-4 text-center text-base font-medium text-black dark:text-white">
             Not registered yet?{" "}
             <Link href="/signup" legacyBehavior>
-              <a className="font-bold text-blue-950 underline-offset-4 hover:underline ">
+              <a className=" ml-1 text-blue-950 dark:text-blue-200 underline-offset-4 hover:underline ">
                 Sign up
               </a>
             </Link>

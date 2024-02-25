@@ -16,7 +16,7 @@ export default function Home({ dark }) {
     },
     {
       imgsrc: "/play.jpg",
-      page: "league",
+      page: "news",
       content: "Latest News",
       text: "Stay updated with the latest football news from around the world.",
       buttonText: "Discover",
@@ -85,7 +85,16 @@ export default function Home({ dark }) {
               href="#"
               className="flex title-font font-medium items-center md:justify-start justify-center 2xl: text-gray-900 dark:text-white"
             >
-              <Image src="/logo.png" width={320} height={100} alt="Logo" />
+              {dark ? (
+                <Image
+                  src="/dark-logo.png"
+                  width={320}
+                  height={100}
+                  alt="Logo"
+                />
+              ) : (
+                <Image src="/logo.png" width={320} height={100} alt="Logo" />
+              )}
             </Link>
           </div>
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 mt-10 md:mt-0 justify-end pr-10 md:text-right text-center ">

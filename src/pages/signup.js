@@ -32,7 +32,7 @@ const Signup = ({ dark }) => {
   };
 
   const iconStyle = {
-    color: "#172554",
+    color: dark ? "white" : "#172554",
   };
 
   useEffect(() => {
@@ -162,7 +162,7 @@ const Signup = ({ dark }) => {
   };
 
   return (
-    <div>
+    <div className={dark ? "dark" : ""}>
       <Head>
         <title>Signup - FootZone</title>
         <meta
@@ -174,7 +174,7 @@ const Signup = ({ dark }) => {
           content="football soccer stadium players athletes sport"
         />
       </Head>
-      <section className="relative h-screen bg-white flex items-center justify-center">
+      <section className="relative h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
           <Image
             src="/stad.jpg"
@@ -189,7 +189,7 @@ const Signup = ({ dark }) => {
         <form
           id="signupForm"
           onSubmit={handleSubmit}
-          className="md:w-96 sm:w-72 bg-white bg-opacity-60 border-2 border-black rounded-lg shadow p-8 space-y-1 relative z-10"
+          className="md:w-96 sm:w-72 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-80 border-2 border-black dark:border-white rounded-lg shadow  space-y-1 p-8 relative z-10"
           method="POST"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -199,14 +199,14 @@ const Signup = ({ dark }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center  text-black font-semibold leading-tight tracking-tight text-orange-5 md:text-2xl ">
+          <h1 className="text-xl text-center  text-black font-semibold  dark:text-white leading-tight tracking-tight text-orange-5 md:text-2xl ">
             Sign Up
           </h1>
 
           <div>
             <label
               htmlFor="username"
-              className="block mt-4 mb-2 text-sm font-bold text-black"
+              className="block mt-4 mb-2 text-sm font-bold text-black dark:text-white"
             >
               Username <span className="text-red-500">*</span>
             </label>
@@ -216,7 +216,7 @@ const Signup = ({ dark }) => {
               name="username"
               id="username"
               value={username}
-              className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5"
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="user12"
               required
             />
@@ -224,7 +224,7 @@ const Signup = ({ dark }) => {
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-bold text-black mt-4"
+              className="block mb-2 text-sm font-bold text-black mt-4  dark:text-white"
             >
               Email <span className="text-red-500">*</span>
             </label>
@@ -234,7 +234,7 @@ const Signup = ({ dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 focus:border-primary-600 block w-full p-2.5"
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="name@company.com"
               required
             />
@@ -242,7 +242,7 @@ const Signup = ({ dark }) => {
           <div>
             <label
               htmlFor="password"
-              className="block mb-2 mt-4 text-sm font-bold text-black"
+              className="block mb-2 mt-4 text-sm font-bold text-black  dark:text-white"
             >
               Password <span className="text-red-500">*</span>
             </label>
@@ -253,8 +253,7 @@ const Signup = ({ dark }) => {
                 name="password"
                 id="password"
                 value={password}
-                className="bg-white border-black border-2  font-medium  text-base  text-black sm:text-sm 
-                placeholder-blue-200 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pr-10 p-2.5"
+                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5"
                 placeholder="********"
                 required
               />
@@ -274,15 +273,15 @@ const Signup = ({ dark }) => {
             <button
               type="submit"
               ref={buttonRef}
-              className="w-auto mt-5 mb-4 text-white bg-blue-950 hover:bg-blue-900 font-medium rounded-lg focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed"
+              className="w-auto mt-2 mb-4 text-white bg-blue-950  hover:bg-blue-900  focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium rounded-lg text-base px-7 py-2 text-center disabled:hover:cursor-not-allowed dark:focus:border-blue-200"
             >
               Sign Up
             </button>
           </div>
-          <p className="text-center text-base font-bold text-black">
+          <p className="text-center text-base font-medium text-black dark:text-white">
             Already registered?{" "}
             <Link href="/login" legacyBehavior>
-              <a className=" text-blue-950 text-primary-600 hover:underline underline-offset-4 ">
+              <a className="ml-1 text-blue-950 text-primary-600 hover:underline dark:text-blue-200 underline-offset-4 ">
                 Login
               </a>
             </Link>

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { FiAlignJustify } from "react-icons/fi";
+import { MdOutlineLightMode } from "react-icons/md";
+import { IoMdMoon } from "react-icons/io";
 
-const Navbar = ({ user, logout, dark }) => {
+const Navbar = ({ user, logout, dark, setDark }) => {
   const [sidebar, setSidebar] = useState(false);
   const [hamMenu, setHam] = useState(false);
   const [hamHovered, setHamHovered] = useState(false);
@@ -16,10 +18,16 @@ const Navbar = ({ user, logout, dark }) => {
     setSidebar(false);
   };
 
+  const handleToggle = () => {
+    setDark(!dark);
+  };
+
   return (
     <>
       <div
-        className={`flex sticky flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-3 pt-4 bg-blue-200  ${
+        className={`flex sticky flex-col md:justify-start sm:justify-center items-start border-blue-50 py-2 shadow-md top-0 z-40 pb-3 pt-4 ${
+          dark ? "dark" : ""
+        } ${dark ? "bg-black" : "bg-blue-200"}  ${
           !sidebar && "overflow-hidden"
         }`}
       >
@@ -28,7 +36,13 @@ const Navbar = ({ user, logout, dark }) => {
             <FiAlignJustify
               className={`text-lg md:text-2xl ${hamHovered ? "hovered" : ""}`}
               style={{
-                color: hamHovered ? "#177abf" : "#172554",
+                color: hamHovered
+                  ? dark
+                    ? "#1d4ed8"
+                    : "#177abf"
+                  : dark
+                  ? "#46adec"
+                  : "#172554",
                 cursor: "pointer",
               }}
               onClick={toggleHam}
@@ -43,7 +57,11 @@ const Navbar = ({ user, logout, dark }) => {
                 }`}
                 aria-label="Sidebar"
               >
-                <div className="h-full px-3 py-4 overflow-y-auto bg-blue-50">
+                <div
+                  className={`h-full px-3 py-4 overflow-y-auto ${
+                    dark ? "bg-slate-950" : "bg-blue-50"
+                  }`}
+                >
                   <span
                     onClick={toggleHam}
                     onMouseEnter={() => setIsHovered(true)}
@@ -53,30 +71,36 @@ const Navbar = ({ user, logout, dark }) => {
                     <IoClose
                       size={isHovered ? 23 : 20}
                       style={{
-                        color: isHovered ? "red" : "#172554",
+                        color: isHovered
+                          ? dark
+                            ? "#ff5252"
+                            : "red"
+                          : dark
+                          ? "#ffffff"
+                          : "#172554",
                         transition: "all 0.3s ease",
                       }}
                     />
                   </span>
-                  <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold">
+                  <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold dark:text-white">
                     {" "}
                     {true && (
                       <Link href={"/"}>
-                        <li className="my-2  hover:bg-blue-100 hover:text-blue-900 rounded-md">
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
                           Home
                         </li>
                       </Link>
                     )}
                     {true && (
                       <Link href={"/league"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 rounded-md">
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
                           Soccer
                         </li>
                       </Link>
                     )}
                     {true && (
                       <Link href={"/news"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 rounded-md">
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
                           News
                         </li>
                       </Link>
@@ -84,7 +108,7 @@ const Navbar = ({ user, logout, dark }) => {
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-2 hover:text-red-600 hover:bg-blue-100 rounded-md "
+                          className="my-2 hover:text-red-600 hover:bg-blue-100  dark:hover:bg-slate-900 rounded-md "
                           onClick={logout}
                         >
                           Logout
@@ -98,16 +122,48 @@ const Navbar = ({ user, logout, dark }) => {
           </div>
           <Link href={"/"}>
             <div className={hamMenu ? "ml-32 hidden md:block" : ""}>
-              <Image
-                src="/logo.png"
-                alt="FootZone logo"
-                width={140}
-                height={140}
-              />
+              {dark ? (
+                <Image
+                  src="/dark-logo.png"
+                  alt="FootZone logo"
+                  width={140}
+                  height={140}
+                />
+              ) : (
+                <Image
+                  src="/logo.png"
+                  alt="FootZone logo"
+                  width={140}
+                  height={140}
+                />
+              )}
             </div>
           </Link>
         </div>
         <div className="items-center cursor-pointer absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
+          <div className="mr-4">
+            <label
+              htmlFor="switch"
+              className="flex items-center cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                id="switch"
+                className="hidden"
+                onChange={handleToggle}
+                checked={dark}
+              />
+              {dark && <MdOutlineLightMode style={{ color: "white" }} />}
+              <div className="mx-2 w-10 h-6 bg-white dark:bg-blue-950 rounded-full p-1 flex items-center text-sm">
+                <div
+                  className={`w-4 h-4 bg-slate-400 dark:bg-black rounded-full shadow-md transform transition-all duration-300 ${
+                    dark ? "translate-x-4" : "translate-x-0"
+                  }`}
+                ></div>
+              </div>
+              {!dark && <IoMdMoon />}
+            </label>
+          </div>
           {user.user_id && (
             <div className="-mt-1">
               <span className="flex text-base md:text-xl flex-col">
@@ -120,7 +176,7 @@ const Navbar = ({ user, logout, dark }) => {
           )}
           {!user.user_id && (
             <Link href={"/login"}>
-              <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium text-white ">
+              <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium text-white ">
                 Login
               </button>
             </Link>
