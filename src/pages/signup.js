@@ -216,7 +216,7 @@ const Signup = ({ dark }) => {
               name="username"
               id="username"
               value={username}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="user12"
               required
             />
@@ -234,7 +234,7 @@ const Signup = ({ dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="name@company.com"
               required
             />
@@ -253,7 +253,7 @@ const Signup = ({ dark }) => {
                 name="password"
                 id="password"
                 value={password}
-                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5"
+                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5"
                 placeholder="********"
                 required
               />
@@ -278,7 +278,7 @@ const Signup = ({ dark }) => {
               Sign Up
             </button>
           </div>
-          <p className="text-center text-base font-medium text-black dark:text-white">
+          <p className="text-center text-base font-semibold dark:font-medium  text-black dark:text-white">
             Already registered?{" "}
             <Link href="/login" legacyBehavior>
               <a className="ml-1 text-blue-950 text-primary-600 hover:underline dark:text-blue-200 underline-offset-4 ">

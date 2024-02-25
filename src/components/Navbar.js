@@ -106,6 +106,13 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                       </Link>
                     )}
                     {user.user_id && (
+                      <Link href={"/security"}>
+                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
+                          Security
+                        </li>
+                      </Link>
+                    )}
+                    {user.user_id && (
                       <Link href={"/"}>
                         <li
                           className="my-2 hover:text-red-600 hover:bg-blue-100  dark:hover:bg-slate-900 rounded-md "
@@ -140,8 +147,8 @@ const Navbar = ({ user, logout, dark, setDark }) => {
             </div>
           </Link>
         </div>
-        <div className="items-center cursor-pointer absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
-          <div className="mr-4">
+        <div className="items-center  absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
+          <div className="mr-4 md:mr-8">
             <label
               htmlFor="switch"
               className="flex items-center cursor-pointer"
@@ -154,10 +161,10 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                 checked={dark}
               />
               {dark && <MdOutlineLightMode style={{ color: "white" }} />}
-              <div className="mx-2 w-10 h-6 bg-white dark:bg-blue-950 rounded-full p-1 flex items-center text-sm">
+              <div className="mx-1 md:mx-2 w-7 h-4 md:w-10 md:h-6 bg-white dark:bg-blue-950 rounded-full p-1 flex items-center text-xs  md:text-sm">
                 <div
-                  className={`w-4 h-4 bg-slate-400 dark:bg-black rounded-full shadow-md transform transition-all duration-300 ${
-                    dark ? "translate-x-4" : "translate-x-0"
+                  className={`w-3 h-3 md:w-4 md:h-4 bg-slate-400 dark:bg-black rounded-full shadow-md transform transition-all duration-300 ${
+                    dark ? "translate-x-2 md:translate-x-4" : "translate-x-0"
                   }`}
                 ></div>
               </div>
@@ -167,8 +174,10 @@ const Navbar = ({ user, logout, dark, setDark }) => {
           {user.user_id && (
             <div className="-mt-1">
               <span className="flex text-base md:text-xl flex-col">
-                <MdAccountCircle style={{ color: "#172554" }} />
-                <p className="text-sm md:text-sm -ml-1 font-semibold text-black">
+                <MdAccountCircle
+                  style={{ color: dark ? "white" : "#172554" }}
+                />
+                <p className="text-xs md:text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium">
                   {user.username}
                 </p>
               </span>
@@ -176,7 +185,7 @@ const Navbar = ({ user, logout, dark, setDark }) => {
           )}
           {!user.user_id && (
             <Link href={"/login"}>
-              <button className="bg-blue-950 px-2 py-1 rounded-md text-sm hover:bg-blue-900  focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium text-white ">
+              <button className="bg-blue-950 px-2 py-1 rounded-md text-xs md:text-sm hover:bg-blue-900  focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium text-white ">
                 Login
               </button>
             </Link>

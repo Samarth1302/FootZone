@@ -46,8 +46,8 @@ const News = ({ dark }) => {
       </Head>
       {news && (
         <section className="text-gray-600 body-font dark:bg-slate-900">
-          <div className="container px-5 py-12 mx-auto">
-            <h1 className="text-3xl font-bold  text-blue-900 dark:text-white mb-14">
+          <div className="px-5 py-8 md:py-12 mx-auto">
+            <h1 className="text-lg  md:text-3xl font-bold  text-blue-900 dark:text-white mb-14">
               Latest Football News
             </h1>
             <div className="flex flex-wrap -m-4">

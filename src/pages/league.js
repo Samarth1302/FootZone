@@ -70,7 +70,7 @@ const League = ({ dark }) => {
       </Head>
       <div className="text-gray-600 body-font dark:bg-slate-900">
         <div className="px-5 pt-4 mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold  text-blue-900 dark:text-blue-200">
+          <h1 className="text-lg md:text-3xl font-bold  text-blue-900 dark:text-blue-200">
             Choose a League
           </h1>
           <input
@@ -78,7 +78,7 @@ const League = ({ dark }) => {
             placeholder="Search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="border-2 px-3 border-gray-400 dark:bg-slate-950 p-2 rounded-md dark:text-white"
+            className="border-2 p-1 px-2 md:px-3 border-gray-400 dark:bg-slate-950 md:p-2 rounded-md dark:text-white"
           />
         </div>
         <div className="min-h-screen px-5 py-12 mx-auto">

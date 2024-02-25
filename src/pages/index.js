@@ -65,7 +65,7 @@ export default function Home({ dark }) {
             options={{
               strings: [
                 "Explore soccer stats",
-                "Get to know latest football news",
+                "Get latest football news",
                 "Join the fan discussion",
               ],
               delay: 100,

@@ -33,7 +33,7 @@ const Login = ({ user, dark }) => {
     if (email) {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URI}/security/forgot`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/pass/forgot`,
           {
             method: "POST",
             body: JSON.stringify({ email }),
@@ -215,7 +215,7 @@ const Login = ({ user, dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
               placeholder="name@company.com"
               required
             />
@@ -234,7 +234,7 @@ const Login = ({ user, dark }) => {
                 name="password"
                 id="password"
                 value={password}
-                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-base text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
                 required
               />
               <span
@@ -280,7 +280,7 @@ const Login = ({ user, dark }) => {
             </button>
           </div>
 
-          <p className=" mt-4 text-center text-base font-medium text-black dark:text-white">
+          <p className=" mt-4 text-center text-base font-semibold dark:font-medium text-black dark:text-white">
             Not registered yet?{" "}
             <Link href="/signup" legacyBehavior>
               <a className=" ml-1 text-blue-950 dark:text-blue-200 underline-offset-4 hover:underline ">
