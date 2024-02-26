@@ -11,6 +11,7 @@ import "@/styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Inria_Sans } from "next/font/google";
+import BotpressChatWidget from "@/components/Bot.js";
 
 const font = Inria_Sans({
   weight: "400",
@@ -97,9 +98,9 @@ export default function App({ Component, pageProps }) {
             setDark={setDark}
           />
         )}
-
+        <BotpressChatWidget />
         <Component user={user} dark={dark} {...pageProps} />
-
+        
         <Footer dark={dark} />
         {showLogoutConfirmation && (
           <Confirm
