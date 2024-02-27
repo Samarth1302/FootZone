@@ -29,7 +29,8 @@ const Login = ({ user, dark }) => {
     }
   };
 
-  const handleForgotPassword = async () => {
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
     if (email) {
       try {
         const response = await fetch(
@@ -157,6 +158,19 @@ const Login = ({ user, dark }) => {
         setPass("");
       }
     }
+    if(!password){
+      toast.error("Please enter password", {
+        position: "top-left",
+        toastId: "passlogin",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: dark ? "dark" : "light",
+      });
+    }
   };
 
   return (
@@ -188,7 +202,7 @@ const Login = ({ user, dark }) => {
           id="loginForm"
           onSubmit={handleSubmit}
           className="md:w-96 sm:w-72 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-80 border-2 border-black dark:border-white rounded-lg shadow p-8 space-y-2
-          relative z-10"
+          relative z-10 "
           method="POST"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -198,7 +212,7 @@ const Login = ({ user, dark }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center font-semibold text-black dark:text-white leading-tight tracking-tight md:text-2xl ">
+          <h1 className="text-xl text-center font-semibold text-black dark:text-white leading-tight tracking-widest md:text-2xl ">
             Login
           </h1>
 
@@ -215,7 +229,7 @@ const Login = ({ user, dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 placeholder:text-sm"
               placeholder="name@company.com"
               required
             />
@@ -235,7 +249,6 @@ const Login = ({ user, dark }) => {
                 id="password"
                 value={password}
                 className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
-                required
               />
               <span
                 onClick={handlePasswordVisibility}
@@ -250,25 +263,26 @@ const Login = ({ user, dark }) => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
+            
                   {email ? (
                     <p
                       onClick={handleForgotPassword}
-                      className="text-sm font-bold text-blue-950 hover:underline cursor-pointer"
+                      className="text-sm font-bold text-blue-950 dark:text-blue-200 hover:underline cursor-pointer"
                     >
                       Forgot password?
                     </p>
                   ) : (
+                    <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
                     <p className="text-sm font-bold text-blue-950 dark:text-blue-200 cursor-not-allowed hover:underline underline-offset-4 ">
                       Forgot password?
                     </p>
-                  )}
-                </TooltipTrigger>
+                    </TooltipTrigger>
                 <TooltipContent>Enter email to click here</TooltipContent>
               </Tooltip>
-            </TooltipProvider>
+            </TooltipProvider>)}
+               
           </div>
           <div className="flex justify-center">
             <button

@@ -1,5 +1,3 @@
-// Carousel.js
-
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -61,6 +59,7 @@ export default function Carousel({ slides }) {
               height={600}
               src={slide.imgsrc}
               alt={`Slide ${index + 1}`}
+              loading="lazy"
             />
             <div
               className={`absolute inset-0 flex flex-col justify-center items-center text-white text-center p-4 bg-black bg-opacity-50`}

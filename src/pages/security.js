@@ -136,7 +136,7 @@ const ChangePassword = ({ dark }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center text-black font-semibold dark:text-white leading-tight tracking-tight text-orange-5 md:text-2xl pb-4">
+          <h1 className="text-xl text-center text-black font-semibold dark:text-white leading-tight tracking-widest text-orange-5 md:text-2xl pb-4">
             Change Password
           </h1>
 

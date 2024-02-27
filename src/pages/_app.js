@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
   const [key, setKey] = useState();
   const [dark, setDark] = useState(false);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -71,6 +72,18 @@ export default function App({ Component, pageProps }) {
     setShowLogoutConfirmation(true);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <main className={font.className}>
@@ -98,7 +111,7 @@ export default function App({ Component, pageProps }) {
             setDark={setDark}
           />
         )}
-        <BotpressChatWidget />
+       {!isMobile && <BotpressChatWidget />}
         <Component user={user} dark={dark} {...pageProps} />
         
         <Footer dark={dark} />

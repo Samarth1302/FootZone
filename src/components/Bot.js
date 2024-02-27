@@ -1,6 +1,7 @@
 import Script from 'next/script';
 
 const BotpressChatWidget = () => {
+    
     const initBotpress = ()=>{
         window.botpressWebChat.init({
             "composerPlaceholder": "Chat with FootBot",

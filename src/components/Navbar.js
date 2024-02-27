@@ -135,6 +135,7 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                   alt="FootZone logo"
                   width={140}
                   height={140}
+                  priority
                 />
               ) : (
                 <Image
@@ -142,12 +143,13 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                   alt="FootZone logo"
                   width={140}
                   height={140}
+                  priority
                 />
               )}
             </div>
           </Link>
         </div>
-        <div className="items-center  absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
+        <div className="items-center text-xs md:text-sm absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
           <div className="mr-4 md:mr-8">
             <label
               htmlFor="switch"
@@ -172,12 +174,12 @@ const Navbar = ({ user, logout, dark, setDark }) => {
             </label>
           </div>
           {user.user_id && (
-            <div className="-mt-1">
+            <div className="md:-mt-1">
               <span className="flex text-base md:text-xl flex-col">
-                <MdAccountCircle
+                <div className="ml-1 md:ml-0"><MdAccountCircle
                   style={{ color: dark ? "white" : "#172554" }}
-                />
-                <p className="text-xs md:text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium">
+                /></div>
+                <p className="text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium">
                   {user.username}
                 </p>
               </span>

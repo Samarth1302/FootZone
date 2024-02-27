@@ -199,7 +199,7 @@ const Signup = ({ dark }) => {
             }
           }}
         >
-          <h1 className="text-xl text-center  text-black font-semibold  dark:text-white leading-tight tracking-tight text-orange-5 md:text-2xl ">
+          <h1 className="text-xl text-center  text-black font-semibold  dark:text-white leading-tight tracking-widest text-orange-5 md:text-2xl ">
             Sign Up
           </h1>
 
@@ -216,7 +216,7 @@ const Signup = ({ dark }) => {
               name="username"
               id="username"
               value={username}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 placeholder:text-sm"
               placeholder="user12"
               required
             />
@@ -234,7 +234,7 @@ const Signup = ({ dark }) => {
               name="email"
               id="email"
               value={email}
-              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 "
+              className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 placeholder:text-sm"
               placeholder="name@company.com"
               required
             />
@@ -253,7 +253,7 @@ const Signup = ({ dark }) => {
                 name="password"
                 id="password"
                 value={password}
-                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5"
+                className="bg-white dark:bg-slate-900 border-black dark:border-white border-2 font-medium text-lg text-black dark:text-white sm:text-sm rounded-lg focus:ring-primary-600 placeholder-blue-200 dark:placeholder-gray-100 dark:placeholder:opacity-30 focus:border-primary-600 block w-full p-2.5 placeholder:text-sm"
                 placeholder="********"
                 required
               />

@@ -49,6 +49,7 @@ export default function Home({ dark }) {
           width={4000}
           height={3000}
           alt="Background image"
+          priority
         />
       </div>
       <div
@@ -67,6 +68,7 @@ export default function Home({ dark }) {
                 "Explore soccer stats",
                 "Get latest football news",
                 "Join the fan discussion",
+                "Login and interact with soccer bot"
               ],
               delay: 100,
               loop: true,
@@ -91,13 +93,14 @@ export default function Home({ dark }) {
                   width={320}
                   height={100}
                   alt="Logo"
+                  priority
                 />
               ) : (
-                <Image src="/logo.png" width={320} height={100} alt="Logo" />
+                <Image src="/logo.png" width={320} height={100} alt="Logo" priority/>
               )}
             </Link>
           </div>
-          <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 mt-10 md:mt-0 justify-end pr-10 md:text-right text-center ">
+          <div className="flex-row flex md:pl-20 -mb-10 mt-10 md:mt-0 md:pr-10 text-center md:text-right ">
             <div className="w-full px-4">
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1 dark:text-white">
                 QUICK LINKS
@@ -108,7 +111,38 @@ export default function Home({ dark }) {
                     href="#"
                     className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
                   >
-                    News
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
+                  >
+                    Support us
+                  </Link>
+                </li>
+              </nav>
+            </div>
+            <div className="w-full px-4">
+              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1 dark:text-white">
+                QUICK LINKS
+              </h2>
+              <nav className="list-none">
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
+                  >
+                    Support us
                   </Link>
                 </li>
               </nav>
