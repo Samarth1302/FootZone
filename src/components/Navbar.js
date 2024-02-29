@@ -94,7 +94,7 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                     {true && (
                       <Link href={"/league"}>
                         <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
-                          Soccer
+                          Leagues
                         </li>
                       </Link>
                     )}

@@ -3,21 +3,21 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Confirm = ({ message, onConfirm, onCancel, dark }) => {
   return (
-    <div className="fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-md p-6">
+    <div className={`${dark?"dark":""} fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center`}>
+      <div className="md:w-full max-w-sm md:max-w-md">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md p-6">
           <div className="flex justify-end mb-1">
             <button
               onClick={onCancel}
-              className="text-black text-2xl cursor-pointer focus:outline-1"
+              className="text-black dark:text-white text-2xl cursor-pointer focus:outline-1"
             >
               <AiOutlineCloseCircle />
             </button>
           </div>
-          <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-red-800">
+          <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-red-800 dark:text-red-600">
             Confirm action
           </h1>
-          <p className="text-black text-center mt-2 mb-4 font-medium">
+          <p className="text-black  dark:text-white text-center mt-2 mb-4 font-medium">
             {message}
           </p>
           <div className="flex justify-center space-x-4">

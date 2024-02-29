@@ -120,6 +120,7 @@ export default function App({ Component, pageProps }) {
             message="Are you sure you want to logout?"
             onConfirm={confirmLogout}
             onCancel={cancelLogout}
+            dark={dark}
           />
         )}
       </main>
