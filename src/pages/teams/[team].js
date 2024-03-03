@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Chart from "chart.js/auto";
+import { IoClose } from "react-icons/io5";
 
 const TeamDetails = ({ dark }) => {
   const router = useRouter();
@@ -11,6 +13,10 @@ const TeamDetails = ({ dark }) => {
   const [players, setPlayers] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [filteredPlayers, setFilteredPlayers] = useState([]);
+  const [matchesChart, setMatchesChart] = useState(null);
+  const [homeAwayChart, setHomeAwayChart] = useState(null);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (team && leagueId) {
@@ -28,6 +34,113 @@ const TeamDetails = ({ dark }) => {
         .catch((error) => console.error("Error fetching team players:", error));
     }
   }, [team, leagueId]);
+
+  const handlePlayerClick = (playerId) => {
+    const selectedPlayer = filteredPlayers.find(
+      (player) => player.playerId === playerId
+    );
+    setSelectedPlayer(selectedPlayer);
+  };
+
+  const handleClosePlayerDetails = () => {
+    setSelectedPlayer(null);
+  };
+
+  useEffect(() => {
+    if (teamDetails) {
+      if (matchesChart) matchesChart.destroy();
+      if (homeAwayChart) homeAwayChart.destroy();
+      const matchesChartCtx = document.getElementById("matchesChart");
+      const newMatchesChart = new Chart(matchesChartCtx, {
+        type: "pie",
+        data: {
+          labels: ["Won", "Lost", "Drawn"],
+          datasets: [
+            {
+              label: "Matches",
+              data: [
+                teamDetails.standings[0].all.win,
+                teamDetails.standings[0].all.lose,
+                teamDetails.standings[0].all.draw,
+              ],
+              backgroundColor: [
+                "rgb(47, 173, 93)",
+                "rgb(255, 69, 69)",
+                "rgb(207, 151, 31)",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+      setMatchesChart(newMatchesChart);
+
+      const homeAwayChartCtx = document.getElementById("homeAwayChart");
+      const newHomeAwayChart = new Chart(homeAwayChartCtx, {
+        type: "bar",
+        data: {
+          labels: ["Home", "Away"],
+          datasets: [
+            {
+              label: "Wins",
+              data: [
+                teamDetails.standings[0].home.win,
+                teamDetails.standings[0].away.win,
+              ],
+              backgroundColor: "rgb(47, 173, 93)",
+              borderColor: "rgb(128, 128, 128)",
+            },
+            {
+              label: "Losses",
+              data: [
+                teamDetails.standings[0].home.lose,
+                teamDetails.standings[0].away.lose,
+              ],
+              backgroundColor: "rgb(255, 69, 69)",
+              borderColor: "rgb(128, 128, 128)",
+            },
+            {
+              label: "Draws",
+              data: [
+                teamDetails.standings[0].home.draw,
+                teamDetails.standings[0].away.draw,
+              ],
+              backgroundColor: "rgb(207, 151, 31)",
+              borderColor: "rgb(128, 128, 128)",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: "rgb(128, 128, 128)",
+              },
+            },
+            x: {
+              ticks: {
+                color: "rgb(128, 128, 128)",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+      setHomeAwayChart(newHomeAwayChart);
+    }
+  }, [teamDetails]);
 
   const filterPlayers = () => {
     if (players) {
@@ -54,7 +167,7 @@ const TeamDetails = ({ dark }) => {
     >
       <Head>
         <title>
-          {teamDetails ? teamDetails.name : "Team Details"} - FootZone
+          {teamDetails ? teamDetails.name : "Team Details"}-FootZone
         </title>
         <meta name="description" content="Team Details Page" />
       </Head>
@@ -121,87 +234,66 @@ const TeamDetails = ({ dark }) => {
                 </div>
               </div>
             )}
+            <hr className="my-8 border-t-4 border-gray-300" />
             {teamDetails.standings && (
-              <div className="mt-10 mb-4 text-base dark:text-blue-50 md:text-xl flex flex-col md:flex-row md:space-x-14 lg:space-x-20 text-center justify-center">
-                <div className="flex flex-row space-x-8 md:space-x-14 lg:space-x-20">
-                  <div className="flex flex-col">
-                    <p className="font-medium">
-                      League Rank: {teamDetails.standings[0].rank}{" "}
-                    </p>
-                    <p>Matches Played: {teamDetails.standings[0].all.played}</p>
-                    <p className="text-green-600 dark:text-green-400 ">
-                      Matches Won: {teamDetails.standings[0].all.win}
-                    </p>
-                    <p className="text-red-600 dark:text-red-400">
-                      Matches Lost: {teamDetails.standings[0].all.lose}
-                    </p>
-                    <p className="text-yellow-600 dark:text-yellow-400">
-                      Matches Drawn: {teamDetails.standings[0].all.draw}
-                    </p>{" "}
-                  </div>
-                  <div className="flex flex-col">
-                    <p>Total Points: {teamDetails.standings[0].points}</p>
-                    <p className="text-green-600 dark:text-green-400">
-                      Goals Scored: {teamDetails.standings[0].all.goals.for}
-                    </p>
-                    <p className="text-red-600 dark:text-red-400">
-                      Goals Conceded:{" "}
-                      {teamDetails.standings[0].all.goals.against}
-                    </p>
-                    <p>Goal Difference: {teamDetails.standings[0].goalsDiff}</p>
-                    <div className="flex text-center  justify-center">
-                      <p className="mr-2">Form:</p>
-                      <div className="flex flex-row items-center">
-                        {teamDetails.standings[0].form
-                          .split("")
-                          .map((result, i) => (
-                            <span
-                              key={i}
-                              className={`${
-                                result === "W"
-                                  ? "bg-green-500"
-                                  : result === "D"
-                                  ? "bg-yellow-500"
-                                  : "bg-red-500"
-                              } h-3 w-3 mx-0.5 rounded-full`}
-                            ></span>
-                          ))}
-                      </div>
+              <div className="my-auto text-base dark:text-blue-50 md:text-lg lg:text-xl flex flex-col md:flex-row md:space-x-14 lg:space-x-40 text-center justify-center space-y-16 md:space-y-0">
+                <div>
+                  <p className="font-medium">
+                    League Rank: {teamDetails.standings[0].rank}{" "}
+                  </p>
+
+                  <p>Total Points: {teamDetails.standings[0].points}</p>
+                  <p className="text-green-600 dark:text-green-400">
+                    Goals Scored: {teamDetails.standings[0].all.goals.for}
+                  </p>
+                  <p className="text-red-600 dark:text-red-400">
+                    Goals Conceded: {teamDetails.standings[0].all.goals.against}
+                  </p>
+                  <p>Goal Difference: {teamDetails.standings[0].goalsDiff}</p>
+                  <div className="flex text-center justify-center">
+                    <p className="mr-2">Form:</p>
+                    <div className="flex flex-row items-center">
+                      {teamDetails.standings[0].form
+                        .split("")
+                        .map((result, i) => (
+                          <span
+                            key={i}
+                            className={`${
+                              result === "W"
+                                ? "bg-green-500"
+                                : result === "D"
+                                ? "bg-yellow-500"
+                                : "bg-red-500"
+                            } h-3 w-3 mx-0.5 rounded-full`}
+                          ></span>
+                        ))}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-row mt-6 md:mt-0 space-x-20 md:space-x-14 lg:space-x-20 text-center justify-center">
-                  <div className="flex flex-col">
-                    <h2 className="font-semibold">Home stats</h2>
-                    <p>Played- {teamDetails.standings[0].home.played}</p>
-                    <p className="text-green-600 dark:text-green-400">
-                      Won- {teamDetails.standings[0].home.win}
-                    </p>
-                    <p className="text-red-600 dark:text-red-400">
-                      Lost- {teamDetails.standings[0].home.lose}
-                    </p>
-                    <p className="text-yellow-600 dark:text-yellow-400">
-                      Drawn- {teamDetails.standings[0].home.draw}
-                    </p>
+                <div className="mx-auto">
+                  <p className="mb-6">
+                    Matches: {teamDetails.standings[0].all.played}
+                  </p>
+                  <div
+                    className="chart-container"
+                    style={{ width: "100px", height: "100px" }}
+                  >
+                    <canvas id="matchesChart"></canvas>
                   </div>
-                  <div className="flex flex-col">
-                    <h2 className="font-semibold">Away stats</h2>
-                    <p>Played- {teamDetails.standings[0].away.played}</p>
-                    <p className="text-green-600 dark:text-green-400">
-                      Won- {teamDetails.standings[0].away.win}
-                    </p>
-                    <p className="text-red-600 dark:text-red-400">
-                      Lost- {teamDetails.standings[0].away.lose}
-                    </p>
-                    <p className="text-yellow-600 dark:text-yellow-400">
-                      Drawn- {teamDetails.standings[0].away.draw}
-                    </p>
+                </div>
+                <div className="mx-auto">
+                  <p className="font-medium mb-6">Home/Away Stats</p>
+                  <div
+                    className="chart-container"
+                    style={{ width: "200px", height: "200px" }}
+                  >
+                    <canvas id="homeAwayChart"></canvas>
                   </div>
                 </div>
               </div>
             )}
-            <hr className="my-8 border-t-4 border-gray-300" />
+            <hr className="-mt-10 border-t-4 border-gray-300" />
             {players && (
               <div className="flex mt-10 flex-col">
                 <div className="flex flex-row justify-between items-center mb-14">
@@ -219,8 +311,9 @@ const TeamDetails = ({ dark }) => {
                 <div className="flex flex-wrap justify-center dark:text-blue-100">
                   {filteredPlayers.map((player) => (
                     <div
-                      key={player.name}
-                      className="flex flex-col items-center justify-center mr-4 mb-4 w-1/4 md:w-1/6 lg:w-1/12"
+                      key={player.playerId}
+                      className="flex flex-col items-center justify-center mx-3 my-6 w-1/4 md:w-1/6 lg:w-1/12"
+                      onClick={() => handlePlayerClick(player.playerId)}
                     >
                       <div className="w-20 h-20 rounded-full overflow-hidden">
                         <Image
@@ -239,6 +332,81 @@ const TeamDetails = ({ dark }) => {
                     </div>
                   ))}
                 </div>
+                {selectedPlayer && (
+                  <div className="fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center">
+                    <div className="md:w-full max-w-sm md:max-w-md">
+                      <div className="bg-white dark:bg-slate-900 dark:text-white rounded-lg shadow-md p-6">
+                        <div className="flex justify-end mb-1">
+                          <button
+                            onClick={handleClosePlayerDetails}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                            className="text-black dark:text-white text-2xl cursor-pointer focus:outline-1"
+                          >
+                            <IoClose
+                              style={{
+                                color: isHovered
+                                  ? dark
+                                    ? "red"
+                                    : "red"
+                                  : dark
+                                  ? "white"
+                                  : "black",
+                                transition: "all 0.3s ease",
+                              }}
+                            />
+                          </button>
+                        </div>
+                        <h2 className="text-xl text-center font-semibold">
+                          {selectedPlayer.name} ( {selectedPlayer.position} )
+                        </h2>
+                        <h3 className="text-lg mt-2 text-center font-medium">
+                          {selectedPlayer.firstname +
+                            " " +
+                            selectedPlayer.lastname}
+                        </h3>
+                        <div className="flex flex-col md:flex-row items-center">
+                          <div className="mt-4 mb-4 mx-auto md:mb-0">
+                            <Image
+                              src={selectedPlayer.photo}
+                              alt={selectedPlayer.name}
+                              width={120}
+                              height={120}
+                            />
+                          </div>
+                          <div className="ml-4 mt-4 mx-auto md:ml-6">
+                            {selectedPlayer.age && (
+                              <p className="mb-2">
+                                <span className="font-semibold">Age:</span>{" "}
+                                {selectedPlayer.age}
+                              </p>
+                            )}
+                            {selectedPlayer.nationality && (
+                              <p className="mb-2">
+                                <span className="font-semibold">
+                                  Nationality:
+                                </span>{" "}
+                                {selectedPlayer.nationality}
+                              </p>
+                            )}
+                            {selectedPlayer.height && (
+                              <p className="mb-2">
+                                <span className="font-semibold">Height:</span>{" "}
+                                {selectedPlayer.height}
+                              </p>
+                            )}
+                            {selectedPlayer.weight && (
+                              <p className="mb-2">
+                                <span className="font-semibold">Weight:</span>{" "}
+                                {selectedPlayer.weight}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
@@ -59,6 +58,7 @@ const ChangePassword = ({ dark }) => {
       );
       const data = await response.json();
       if (data.success == true) {
+        router.push("/");
         toast.success(data.message, {
           position: "top-left",
           toastId: "changesuccess",
@@ -70,7 +70,6 @@ const ChangePassword = ({ dark }) => {
           progress: undefined,
           theme: dark ? "dark" : "light",
         });
-        router.push("/");
       } else {
         toast.error(data.error, {
           position: "top-left",

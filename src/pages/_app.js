@@ -25,6 +25,7 @@ export default function App({ Component, pageProps }) {
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
   const router = useRouter();
+  const currentPath = router.asPath;
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("myUser"));
@@ -84,6 +85,16 @@ export default function App({ Component, pageProps }) {
     };
   }, []);
 
+  useEffect(() => {
+    const getDarkModePreference = () => {
+      setDark(
+        window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    };
+    getDarkModePreference();
+  }, []);
+
   return (
     <>
       <main className={font.className}>
@@ -109,11 +120,12 @@ export default function App({ Component, pageProps }) {
             logout={handleLogout}
             dark={dark}
             setDark={setDark}
+            currentPath={currentPath}
           />
         )}
-       {!isMobile && <BotpressChatWidget />}
+        {!isMobile && <BotpressChatWidget />}
         <Component user={user} dark={dark} {...pageProps} />
-        
+
         <Footer dark={dark} />
         {showLogoutConfirmation && (
           <Confirm

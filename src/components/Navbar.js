@@ -7,7 +7,7 @@ import { FiAlignJustify } from "react-icons/fi";
 import { MdOutlineLightMode } from "react-icons/md";
 import { IoMdMoon } from "react-icons/io";
 
-const Navbar = ({ user, logout, dark, setDark }) => {
+const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
   const [sidebar, setSidebar] = useState(false);
   const [hamMenu, setHam] = useState(false);
   const [hamHovered, setHamHovered] = useState(false);
@@ -83,31 +83,56 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                     />
                   </span>
                   <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold dark:text-white">
-                    {" "}
-                    {true && (
-                      <Link href={"/"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
-                          Home
+                    <Link href={"/"}>
+                      <li
+                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                          currentPath == "/" &&
+                          "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                        }`}
+                      >
+                        Home
+                      </li>
+                    </Link>
+                    <Link href={"/league"}>
+                      <li
+                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                          currentPath === "/league" &&
+                          "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                        }`}
+                      >
+                        Leagues
+                      </li>
+                    </Link>
+                    {user.user_id && (
+                      <Link href={"/team"}>
+                        <li
+                          className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                            currentPath === "/team" &&
+                            "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                          }`}
+                        >
+                          Teams
                         </li>
                       </Link>
                     )}
-                    {true && (
-                      <Link href={"/league"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
-                          Leagues
-                        </li>
-                      </Link>
-                    )}
-                    {true && (
-                      <Link href={"/news"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
-                          News
-                        </li>
-                      </Link>
-                    )}
+                    <Link href={"/news"}>
+                      <li
+                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                          currentPath === "/news" &&
+                          "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                        }`}
+                      >
+                        News
+                      </li>
+                    </Link>
                     {user.user_id && (
                       <Link href={"/security"}>
-                        <li className="my-2 hover:bg-blue-100 hover:text-blue-900  dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md">
+                        <li
+                          className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                            currentPath === "/security" &&
+                            "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                          }`}
+                        >
                           Security
                         </li>
                       </Link>
@@ -115,7 +140,9 @@ const Navbar = ({ user, logout, dark, setDark }) => {
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className="my-2 hover:text-red-600 hover:bg-blue-100  dark:hover:bg-slate-900 rounded-md "
+                          className={`my-2 hover:text-red-600 hover:bg-blue-100  dark:hover:bg-slate-900 rounded-md ${
+                            currentPath === "/logout" && "font-bold"
+                          }`}
                           onClick={logout}
                         >
                           Logout
@@ -149,7 +176,7 @@ const Navbar = ({ user, logout, dark, setDark }) => {
             </div>
           </Link>
         </div>
-        <div className="items-center text-xs md:text-sm absolute right-2 md:right-4 top-2 md:top-4 ml-72 flex">
+        <div className="items-center text-xs md:text-sm absolute right-2 md:right-4 top-2 md:top-3 ml-72 flex">
           <div className="mr-4 md:mr-8">
             <label
               htmlFor="switch"
@@ -176,9 +203,11 @@ const Navbar = ({ user, logout, dark, setDark }) => {
           {user.user_id && (
             <div className="md:-mt-1">
               <span className="flex text-base md:text-xl flex-col">
-                <div className="ml-1 md:ml-0"><MdAccountCircle
-                  style={{ color: dark ? "white" : "#172554" }}
-                /></div>
+                <div className="ml-1 md:ml-0">
+                  <MdAccountCircle
+                    style={{ color: dark ? "white" : "#172554" }}
+                  />
+                </div>
                 <p className="text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium">
                   {user.username}
                 </p>

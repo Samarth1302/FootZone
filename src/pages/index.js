@@ -3,7 +3,6 @@ import Carousel from "@/components/Carousel";
 import Typewriter from "typewriter-effect";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Home({ dark }) {
   let slides = [
@@ -52,7 +51,7 @@ export default function Home({ dark }) {
           priority
         />
       </div>
-      <div
+      <section
         className="text-center md:pr-10 text-white text-lg md:text-2xl
       font-medium pt-14 md:pt-20 z-20"
       >
@@ -68,7 +67,7 @@ export default function Home({ dark }) {
                 "Explore soccer stats",
                 "Get latest football news",
                 "Join the fan discussion",
-                "Login and interact with soccer bot"
+                "Login and interact with soccer bot",
               ],
               delay: 100,
               loop: true,
@@ -76,8 +75,8 @@ export default function Home({ dark }) {
             }}
           />
         </div>
-      </div>
-      <div className="w-[90%] lg:w-[50%] lg:z-20 m-auto rounded-lg bg-gray-600 mb-10 mt-32 md:mt-80 lg:mt-16 ">
+      </section>
+      <div className="w-[90%] bg-gray-600 lg:w-[50%] lg:z-20 m-auto rounded-lg mb-10 mt-32 md:mt-80 lg:mt-16 dark:bg-gray-800">
         <Carousel slides={slides} />
       </div>
       <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900">
@@ -91,21 +90,24 @@ export default function Home({ dark }) {
                 <Image
                   src="/dark-logo.png"
                   width={320}
-                  height={100}
+                  height={320}
                   alt="Logo"
                   priority
                 />
               ) : (
-                <Image src="/logo.png" width={320} height={100} alt="Logo" priority/>
+                <Image
+                  src="/logo.png"
+                  width={320}
+                  height={320}
+                  alt="Logo"
+                  priority
+                />
               )}
             </Link>
           </div>
-          <div className="flex-row flex md:pl-20 -mb-10 mt-10 md:mt-0 md:pr-10 text-center md:text-right ">
+          <div className="flex-row flex md:pl-20 -mb-10 mt-10 md:mt-0 md:pr-10 text-center md:text-right lg:justify-end">
             <div className="w-full px-4">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1 dark:text-white">
-                QUICK LINKS
-              </h2>
-              <nav className="list-none">
+              <div className="list-none flex flex-row space-x-8 lg:text-lg">
                 <li>
                   <Link
                     href="#"
@@ -119,22 +121,7 @@ export default function Home({ dark }) {
                     href="#"
                     className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
                   >
-                    Support us
-                  </Link>
-                </li>
-              </nav>
-            </div>
-            <div className="w-full px-4">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-base mb-1 dark:text-white">
-                QUICK LINKS
-              </h2>
-              <nav className="list-none">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
-                  >
-                    Contact
+                    About
                   </Link>
                 </li>
                 <li>
@@ -142,10 +129,10 @@ export default function Home({ dark }) {
                     href="#"
                     className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
                   >
-                    Support us
+                    Credits
                   </Link>
                 </li>
-              </nav>
+              </div>
             </div>
           </div>
         </div>
