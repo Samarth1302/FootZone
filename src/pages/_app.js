@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
 import DOMPurify from "dompurify";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Confirm from "@/components/Confirm";
+import Comment from "@/components/Comment";
 import RouteLoader from "@/components/Loader";
 import "@/styles/globals.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import { Inria_Sans } from "next/font/google";
 import BotpressChatWidget from "@/components/Bot.js";
 
@@ -54,17 +53,7 @@ export default function App({ Component, pageProps }) {
     setKey(Math.random());
     router.push("/");
     setShowLogoutConfirmation(false);
-    toast.success("User logged out.", {
-      position: "top-left",
-      autoClose: 1500,
-      toastId: "logout",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: dark ? "dark" : "light",
-    });
+    toast.success("User logged out", { id: "logout" });
   };
   const cancelLogout = () => {
     setShowLogoutConfirmation(false);
@@ -99,20 +88,30 @@ export default function App({ Component, pageProps }) {
     <>
       <main className={font.className}>
         <RouteLoader dark={dark} />
-        <ToastContainer
-          position="top-left"
-          limit={1}
-          autoClose={1000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme={dark ? "dark" : "light"}
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 2000,
+            style: {
+              background: dark ? "#333" : "#fff",
+              color: dark ? "#fff" : "#333",
+            },
+            success: {
+              duration: 2000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+            error: {
+              duration: 2000,
+              theme: {
+                primary: "red",
+                secondary: "black",
+              },
+            },
+          }}
         />
-
         {key && (
           <Navbar
             user={user}
@@ -125,7 +124,7 @@ export default function App({ Component, pageProps }) {
         )}
         {!isMobile && <BotpressChatWidget />}
         <Component user={user} dark={dark} {...pageProps} />
-
+        <Comment dark={dark} user={user} />
         <Footer dark={dark} />
         {showLogoutConfirmation && (
           <Confirm

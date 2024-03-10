@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 
 const LeagueDetails = ({ dark }) => {
@@ -19,9 +18,7 @@ const LeagueDetails = ({ dark }) => {
         .then((response) => response.json())
         .then((data) => setLeagueDetails(data))
 
-        .catch((error) =>
-          console.error("Error fetching league details:", error)
-        );
+        .catch((error) => toast.error(error));
     }
   }, [leagueId]);
   const filterTeams = () => {

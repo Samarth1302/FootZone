@@ -1,20 +1,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import {
-  BsFillArrowRightCircleFill,
-  BsFillArrowLeftCircleFill,
-} from "react-icons/bs";
 
 export default function Carousel({ slides }) {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
-
-  const previousSlide = () => {
-    if (current === 0) setCurrent(slides.length - 1);
-    else setCurrent(current - 1);
-  };
 
   const nextSlide = () => {
     if (current === slides.length - 1) setCurrent(0);
@@ -40,10 +31,18 @@ export default function Carousel({ slides }) {
     };
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 9000);
+
+    return () => clearInterval(interval);
+  }, [current]);
+
   return (
     <div className="relative overflow-hidden">
       <div
-        className={`flex transition ease-out duration-500`}
+        className={`flex transition-transform ease-in-out duration-1000`}
         style={{
           transform: `translateX(-${current * 100}%)`,
         }}
@@ -92,20 +91,7 @@ export default function Carousel({ slides }) {
 
       <div
         className={`absolute top-0 h-full w-full flex items-center justify-between px-4 pointer-events-none`}
-      >
-        <button
-          onClick={previousSlide}
-          className={`text-3xl md:text-4xl text-white pointer-events-auto`}
-        >
-          <BsFillArrowLeftCircleFill style={{ color: "white" }} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className={`text-3xl md:text-4xl text-white pointer-events-auto`}
-        >
-          <BsFillArrowRightCircleFill style={{ color: "white" }} />
-        </button>
-      </div>
+      ></div>
 
       {!isMobile ? (
         <div

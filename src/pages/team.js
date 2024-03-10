@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Teams = ({ dark }) => {
   const [originalTeams, setOriginalTeams] = useState([]);
@@ -22,17 +21,7 @@ const Teams = ({ dark }) => {
         setOriginalTeams(data);
         setFilteredTeams(data);
       } catch (err) {
-        toast.error(err, {
-          position: "top-left",
-          toastId: "teamerr",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(err);
       }
     };
 

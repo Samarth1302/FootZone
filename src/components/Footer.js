@@ -31,11 +31,18 @@ const Footer = ({ dark }) => {
               className="text-base text-black hover:underline underline-offset-4 dark:text-white"
               href="#"
             >
-              Terms of Service
+              About
             </Link>
             <Link
               className="text-base text-black hover:underline underline-offset-4 dark:text-white"
               href="#"
+            >
+              Credits
+            </Link>
+
+            <Link
+              className="text-base text-black hover:underline underline-offset-4 dark:text-white"
+              href="/privacy"
             >
               Privacy
             </Link>

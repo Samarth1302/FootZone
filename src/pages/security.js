@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import toast from "react-hot-toast";
 import Image from "next/image";
 
 const ChangePassword = ({ dark }) => {
@@ -59,42 +58,12 @@ const ChangePassword = ({ dark }) => {
       const data = await response.json();
       if (data.success == true) {
         router.push("/");
-        toast.success(data.message, {
-          position: "top-left",
-          toastId: "changesuccess",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.success(data.message);
       } else {
-        toast.error(data.error, {
-          position: "top-left",
-          toastId: "changesuccess",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(data.error);
       }
     } catch (error) {
-      toast.error(error.message, {
-        position: "top-left",
-        toastId: "changesuccess",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: dark ? "dark" : "light",
-      });
+      toast.error(error.message);
     }
   };
 

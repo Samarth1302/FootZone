@@ -147,8 +147,12 @@ const TeamDetails = ({ dark }) => {
       if (searchInput.trim() === "") {
         setFilteredPlayers(players);
       } else {
-        const filtered = players.filter((player) =>
-          player.name.toLowerCase().includes(searchInput.toLowerCase())
+        const filtered = players.filter(
+          (player) =>
+            player.firstname
+              .toLowerCase()
+              .includes(searchInput.toLowerCase()) ||
+            player.lastname.toLowerCase().includes(searchInput.toLowerCase())
         );
         setFilteredPlayers(filtered);
       }
@@ -315,7 +319,7 @@ const TeamDetails = ({ dark }) => {
                       className="flex flex-col items-center justify-center mx-3 my-6 w-1/4 md:w-1/6 lg:w-1/12"
                       onClick={() => handlePlayerClick(player.playerId)}
                     >
-                      <div className="w-20 h-20 rounded-full overflow-hidden">
+                      <div className="w-20 h-20 rounded-full hover:cursor-pointer overflow-hidden">
                         <Image
                           src={player.photo}
                           alt={player.lastname}
@@ -324,11 +328,7 @@ const TeamDetails = ({ dark }) => {
                           className="object-cover"
                         />
                       </div>
-                      <p className="mt-2">
-                        {player.lastname.substring(
-                          player.lastname.lastIndexOf(" ") + 1
-                        )}
-                      </p>
+                      <p className="mt-2">{player.name}</p>
                     </div>
                   ))}
                 </div>

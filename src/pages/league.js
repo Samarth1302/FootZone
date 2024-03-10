@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const League = ({ dark }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -20,17 +19,7 @@ const League = ({ dark }) => {
         setOriginalLeagues(data);
         setFilteredLeagues(data);
       } catch (err) {
-        toast.error(err, {
-          position: "top-left",
-          toastId: "leagueerr",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(err);
       }
     };
 
@@ -87,7 +76,7 @@ const League = ({ dark }) => {
               {filteredLeagues.map((league, index) => (
                 <Link key={index} href={`/leagues/${league.id}`} legacyBehavior>
                   <a className="p-4 md:w-1/2 lg:w-1/4 block">
-                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:hover:bg-blue-100 hover:bg-opacity-20 items-center text-blue-900 dark:text-blue-100 dark:hover:text-blue-950  dark:font-semibold font-medium">
+                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:bg-blue-100 hover:bg-opacity-20 items-center text-blue-900 dark:text-blue-950 dark:hover:bg-blue-200  dark:font-semibold font-medium">
                       <div className="w-1/3">
                         <Image
                           src={league.logo}

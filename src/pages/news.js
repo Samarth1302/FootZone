@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const formatDate = (dateString) => {
   const options = { day: "2-digit", month: "short", year: "numeric" };
   return new Date(dateString).toLocaleDateString("en-GB", options);
 };
 
-const News = ({ dark }) => {
+const News = ({ dark, error }) => {
   const [news, setNews] = useState([]);
 
   const fetchNews = async () => {
@@ -19,17 +18,7 @@ const News = ({ dark }) => {
       const data = await response.json();
       setNews(data);
     } catch (err) {
-      toast.error(err, {
-        position: "top-left",
-        toastId: "newserr",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: dark ? "dark" : "light",
-      });
+      toast.error(err);
     }
   };
 

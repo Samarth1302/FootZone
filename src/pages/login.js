@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import Link from "next/link";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -44,42 +43,14 @@ const Login = ({ user, dark }) => {
         const data = await response.json();
         if (data.success) {
           toast.success(data.message, {
-            position: "top-left",
-            toastId: "forgot",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: dark ? "dark" : "light",
+            duration: 4000,
           });
         }
       } catch (error) {
-        toast.error(error.message, {
-          position: "top-left",
-          toastId: "erforget",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(error.message);
       }
     } else {
-      toast.error("Fill the email address", {
-        position: "top-left",
-        toastId: "errorforget",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: dark ? "dark" : "light",
-      });
+      toast.error("Fill the email address");
     }
   };
   const handlePasswordVisibility = () => {
@@ -114,62 +85,22 @@ const Login = ({ user, dark }) => {
         const data = await response.json();
         if (data.token) {
           localStorage.setItem("myUser", JSON.stringify(data.token));
-          toast.success("Logged in successfully", {
-            position: "top-left",
-            autoClose: 1500,
-            toastId: "login",
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: dark ? "dark" : "light",
-          });
+          toast.success("Logged in successfully");
           setEmail("");
           setPass("");
           setTimeout(() => {
             router.push("/");
           }, 1000);
         } else {
-          toast.error(data.error, {
-            position: "top-left",
-            toastId: "er1login",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: dark ? "dark" : "light",
-          });
+          toast.error(data.error);
         }
       } catch (error) {
-        toast.error(error.message, {
-          position: "top-left",
-          toastId: "erlogin",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(error.message);
         setPass("");
       }
     }
-    if(!password){
-      toast.error("Please enter password", {
-        position: "top-left",
-        toastId: "passlogin",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: dark ? "dark" : "light",
-      });
+    if (!password) {
+      toast.error("Please enter password");
     }
   };
 
@@ -263,26 +194,25 @@ const Login = ({ user, dark }) => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            
-                  {email ? (
-                    <p
-                      onClick={handleForgotPassword}
-                      className="text-sm font-bold text-blue-950 dark:text-blue-200 hover:underline cursor-pointer"
-                    >
-                      Forgot password?
-                    </p>
-                  ) : (
-                    <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
+            {email ? (
+              <p
+                onClick={handleForgotPassword}
+                className="text-sm font-bold text-blue-950 dark:text-blue-200 hover:underline cursor-pointer"
+              >
+                Forgot password?
+              </p>
+            ) : (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
                     <p className="text-sm font-bold text-blue-950 dark:text-blue-200 cursor-not-allowed hover:underline underline-offset-4 ">
                       Forgot password?
                     </p>
-                    </TooltipTrigger>
-                <TooltipContent>Enter email to click here</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>)}
-               
+                  </TooltipTrigger>
+                  <TooltipContent>Enter email to click here</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
           </div>
           <div className="flex justify-center">
             <button

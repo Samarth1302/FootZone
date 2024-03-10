@@ -85,7 +85,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                   <ul className="space-y-4 mt-10 text-center justify-evenly text-base md:text-lg font-semibold dark:text-white">
                     <Link href={"/"}>
                       <li
-                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                        className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
                           currentPath == "/" &&
                           "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
                         }`}
@@ -95,7 +95,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                     </Link>
                     <Link href={"/league"}>
                       <li
-                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                        className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
                           currentPath === "/league" &&
                           "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
                         }`}
@@ -103,10 +103,10 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         Leagues
                       </li>
                     </Link>
-                    {user.user_id && (
+                    {true && (
                       <Link href={"/team"}>
                         <li
-                          className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                          className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
                             currentPath === "/team" &&
                             "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
                           }`}
@@ -117,7 +117,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                     )}
                     <Link href={"/news"}>
                       <li
-                        className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                        className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
                           currentPath === "/news" &&
                           "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
                         }`}
@@ -128,7 +128,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                     {user.user_id && (
                       <Link href={"/security"}>
                         <li
-                          className={`my-2 hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-slate-900 dark:hover:text-blue-200 rounded-md ${
+                          className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
                             currentPath === "/security" &&
                             "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
                           }`}
@@ -189,15 +189,15 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                 onChange={handleToggle}
                 checked={dark}
               />
-              {dark && <MdOutlineLightMode style={{ color: "white" }} />}
+              {dark && <MdOutlineLightMode style={{ color: "#93c5fd" }} />}
               <div className="mx-1 md:mx-2 w-7 h-4 md:w-10 md:h-6 bg-white dark:bg-blue-950 rounded-full p-1 flex items-center text-xs  md:text-sm">
                 <div
-                  className={`w-3 h-3 md:w-4 md:h-4 bg-slate-400 dark:bg-black rounded-full shadow-md transform transition-all duration-300 ${
+                  className={`w-3 h-3 md:w-4 md:h-4 bg-blue-200 dark:bg-black rounded-full shadow-md transform transition-all duration-300 ${
                     dark ? "translate-x-2 md:translate-x-4" : "translate-x-0"
                   }`}
                 ></div>
               </div>
-              {!dark && <IoMdMoon />}
+              {!dark && <IoMdMoon style={{ color: "#172554" }} />}
             </label>
           </div>
           {user.user_id && (

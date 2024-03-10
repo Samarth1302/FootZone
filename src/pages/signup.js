@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Link from "next/link";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -55,46 +54,16 @@ const Signup = ({ dark }) => {
 
           if (data.token) {
             localStorage.setItem("myUser", JSON.stringify(data.token));
-            toast.success("User verification complete", {
-              position: "top-left",
-              autoClose: 1500,
-              toastId: "verif",
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: dark ? "dark" : "light",
-            });
+            toast.success("User verification complete");
             setTimeout(() => {
               router.push("/");
             }, 1000);
           } else {
-            toast.error(data.error, {
-              position: "top-left",
-              toastId: "erverif",
-              autoClose: 1500,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: dark ? "dark" : "light",
-            });
+            toast.error(data.error);
           }
         } catch (error) {
           console.error(error);
-          toast.error("Verification failed", {
-            position: "top-left",
-            autoClose: 1500,
-            toastId: "verifail",
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: dark ? "dark" : "light",
-          });
+          toast.error("Verification failed, retry");
         }
       };
 
@@ -118,42 +87,12 @@ const Signup = ({ dark }) => {
 
       const data = await response.json();
       if (data.message) {
-        toast.success(data.message, {
-          position: "top-left",
-          toastId: "signup",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.success(data.message);
       } else {
-        toast.error(data.error, {
-          position: "top-left",
-          autoClose: 1500,
-          toastId: "ersignup",
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: dark ? "dark" : "light",
-        });
+        toast.error(data.error);
       }
     } catch (error) {
-      toast.error(error.message, {
-        position: "top-left",
-        autoClose: 1500,
-        toastId: "er1signup",
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: dark ? "dark" : "light",
-      });
+      toast.error(error.message);
     } finally {
       setEmail("");
       setUname("");

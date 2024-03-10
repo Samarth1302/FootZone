@@ -3,6 +3,12 @@ import Carousel from "@/components/Carousel";
 import Typewriter from "typewriter-effect";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FaNewspaper,
+  FaUsers,
+  FaShoppingCart,
+  FaComments,
+} from "react-icons/fa";
 
 export default function Home({ dark }) {
   let slides = [
@@ -79,60 +85,84 @@ export default function Home({ dark }) {
       <div className="w-[90%] bg-gray-600 lg:w-[50%] lg:z-20 m-auto rounded-lg mb-10 mt-32 md:mt-80 lg:mt-16 dark:bg-gray-800">
         <Carousel slides={slides} />
       </div>
-      <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900">
-        <div className="pl-3 py-24 mx-auto flex text-center md:items-center max-2xl:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-          <div className="w-auto flex-shrink-0 md:mx-0 text-center md:text-left">
-            <Link
-              href="#"
-              className="flex title-font font-medium items-center md:justify-start justify-center 2xl: text-gray-900 dark:text-white"
-            >
-              {dark ? (
-                <Image
-                  src="/dark-logo.png"
-                  width={320}
-                  height={320}
-                  alt="Logo"
-                  priority
-                />
-              ) : (
-                <Image
-                  src="/logo.png"
-                  width={320}
-                  height={320}
-                  alt="Logo"
-                  priority
-                />
-              )}
-            </Link>
-          </div>
-          <div className="flex-row flex md:pl-20 -mb-10 mt-10 md:mt-0 md:pr-10 text-center md:text-right lg:justify-end">
-            <div className="w-full px-4">
-              <div className="list-none flex flex-row space-x-8 lg:text-lg">
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-base font-medium hover:text-gray-900 hover:underline underline-offset-2 dark:text-white"
-                  >
-                    Credits
-                  </Link>
-                </li>
+      <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900 text-center">
+        <div className="py-10 mx-auto flex justify-center items-center">
+          <Link href="#" className="flex items-center justify-center">
+            {dark ? (
+              <Image
+                src="/dark-logo.png"
+                width={320}
+                height={320}
+                alt="Logo"
+                priority
+              />
+            ) : (
+              <Image
+                src="/logo.png"
+                width={320}
+                height={320}
+                alt="Logo"
+                priority
+              />
+            )}
+          </Link>
+        </div>
+        <div className="flex flex-wrap mx-4 pb-10">
+          <div className="xl:w-1/4 md:w-1/2 p-4">
+            <div className="border border-gray-400 dark:hover:bg-slate-800 hover:cursor-auto p-6 rounded-lg">
+              <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black mb-4">
+                <FaNewspaper />
               </div>
+              <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
+                Latest News
+              </h2>
+              <p className="leading-relaxed text-base dark:text-white">
+                Stay updated with the latest football news and updates from
+                around the world.
+              </p>
+            </div>
+          </div>
+          <div className="xl:w-1/4 md:w-1/2 p-4">
+            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+              <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black mb-4">
+                <FaUsers />
+              </div>
+              <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
+                Player Stats
+              </h2>
+              <p className="leading-relaxed text-base dark:text-white">
+                Explore detailed statistics and performance metrics of your
+                favorite football players.
+              </p>
+            </div>
+          </div>
+
+          <div className="xl:w-1/4 md:w-1/2 p-4">
+            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+              <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black-500 mb-4">
+                <FaShoppingCart />
+              </div>
+              <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
+                Ecommerce Page
+              </h2>
+              <p className="leading-relaxed text-base dark:text-white">
+                Shop for jerseys, cleats, footballs, and more football
+                merchandise.
+              </p>
+            </div>
+          </div>
+
+          <div className="xl:w-1/4 md:w-1/2 p-4">
+            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+              <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black-500 mb-4">
+                <FaComments />
+              </div>
+              <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
+                Fan Discussion
+              </h2>
+              <p className="leading-relaxed text-base dark:text-white">
+                Engage in discussions and connect with fellow football fans.
+              </p>
             </div>
           </div>
         </div>
