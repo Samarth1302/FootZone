@@ -45,6 +45,7 @@ const ChangePassword = ({ dark }) => {
         `${process.env.NEXT_PUBLIC_BACKEND_URI}/pass/change`,
         {
           method: "POST",
+          mode: "cors",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

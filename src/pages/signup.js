@@ -94,8 +94,6 @@ const Signup = ({ dark }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setEmail("");
-      setUname("");
       setPass("");
     }
   };

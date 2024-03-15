@@ -91,20 +91,20 @@ export default function App({ Component, pageProps }) {
         <Toaster
           position="top-center"
           toastOptions={{
-            duration: 2000,
+            duration: 4000,
             style: {
               background: dark ? "#333" : "#fff",
               color: dark ? "#fff" : "#333",
             },
             success: {
-              duration: 2000,
+              duration: 4000,
               theme: {
                 primary: "green",
                 secondary: "black",
               },
             },
             error: {
-              duration: 2000,
+              duration: 4000,
               theme: {
                 primary: "red",
                 secondary: "black",

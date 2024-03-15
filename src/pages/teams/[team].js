@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Chart from "chart.js/auto";
@@ -17,6 +17,7 @@ const TeamDetails = ({ dark }) => {
   const [homeAwayChart, setHomeAwayChart] = useState(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
+  const overlayRef = useRef(null);
 
   useEffect(() => {
     if (team && leagueId) {
@@ -34,6 +35,18 @@ const TeamDetails = ({ dark }) => {
         .catch((error) => console.error("Error fetching team players:", error));
     }
   }, [team, leagueId]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+        handleClosePlayerDetails();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handlePlayerClick = (playerId) => {
     const selectedPlayer = filteredPlayers.find(
@@ -334,8 +347,8 @@ const TeamDetails = ({ dark }) => {
                 </div>
                 {selectedPlayer && (
                   <div className="fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center">
-                    <div className="md:w-full max-w-sm md:max-w-md">
-                      <div className="bg-white dark:bg-slate-900 dark:text-white rounded-lg shadow-md p-6">
+                    <div ref={overlayRef} className="md:w-full max-w-sm md:max-w-md">
+                      <div className="bg-white dark:bg-slate-900 dark:text-white rounded-lg shadow-md p-6 tracking-wide">
                         <div className="flex justify-end mb-1">
                           <button
                             onClick={handleClosePlayerDetails}
@@ -377,27 +390,27 @@ const TeamDetails = ({ dark }) => {
                           <div className="ml-4 mt-4 mx-auto md:ml-6">
                             {selectedPlayer.age && (
                               <p className="mb-2">
-                                <span className="font-semibold">Age:</span>{" "}
+                                <span className="font-semibold">Age :</span>{" "}
                                 {selectedPlayer.age}
                               </p>
                             )}
                             {selectedPlayer.nationality && (
                               <p className="mb-2">
                                 <span className="font-semibold">
-                                  Nationality:
+                                  Nationality :
                                 </span>{" "}
                                 {selectedPlayer.nationality}
                               </p>
                             )}
                             {selectedPlayer.height && (
                               <p className="mb-2">
-                                <span className="font-semibold">Height:</span>{" "}
+                                <span className="font-semibold">Height :</span>{" "}
                                 {selectedPlayer.height}
                               </p>
                             )}
                             {selectedPlayer.weight && (
                               <p className="mb-2">
-                                <span className="font-semibold">Weight:</span>{" "}
+                                <span className="font-semibold">Weight :</span>{" "}
                                 {selectedPlayer.weight}
                               </p>
                             )}

@@ -5,12 +5,15 @@ import { useRouter } from "next/router";
 export default function Carousel({ slides }) {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
 
   const nextSlide = () => {
     if (current === slides.length - 1) setCurrent(0);
     else setCurrent(current + 1);
   };
+  // const prevSlide = () => {
+  //   if (current === 0) setCurrent(0);
+  //   else setCurrent(current + 1);
+  // };
   const handlePage = (page) => {
     router.push(page);
   };
@@ -18,18 +21,6 @@ export default function Carousel({ slides }) {
   const handleCircleClick = (index) => {
     setCurrent(index);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,9 +31,9 @@ export default function Carousel({ slides }) {
   }, [current]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden lg:rounded-2xl">
       <div
-        className={`flex transition-transform ease-in-out duration-1000`}
+        className={`flex transition-transform ease-in-out duration-500`}
         style={{
           transform: `translateX(-${current * 100}%)`,
         }}
@@ -50,10 +41,10 @@ export default function Carousel({ slides }) {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="relative w-full flex-shrink-0 rounded-lg overflow-hidden"
+            className="relative w-full flex-shrink-0 overflow-hidden"
           >
             <Image
-              className="opacity-40 rounded-lg"
+              className="opacity-40 lg:rounded-2xl"
               width={1500}
               height={600}
               src={slide.imgsrc}
@@ -79,7 +70,7 @@ export default function Carousel({ slides }) {
                   onClick={() => {
                     handlePage(slide.page);
                   }}
-                  className={`w-auto mt-8 mb-4 text-white bg-blue-800 hover:bg-blue-900  focus:bg-white focus:border-2 focus:border-blue-950 focus:text-blue-950 font-medium rounded-lg focus:outline-none focus:ring text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
+                  className={`w-auto mt-8 mb-4 text-white bg-blue-800 hover:bg-blue-900  focus:bg-white dark:focus:bg-blue-700 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium rounded-lg focus:outline-none focus:ring text-xs md:text-base lg:text-lg px-4 md:px-7 py-2`}
                 >
                   {slide.buttonText}
                 </button>
@@ -93,7 +84,7 @@ export default function Carousel({ slides }) {
         className={`absolute top-0 h-full w-full flex items-center justify-between px-4 pointer-events-none`}
       ></div>
 
-      {!isMobile ? (
+   
         <div
           className={`absolute bottom-2 pb-4 flex justify-center gap-3 w-full`}
         >
@@ -107,7 +98,6 @@ export default function Carousel({ slides }) {
             ></div>
           ))}
         </div>
-      ) : null}
     </div>
   );
 }

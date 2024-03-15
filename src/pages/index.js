@@ -16,7 +16,7 @@ export default function Home({ dark }) {
       imgsrc: "/comp.jpg",
       page: "league",
       content: "Soccer stats",
-      text: "Check out the latest match fixtures, player stats, and more.",
+      text: "Check out the latest league fixtures, team stats, standings and more.",
       buttonText: "Explore",
     },
     {
@@ -28,10 +28,17 @@ export default function Home({ dark }) {
     },
     {
       imgsrc: "/save.jpg",
+      page: "team",
+      content: "Discover Teams",
+      text: "Join the revolution! View different teams and support your favorite.",
+      buttonText: "View",
+    },
+    {
+      imgsrc: "/shop.jpg",
       page: "league",
-      content: "Fan Discussion",
-      text: "Join the discussion! Read and share comments from passionate football fans.",
-      buttonText: "Connect",
+      content: "Foot Store",
+      text: "Browse through a catalog of various products and football accessories",
+      buttonText: "Shop",
     },
   ];
   return (
@@ -46,8 +53,9 @@ export default function Home({ dark }) {
           name="keywords"
           content="football soccer stadium players athletes sport"
         />
-      </Head>
-      <div className="absolute bg-black top-30 left-0 -z-10">
+      </Head>      
+      <div>
+      <div className="absolute bg-black top-30 -z-10">
         <Image
           className="opacity-30"
           src="/ball.jpg"
@@ -57,16 +65,12 @@ export default function Home({ dark }) {
           priority
         />
       </div>
-      <section
-        className="text-center md:pr-10 text-white text-lg md:text-2xl
-      font-medium pt-14 md:pt-20 z-20"
-      >
-        <div className="text-2xl md:text-4xl font-medium">
+        <div className="text-center text-white text-2xl md:text-4xl font-medium pt-14 md:pr-10 md:pt-20 z-20">
           <p>
             Welcome to <span className="text-blue-300">FootZone</span>{" "}
           </p>
-        </div>
-        <div className="pt-2 md:pt-10 text-cyan-100">
+        
+        <div className="pt-2 -mb-2 md:-mb-1 text-lg md:text-2xl md:pt-10 text-cyan-100">
           <Typewriter
             options={{
               strings: [
@@ -81,8 +85,9 @@ export default function Home({ dark }) {
             }}
           />
         </div>
-      </section>
-      <div className="w-[90%] bg-gray-600 lg:w-[50%] lg:z-20 m-auto rounded-lg mb-10 mt-32 md:mt-80 lg:mt-16 dark:bg-gray-800">
+        </div>
+      </div>
+      <div className="w-full bg-gray-400 lg:w-[50%] lg:z-20 m-auto mt-24 md:mt-64 lg:mt-16 lg:mb-20 dark:bg-gray-800 lg:rounded-2xl">
         <Carousel slides={slides} />
       </div>
       <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900 text-center">
@@ -114,11 +119,10 @@ export default function Home({ dark }) {
                 <FaNewspaper />
               </div>
               <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
-                Latest News
+                Football News
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Stay updated with the latest football news and updates from
-                around the world.
+                Leveraged News API functionalities to retrieved soccer based news from popular news sites.
               </p>
             </div>
           </div>
@@ -128,11 +132,10 @@ export default function Home({ dark }) {
                 <FaUsers />
               </div>
               <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
-                Player Stats
+                Soccer Stats
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Explore detailed statistics and performance metrics of your
-                favorite football players.
+               Utilised Football-API and football-data-org to retrieve standings, matches, stats and more.
               </p>
             </div>
           </div>
@@ -146,8 +149,7 @@ export default function Home({ dark }) {
                 Ecommerce Page
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Shop for jerseys, cleats, footballs, and more football
-                merchandise.
+                Provided an e-commerce destination to mimic user processing and complex integration.
               </p>
             </div>
           </div>
@@ -158,10 +160,10 @@ export default function Home({ dark }) {
                 <FaComments />
               </div>
               <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
-                Fan Discussion
+                Commenting system
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Engage in discussions and connect with fellow football fans.
+                Implemented in-house, page-specific commenting system for fans to engage in discussions.
               </p>
             </div>
           </div>
