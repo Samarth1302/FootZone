@@ -326,9 +326,9 @@ const TeamDetails = ({ dark }) => {
                   />
                 </div>
                 <div className="flex flex-wrap justify-center dark:text-blue-100">
-                  {filteredPlayers.map((player) => (
+                  {filteredPlayers.map((player, index) => (
                     <div
-                      key={player.playerId}
+                      key={index}
                       className="flex flex-col items-center justify-center mx-3 my-6 w-1/4 md:w-1/6 lg:w-1/12"
                       onClick={() => handlePlayerClick(player.playerId)}
                     >
@@ -341,13 +341,18 @@ const TeamDetails = ({ dark }) => {
                           className="object-cover"
                         />
                       </div>
-                      <p className="mt-2">{player.name}</p>
+                      <p className="mt-2 text-center max-w-20 md:max-w-40 truncate">
+                        {player.name}
+                      </p>
                     </div>
                   ))}
                 </div>
                 {selectedPlayer && (
                   <div className="fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center">
-                    <div ref={overlayRef} className="md:w-full max-w-sm md:max-w-md">
+                    <div
+                      ref={overlayRef}
+                      className="md:w-full max-w-sm md:max-w-md"
+                    >
                       <div className="bg-white dark:bg-slate-900 dark:text-white rounded-lg shadow-md p-6 tracking-wide">
                         <div className="flex justify-end mb-1">
                           <button
