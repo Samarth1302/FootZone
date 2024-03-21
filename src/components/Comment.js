@@ -17,13 +17,12 @@ const Comment = ({ user, dark }) => {
   const [editComment, setEditComment] = useState(null);
   const [replyInput, setReplyInput] = useState(null);
   const [newReplyText, setNewReplyText] = useState("");
-  const [editReplyId, setEditReplyId] = useState(null);
   const replyInputRef = useRef(null);
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    let nonShow = ["/signup", "/login", "/security", "/privacy"];
+    let nonShow = ["/signup", "/login", "/security", "/privacy","/shop"];
     if (nonShow.includes(router.pathname)) {
       setShow(false);
     } else {
@@ -135,9 +134,6 @@ const Comment = ({ user, dark }) => {
     setEditComment(commentId);
     setNewEditText(currentText);
     closeDropdown();
-    setTimeout(() => {
-      commentInputRef.current.focus();
-    }, 100);
   };
   const handleEditSubmit = async (commentId) => {
     const sanitizedEditText = DOMPurify.sanitize(newEditText);
@@ -164,9 +160,15 @@ const Comment = ({ user, dark }) => {
         }
       );
       const data = await response.json();
-      setComments(
-        comments.map((comment) => (comment._id === commentId ? data : comment))
-      );
+      setComments(comments.map(comment => {
+        if (comment._id === commentId) {
+          return {
+            ...data,
+            replies: comment.replies 
+          };
+        }
+        return comment;
+      }));
       setNewEditText("");
       setEditComment(null);
     } catch (error) {
@@ -370,7 +372,7 @@ const Comment = ({ user, dark }) => {
                 comments.map((comment) => (
                   <article
                     key={comment._id}
-                    className={`p-3 my-3 mx-6 md:mx-1 text-base bg-slate-50 dark:bg-slate-950 rounded-lg `}
+                    className={`p-3 my-3 mx-6 md:mx-1 text-base bg-slate-100 dark:bg-slate-950 rounded-lg `}
                   >
                     <footer className="flex justify-between items-center mb-2">
                       <div className="flex items-center">
@@ -389,7 +391,7 @@ const Comment = ({ user, dark }) => {
                       {comment.userId === user.user_id && (
                         <div className="relative inline-block">
                           <button
-                            className="inline-flex items-center p-1 text-sm font-medium text-center text-gray-800 dark:text-gray-200 bg-white rounded-lg hover:bg-gray-200 focus:ring-1 focus:outline-none focus:ring-gray-400 dark:bg-gray-950 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            className="inline-flex items-center p-1 text-sm font-medium text-center text-gray-800 dark:text-gray-200 bg-slate-100 rounded-lg hover:bg-gray-200 focus:ring-1 focus:outline-none focus:ring-gray-400 dark:bg-gray-950 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             type="button"
                             onClick={(e) => {
                               handleDropdownClick(comment._id, e);
@@ -447,13 +449,6 @@ const Comment = ({ user, dark }) => {
                           className="px-0 w-full text-base mb-2 text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:bg-gray-800"
                           ref={(textarea) => {
                             commentInputRef.current = textarea;
-                            if (textarea && editComment === comment._id) {
-                              textarea.focus();
-                              textarea.setSelectionRange(
-                                textarea.value.length,
-                                textarea.value.length
-                              );
-                            }
                           }}
                           required
                         ></textarea>
@@ -527,7 +522,7 @@ const Comment = ({ user, dark }) => {
                           ref={replyInputRef}
                           required
                         ></textarea>
-                        <div className="flex justify-between">
+                        <div className="flex">
                           <button
                             type="button"
                             className="bg-blue-950 px-2 py-1 mr-2 rounded-md text-xs md:text-sm hover:bg-blue-900 focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium text-white"
@@ -548,7 +543,8 @@ const Comment = ({ user, dark }) => {
 
                     {comment.replies &&
                       comment.replies.map((reply) => (
-                        <div key={reply._id} className="ml-8 mt-4">
+                        <div key={reply._id} className="ml-8 mt-4 mb-4">
+                          <hr className="my-4 dark:border-slate-800"/>
                           <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
                               <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
@@ -565,12 +561,6 @@ const Comment = ({ user, dark }) => {
                             </div>
                             {reply.userId === user.user_id && (
                               <div className="relative flex flex-row space-x-6">
-                                <HiPencilSquare
-                                  className="dark:text-white text-sm md:text-base lg:text-lg block cursor-pointer"
-                                  onClick={() => {
-                                    handleEditReply(reply._id);
-                                  }}
-                                />
                                 <IoTrashBin
                                   className="dark:text-white text-sm md:text-base lg:text-lg block cursor-pointer"
                                   onClick={() => {
@@ -586,6 +576,7 @@ const Comment = ({ user, dark }) => {
                           >
                             {reply.text}
                           </p>
+                          
                         </div>
                       ))}
                   </article>

@@ -19,7 +19,7 @@ export default function Privacy({ dark }) {
 
       <main className="container mx-auto py-8">
         <section className="bg-white rounded-lg p-6 shadow-md">
-          <h2 className="text-xl font-semibold">1. Introduction</h2>
+          <h2 className="text-xl font-semibold mb-2">The Organisation</h2>
           <p>
             Welcome to FootZone! At FootZone, we value your privacy and are
             committed to protecting your personal information. This Privacy
@@ -28,7 +28,7 @@ export default function Privacy({ dark }) {
           </p>
         </section>
         <section className="bg-white rounded-lg p-6 shadow-md mt-4">
-          <h2 className="text-xl font-semibold">2. Information We Collect</h2>
+          <h2 className="text-xl font-semibold mb-2">Information We Collect</h2>
           <p>
             We collect various types of information, including personal
             information, when you use our website. This information may include
@@ -39,8 +39,8 @@ export default function Privacy({ dark }) {
         </section>
 
         <section className="bg-white rounded-lg p-6 shadow-md mt-4">
-          <h2 className="text-xl font-semibold">
-            3. How We Use Your Information
+          <h2 className="text-xl font-semibold mb-2">
+            How We Use Your Information
           </h2>
           <p>
             We use the information we collect for various purposes, including

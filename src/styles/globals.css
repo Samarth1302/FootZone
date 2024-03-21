@@ -35,17 +35,15 @@
     --radius: 0.5rem;
 
     --primary: #ffffff;
-    --secondary: rgb(123, 197, 255);
-    --tertiary: rgb(94, 97, 255);
-    --dark-secondary: rgb(2, 43, 75);
-    --dark-tertiary: rgb(0, 145, 255);
+    --secondary: rgb(92, 92, 92);
+    --tertiary: rgb(74, 74, 74);
   }
   *::-webkit-scrollbar {
     width: 11px;
   }
 
   *::-webkit-scrollbar-track {
-    background: transparent;
+    background: black;
     border-radius: 2px;
   }
 

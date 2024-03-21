@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Teams = ({ dark }) => {
   const [originalTeams, setOriginalTeams] = useState([]);
@@ -123,14 +124,14 @@ const Teams = ({ dark }) => {
               <ul className="flex justify-center mt-14 font-bold">
                 {currentPage > 1 && (
                   <li
-                    className={`mx-1 p-1 px-3 rounded-md cursor-pointer ${
+                    className={`mx-1 p-1 px-1 rounded-md cursor-pointer ${
                       currentPage === 1
                         ? "bg-gray-200 dark:bg-gray-700 dark:text-white"
                         : "bg-blue-200 text-black"
                     }`}
                     onClick={() => paginate(currentPage - 1)}
                   >
-                    {"‹"}
+                    <GrFormPrevious className="mt-1 text-lg"/>
                   </li>
                 )}
                 {Array.from({ length: endPage - startPage + 1 }).map(
@@ -153,18 +154,17 @@ const Teams = ({ dark }) => {
                 )}
                 {currentPage < totalPages && (
                   <li
-                    className={`mx-1 p-1 px-3 rounded-md cursor-pointer ${
+                    className={`mx-1 p-1 px-1 rounded-md cursor-pointer ${
                       currentPage === totalPages
                         ? "bg-gray-200 dark:bg-gray-700 dark:text-white"
                         : "bg-blue-200 text-black"
                     }`}
                     onClick={() => paginate(currentPage + 1)}
                   >
-                    {"›"}
+                   <GrFormNext className="mt-1 text-lg"/>
                   </li>
                 )}
               </ul>
-              <p className="text-center mt-2">Page</p>
             </div>
           )}
         </div>

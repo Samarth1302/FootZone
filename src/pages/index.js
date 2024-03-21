@@ -77,7 +77,7 @@ export default function Home({ dark }) {
                   "Explore soccer stats",
                   "Get latest football news",
                   "Join the fan discussion",
-                  "Login and interact with soccer bot",
+                  "Interact with soccer bot",
                 ],
                 delay: 100,
                 loop: true,
@@ -167,7 +167,7 @@ export default function Home({ dark }) {
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
                 Implemented page-specific commenting system for fans to engage
-                in discussions.
+                in discussions and reply on comments.
               </p>
             </div>
           </div>

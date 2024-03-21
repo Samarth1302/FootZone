@@ -7,7 +7,7 @@ const Loader = ({ dark }) => (
       dark ? "dark" : ""
     } fixed top-0 left-0 w-screen h-screen z-[99999999999999] flex items-center justify-center bg-black opacity-60 dark:opacity-80`}
   >
-    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-200"></div>
   </div>
 );
 
