@@ -183,9 +183,7 @@ const TeamDetails = ({ dark }) => {
       } bg-white dark:bg-slate-900`}
     >
       <Head>
-        <title>
-          {teamDetails ? teamDetails.name : "Team Details"}-FootZone
-        </title>
+        <title>{teamDetails && teamDetails.name}_FootZone</title>
         <meta name="description" content="Team Details Page" />
       </Head>
       {teamDetails && (
@@ -208,47 +206,51 @@ const TeamDetails = ({ dark }) => {
             </a>
           </Link>
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
-          <div className="flex flex-col md:flex-row justify-between">
-            <div className="flex flex-col mb-4 text-lg dark:text-blue-200">
-              <div className="flex flex-row items-center mb-4"> <Image
-                src={teamDetails.logo}
-                alt={teamDetails.name}
-                width={60}
-                height={30}
-              />
-              <h1 className="ml-4 text-xl md:text-3xl text-blue-950 dark:text-blue-100 font-bold">
-                {teamDetails.name} ({teamDetails.code})
-              </h1></div>
-              <p className="text-xl font-semibold">{teamDetails.country}</p>
-              <p>Established: {teamDetails.foundedYear}</p>
-            </div>
-            {teamDetails.venue.name && (
-              <div className="flex items-center mb-4 md:mr-6 lg:mr-20 dark:text-blue-200">
-                {teamDetails.venue.image ? (
+            <div className="flex flex-col md:flex-row justify-between">
+              <div className="flex flex-col mb-4 text-lg dark:text-blue-200">
+                <div className="flex flex-row items-center mb-4">
+                  {" "}
                   <Image
-                    src={teamDetails.venue.image}
-                    alt="Stadium Icon"
-                    width={150}
-                    height={150}
+                    src={teamDetails.logo}
+                    alt={teamDetails.name}
+                    width={60}
+                    height={30}
                   />
-                ) : (
-                  <Image
-                    src={"/stadicon.png"}
-                    alt="Stadium Icon"
-                    width={150}
-                    height={150}
-                  />
-                )}
-                <div className="ml-8">
-                  <p className="font-semibold">
-                    Stadium: {teamDetails.venue.name}
-                  </p>
-                  <p>{teamDetails.venue.address},</p>
-                  <p>{teamDetails.venue.city}</p>
-                  <p>Capacity: {teamDetails.venue.capacity}</p>
+                  <h1 className="ml-4 text-xl md:text-3xl text-blue-950 dark:text-blue-100 font-bold">
+                    {teamDetails.name} ({teamDetails.code})
+                  </h1>
                 </div>
+                <p className="text-xl font-semibold">{teamDetails.country}</p>
+                <p>Established: {teamDetails.foundedYear}</p>
               </div>
-            )}</div>
+              {teamDetails.venue.name && (
+                <div className="flex items-center mb-4 md:mr-6 lg:mr-20 dark:text-blue-200">
+                  {teamDetails.venue.image ? (
+                    <Image
+                      src={teamDetails.venue.image}
+                      alt="Stadium Icon"
+                      width={150}
+                      height={150}
+                    />
+                  ) : (
+                    <Image
+                      src={"/stadicon.png"}
+                      alt="Stadium Icon"
+                      width={150}
+                      height={150}
+                    />
+                  )}
+                  <div className="ml-8">
+                    <p className="font-semibold">
+                      Stadium: {teamDetails.venue.name}
+                    </p>
+                    <p>{teamDetails.venue.address},</p>
+                    <p>{teamDetails.venue.city}</p>
+                    <p>Capacity: {teamDetails.venue.capacity}</p>
+                  </div>
+                </div>
+              )}
+            </div>
             <hr className="my-8 border-t-4 border-gray-300" />
             {teamDetails.standings && (
               <div className="my-auto text-base dark:text-blue-50 md:text-lg lg:text-xl flex flex-col md:flex-row md:space-x-14 lg:space-x-40 text-center justify-center space-y-16 md:space-y-0">

@@ -35,7 +35,7 @@ export default function Home({ dark }) {
     },
     {
       imgsrc: "/shop.jpg",
-      page: "league",
+      page: "shop",
       content: "Foot Store",
       text: "Browse through a catalog of various products and football accessories",
       buttonText: "Shop",

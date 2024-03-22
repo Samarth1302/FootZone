@@ -103,18 +103,16 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         Leagues
                       </li>
                     </Link>
-                    {true && (
-                      <Link href={"/team"}>
-                        <li
-                          className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
-                            currentPath === "/team" &&
-                            "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
-                          }`}
-                        >
-                          Teams
-                        </li>
-                      </Link>
-                    )}
+                    <Link href={"/team"}>
+                      <li
+                        className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
+                          currentPath === "/team" &&
+                          "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                        }`}
+                      >
+                        Teams
+                      </li>
+                    </Link>
                     <Link href={"/news"}>
                       <li
                         className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
@@ -123,6 +121,16 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         }`}
                       >
                         News
+                      </li>
+                    </Link>
+                    <Link href={"/shop"}>
+                      <li
+                        className={`my-2 hover:bg-blue-100  dark:hover:bg-slate-900  rounded-md ${
+                          currentPath === "/shop" &&
+                          "bg-blue-900 text-white dark:bg-blue-100 dark:text-slate-900 hover:bg-blue-900  hover:text-white hover:dark:bg-blue-100 hover:dark:text-slate-900"
+                        }`}
+                      >
+                        Shop
                       </li>
                     </Link>
                     {user.user_id && (

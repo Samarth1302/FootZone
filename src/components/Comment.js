@@ -9,20 +9,20 @@ import { IoTrashBin } from "react-icons/io5";
 const Comment = ({ user, dark }) => {
   const [comments, setComments] = useState([]);
   const router = useRouter();
-  const pageIdentifier = router.pathname;
+  const pageIdentifier = router.asPath;
   const [show, setShow] = useState(true);
   const [showDropdown, setShowDropdown] = useState(null);
-  const [newCommentText, setNewCommentText] = useState("");
-  const [newEditText, setNewEditText] = useState("");
+  const [newComment, setNewComment] = useState("");
+  const [newEdit, setNewEdit] = useState("");
   const [editComment, setEditComment] = useState(null);
   const [replyInput, setReplyInput] = useState(null);
-  const [newReplyText, setNewReplyText] = useState("");
+  const [newReply, setNewReply] = useState("");
   const replyInputRef = useRef(null);
   const commentInputRef = useRef(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    let nonShow = ["/signup", "/login", "/security", "/privacy","/shop"];
+    let nonShow = ["/signup", "/login", "/security", "/privacy", "/shop"];
     if (nonShow.includes(router.pathname)) {
       setShow(false);
     } else {
@@ -70,12 +70,14 @@ const Comment = ({ user, dark }) => {
         console.error(error);
       }
     };
-    fetchComments();
+    if (show) {
+      fetchComments();
+    }
   }, [pageIdentifier]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    const sanitizedComment = DOMPurify.sanitize(newCommentText);
+    const sanitizedComment = DOMPurify.sanitize(newComment);
     if (sanitizedComment.length > 300) {
       return toast.error("Comment length exceeds the limit (300 characters).", {
         icon: "😬",
@@ -111,7 +113,7 @@ const Comment = ({ user, dark }) => {
         });
       }
       setComments([...comments, data]);
-      setNewCommentText("");
+      setNewComment("");
     } catch (error) {
       toast.error(error, {
         id: "commsub",
@@ -132,11 +134,11 @@ const Comment = ({ user, dark }) => {
   };
   const handleEditClick = (commentId, currentText) => {
     setEditComment(commentId);
-    setNewEditText(currentText);
+    setNewEdit(currentText);
     closeDropdown();
   };
   const handleEditSubmit = async (commentId) => {
-    const sanitizedEditText = DOMPurify.sanitize(newEditText);
+    const sanitizedEditText = DOMPurify.sanitize(newEdit);
     if (sanitizedEditText.length > 300) {
       return toast.error("Comment length exceeds the limit (300 characters).", {
         icon: "😬",
@@ -160,16 +162,18 @@ const Comment = ({ user, dark }) => {
         }
       );
       const data = await response.json();
-      setComments(comments.map(comment => {
-        if (comment._id === commentId) {
-          return {
-            ...data,
-            replies: comment.replies 
-          };
-        }
-        return comment;
-      }));
-      setNewEditText("");
+      setComments(
+        comments.map((comment) => {
+          if (comment._id === commentId) {
+            return {
+              ...data,
+              replies: comment.replies,
+            };
+          }
+          return comment;
+        })
+      );
+      setNewEdit("");
       setEditComment(null);
     } catch (error) {
       toast.error("Failed to edit comment. Please try again later.", {
@@ -250,11 +254,11 @@ const Comment = ({ user, dark }) => {
   };
   const handleCancelReply = () => {
     setReplyInput(null);
-    setNewReplyText("");
+    setNewReply("");
   };
 
   const handleReplySubmit = async (commentId) => {
-    const sanitizedReply = DOMPurify.sanitize(newReplyText);
+    const sanitizedReply = DOMPurify.sanitize(newReply);
     if (sanitizedReply.length > 300) {
       return toast.error("Reply length exceeds the limit (300 characters).", {
         icon: "😬",
@@ -295,7 +299,7 @@ const Comment = ({ user, dark }) => {
         return comment;
       });
       setComments(updatedComments);
-      setNewReplyText("");
+      setNewReply("");
       setReplyInput(null);
     } catch (error) {
       toast.error(error, {
@@ -354,8 +358,8 @@ const Comment = ({ user, dark }) => {
                   <textarea
                     id="comment"
                     rows="4"
-                    value={newCommentText}
-                    onChange={(e) => setNewCommentText(e.target.value)}
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
                     className="px-0 w-full text-base text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                     placeholder="Write a comment..."
                     required
@@ -444,8 +448,8 @@ const Comment = ({ user, dark }) => {
                         <textarea
                           id="comment"
                           rows="3"
-                          value={newEditText || comment.text}
-                          onChange={(e) => setNewEditText(e.target.value)}
+                          value={newEdit || comment.text}
+                          onChange={(e) => setNewEdit(e.target.value)}
                           className="px-0 w-full text-base mb-2 text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:bg-gray-800"
                           ref={(textarea) => {
                             commentInputRef.current = textarea;
@@ -515,8 +519,8 @@ const Comment = ({ user, dark }) => {
                         <textarea
                           id="reply"
                           rows="2"
-                          value={newReplyText}
-                          onChange={(e) => setNewReplyText(e.target.value)}
+                          value={newReply}
+                          onChange={(e) => setNewReply(e.target.value)}
                           className="px-0 w-full text-base mb-2 text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:bg-gray-800"
                           placeholder="Write a reply..."
                           ref={replyInputRef}
@@ -544,7 +548,7 @@ const Comment = ({ user, dark }) => {
                     {comment.replies &&
                       comment.replies.map((reply) => (
                         <div key={reply._id} className="ml-8 mt-4 mb-4">
-                          <hr className="my-4 dark:border-slate-800"/>
+                          <hr className="my-4 dark:border-slate-800" />
                           <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
                               <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
@@ -576,7 +580,6 @@ const Comment = ({ user, dark }) => {
                           >
                             {reply.text}
                           </p>
-                          
                         </div>
                       ))}
                   </article>
