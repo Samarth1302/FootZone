@@ -73,7 +73,7 @@ const Comment = ({ user, dark }) => {
     if (show) {
       fetchComments();
     }
-  }, [pageIdentifier]);
+  }, [pageIdentifier,show,router]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();

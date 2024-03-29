@@ -5,7 +5,6 @@ import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
 import React from "react";
 import toast from "react-hot-toast";
-import Image from "next/image";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -134,13 +133,13 @@ const Shop = ({ user, dark }) => {
         <div className="fixed inset-y-0 right-0 flex items-center justify-end">
           <button
             onClick={toggleCart}
-            className="flex bg-blue-100 hover:py-6 hover:pl-4 hover:pr-4 dark:bg-slate-700 rounded-l-3xl py-5 pl-3 pr-3"
+            className="flex bg-blue-100 dark:hover:bg-slate-600 dark:bg-slate-700 rounded-l-2xl py-4 pl-2 pr-3"
           >
             <BsCart2
               className="flex text-xl md:text-2xl"
               style={{ color: dark ? "white" : "black" }}
             />
-            <p className="flex ml-2 text-black dark:text-white text-sm md:text-base">
+            <p className="flex ml-1 text-black dark:text-white text-sm md:text-base">
               {cartCount}
             </p>
           </button>
@@ -149,22 +148,22 @@ const Shop = ({ user, dark }) => {
       {showCart && (
         <div
           ref={ref}
-          className={`w-60 h-full items-center justify-end overflow-y-scroll fixed bg-blue-100 dark:bg-slate-950 px-8 py-10 text-base transition-all text-slate-300 z-20 ${
-            showCart ? "right-0" : "-right-60"
+          className={`md:w-60 h-full items-center justify-end overflow-y-scroll fixed bg-blue-100 dark:bg-slate-950 px-8 py-10 text-base transition-all text-slate-300 z-20 ${
+            showCart ? "right-0" : "-right-40 md:-right-60"
           } `}
         >
           <h2 className="font-bold text-xl text-center text-black dark:text-slate-50">
-            Fut Cart
+            Cart
           </h2>
           <span
             onClick={toggleCart}
-            className="absolute top-5 right-2 cursor-pointer text-2xl"
+            className="absolute top-5 right-2 cursor-pointer text-xl"
           >
             <IoMdCloseCircle className="dark:text-white text-black hover:text-red-500 dark:hover:text-red-600" />
           </span>
           <ol className="list-decimal font-semibold ">
             {Object.keys(cart).length == 0 && (
-              <div className="my-4 text-black dark:text-slate-50 font-semibold">
+              <div className="my-4 text-red-500 font-semibold">
                 Your cart is empty
               </div>
             )}
@@ -203,7 +202,7 @@ const Shop = ({ user, dark }) => {
           <div className="flex my-4">
             <Link href={"/order"} legacyBehavior>
               <button
-                disabled={Object.keys(cart).length === 0 || !user.email}
+                disabled={Object.keys(cart).length === 0 || !user.user_id}
                 className=" dark:bg-slate-700 dark:text-white flex mr-2 disabled:hover:cursor-not-allowed bg-blue-200 border-0 py-2 px-1 
             text-black focus:outline-none rounded text-sm"
               >
@@ -222,11 +221,14 @@ const Shop = ({ user, dark }) => {
         </div>
       )}
       <div className="min-h-screen bg-white dark:bg-slate-900">
-        <div className="flex justify-center flex-wrap p-16">
+      <h1 className="text-xl md:text-3xl font-bold  text-blue-900 dark:text-blue-200 px-5 pt-4 text-center">
+            FootZone Products
+          </h1>
+        <div className="flex justify-center flex-wrap px-16 pb-16">
           {products.map((product) => (
             <div
               key={product._id}
-              className="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
+              className="mx-auto mt-8 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
             >
               <img
                 className="h-48 w-full object-cover object-center"

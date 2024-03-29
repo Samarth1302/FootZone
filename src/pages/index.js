@@ -114,36 +114,36 @@ export default function Home({ dark }) {
         </div>
         <div className="flex flex-wrap mx-4 pb-10">
           <div className="xl:w-1/4 md:w-1/2 p-4">
-            <div className="border border-gray-400 dark:hover:bg-slate-800 hover:cursor-auto p-6 rounded-lg">
+            <div className="border border-gray-400 hover:cursor-auto p-6 rounded-lg">
               <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black mb-4">
                 <FaNewspaper />
               </div>
               <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
-                Football News
+                Soccer News
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Leveraged News API functionalities to retrieved soccer based
+                Get latest soccer
                 news from popular news sites.
               </p>
             </div>
           </div>
           <div className="xl:w-1/4 md:w-1/2 p-4">
-            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+            <div className="border hover:cursor-auto border-gray-400 p-6 rounded-lg">
               <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black mb-4">
                 <FaUsers />
               </div>
               <h2 className="text-lg text-gray-900 dark:text-white font-semibold title-font mb-2">
-                Soccer Stats
+                Football World
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Utilised Football-API and football-data-org to retrieve
-                standings, matches, stats and more.
+                Review and follow
+                league standings, fixtures, stats and more.
               </p>
             </div>
           </div>
 
           <div className="xl:w-1/4 md:w-1/2 p-4">
-            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+            <div className="border hover:cursor-auto border-gray-400 p-6 rounded-lg">
               <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black-500 mb-4">
                 <FaShoppingCart />
               </div>
@@ -151,14 +151,13 @@ export default function Home({ dark }) {
                 Ecommerce Page
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Provided an e-commerce destination to mimic user processing and
-                complex integration.
+                Shop for football accessories through the ecommerce page.
               </p>
             </div>
           </div>
 
           <div className="xl:w-1/4 md:w-1/2 p-4">
-            <div className="border dark:hover:bg-slate-800 hover:cursor-auto border-gray-400 p-6 rounded-lg">
+            <div className="border hover:cursor-auto border-gray-400 p-6 rounded-lg">
               <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-black-500 mb-4">
                 <FaComments />
               </div>
@@ -166,8 +165,7 @@ export default function Home({ dark }) {
                 Commenting system
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Implemented page-specific commenting system for fans to engage
-                in discussions and reply on comments.
+                Experience fan discussions through commenting.
               </p>
             </div>
           </div>

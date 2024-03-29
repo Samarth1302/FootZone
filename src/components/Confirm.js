@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IoMdCloseCircle } from "react-icons/io";
 
 const Confirm = ({ message, onConfirm, onCancel, dark }) => {
   return (
@@ -13,9 +13,9 @@ const Confirm = ({ message, onConfirm, onCancel, dark }) => {
           <div className="flex justify-end mb-1">
             <button
               onClick={onCancel}
-              className="text-black dark:text-white text-2xl cursor-pointer focus:outline-1"
+              className="text-black dark:text-white text-xl cursor-pointer focus:outline-1"
             >
-              <AiOutlineCloseCircle />
+              <IoMdCloseCircle className=" dark:text-white text-black hover:text-red-500 dark:hover:text-red-600"/>
             </button>
           </div>
           <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-red-800 dark:text-red-600">
