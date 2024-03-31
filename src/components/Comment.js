@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import { HiPencilSquare } from "react-icons/hi2";
+import { FaAnglesDown } from "react-icons/fa6";
 import { IoTrashBin } from "react-icons/io5";
 
 const Comment = ({ user, dark }) => {
@@ -12,6 +13,8 @@ const Comment = ({ user, dark }) => {
   const pageIdentifier = router.asPath;
   const [show, setShow] = useState(true);
   const [showDropdown, setShowDropdown] = useState(null);
+  const [displayedComments, setDisplayedComments] = useState(5);
+  const [displayedReplies, setDisplayedReplies] = useState({});
   const [newComment, setNewComment] = useState("");
   const [newEdit, setNewEdit] = useState("");
   const [editComment, setEditComment] = useState(null);
@@ -22,7 +25,14 @@ const Comment = ({ user, dark }) => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    let nonShow = ["/signup", "/login", "/security", "/privacy", "/shop"];
+    let nonShow = [
+      "/signup",
+      "/login",
+      "/security",
+      "/privacy",
+      "/shop",
+      "/order",
+    ];
     if (nonShow.includes(router.pathname)) {
       setShow(false);
     } else {
@@ -73,7 +83,18 @@ const Comment = ({ user, dark }) => {
     if (show) {
       fetchComments();
     }
-  }, [pageIdentifier,show,router]);
+  }, [pageIdentifier, show, router]);
+
+  const loadMoreComments = () => {
+    setDisplayedComments(displayedComments + 5);
+  };
+
+  const loadMoreReplies = (commentId) => {
+    setDisplayedReplies((prev) => ({
+      ...prev,
+      [commentId]: (prev[commentId] || 0) + 5,
+    }));
+  };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -373,7 +394,7 @@ const Comment = ({ user, dark }) => {
                 </button>
               </form>
               {comments &&
-                comments.map((comment) => (
+                comments.slice(0, displayedComments).map((comment) => (
                   <article
                     key={comment._id}
                     className={`p-3 my-3 mx-6 md:mx-1 text-base bg-slate-100 dark:bg-slate-950 rounded-lg `}
@@ -546,44 +567,65 @@ const Comment = ({ user, dark }) => {
                     )}
 
                     {comment.replies &&
-                      comment.replies.map((reply) => (
-                        <div key={reply._id} className="ml-8 mt-4 mb-4">
-                          <hr className="my-4 dark:border-slate-800" />
-                          <footer className="flex justify-between items-center mb-2">
-                            <div className="flex items-center">
-                              <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
-                                <FaRegUserCircle />
-                                <span className="ml-3 tracking-wider text-sm text-blue-400 dark:text-blue-200 ">
-                                  {reply.username}
-                                </span>
-                              </p>
-                              <p className="text-sm text-gray-500 dark:text-gray-500 ml-2">
-                                <time dateTime={reply.createdAt}>
-                                  {formatDate(reply.createdAt)}
-                                </time>
-                              </p>
-                            </div>
-                            {reply.userId === user.user_id && (
-                              <div className="relative flex flex-row space-x-6">
-                                <IoTrashBin
-                                  className="dark:text-white text-sm md:text-base lg:text-lg block cursor-pointer"
-                                  onClick={() => {
-                                    handleDeleteReply(reply._id);
-                                  }}
-                                />
+                      comment.replies
+                        .slice(0, displayedReplies[comment._id] || 2)
+                        .map((reply) => (
+                          <div key={reply._id} className="ml-8 mt-4 mb-4">
+                            <hr className="my-4 dark:border-slate-800" />
+                            <footer className="flex justify-between items-center mb-2">
+                              <div className="flex items-center">
+                                <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
+                                  <FaRegUserCircle />
+                                  <span className="ml-3 tracking-wider text-sm text-blue-400 dark:text-blue-200 ">
+                                    {reply.username}
+                                  </span>
+                                </p>
+                                <p className="text-sm text-gray-500 dark:text-gray-500 ml-2">
+                                  <time dateTime={reply.createdAt}>
+                                    {formatDate(reply.createdAt)}
+                                  </time>
+                                </p>
                               </div>
-                            )}
-                          </footer>
-                          <p
-                            className="px-7 text-gray-900 dark:text-white text-wrap"
-                            style={{ overflowWrap: "break-word" }}
-                          >
-                            {reply.text}
-                          </p>
-                        </div>
-                      ))}
+                              {reply.userId === user.user_id && (
+                                <div className="relative flex flex-row space-x-6">
+                                  <IoTrashBin
+                                    className="dark:text-white text-sm md:text-base lg:text-lg block cursor-pointer"
+                                    onClick={() => {
+                                      handleDeleteReply(reply._id);
+                                    }}
+                                  />
+                                </div>
+                              )}
+                            </footer>
+                            <p
+                              className="px-7 text-gray-900 dark:text-white text-wrap"
+                              style={{ overflowWrap: "break-word" }}
+                            >
+                              {reply.text}
+                            </p>
+                          </div>
+                        ))}
+                    {comment.replies.length >
+                      (displayedReplies[comment._id] || 2) && (
+                      <div
+                        onClick={() => loadMoreReplies(comment._id)}
+                        className="text-center text-sm text-black opacity-65 hover:opacity-90 cursor-pointer flex flex-row justify-center items-center dark:text-white mt-2"
+                      >
+                        <FaAnglesDown className="mr-3" />
+                        <p>View more replies</p>
+                      </div>
+                    )}
                   </article>
                 ))}
+              {comments.length > displayedComments && (
+                <div
+                  onClick={loadMoreComments}
+                  className="text-center text-sm text-black opacity-65 hover:opacity-90 cursor-pointer flex flex-row justify-center items-center dark:text-white mt-4"
+                >
+                  <FaAnglesDown className="mr-3" />
+                  <p>View more comments</p>
+                </div>
+              )}
             </div>
           </section>
         </div>

@@ -1,8 +1,13 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IoHomeOutline, IoFootballOutline  } from "react-icons/io5";
-import { MdAccountCircle ,MdOutlineLightMode, MdOutlineLogout, MdSecurity} from "react-icons/md";
+import { IoHomeOutline, IoFootballOutline } from "react-icons/io5";
+import {
+  MdAccountCircle,
+  MdOutlineLightMode,
+  MdOutlineLogout,
+  MdSecurity,
+} from "react-icons/md";
 import { FiAlignJustify } from "react-icons/fi";
 import { IoMdMoon, IoMdCloseCircle } from "react-icons/io";
 import { TbSoccerField } from "react-icons/tb";
@@ -60,69 +65,84 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                 aria-label="Sidebar"
               >
                 <div
-                  className={`h-full px-3 py-4 overflow-y-auto ${
+                  className={`h-full px-3 py-4 sidemenu overflow-y-scroll ${
                     dark ? "bg-slate-950" : "bg-blue-50"
                   }`}
                 >
-                    <IoMdCloseCircle onClick={toggleHam} className="absolute top-5 right-2 cursor-pointer text-xl dark:text-white text-black hover:text-red-500 dark:hover:text-red-600" />
+                  <IoMdCloseCircle
+                    onClick={toggleHam}
+                    className="absolute top-5 right-2 cursor-pointer text-xl dark:text-white text-black hover:text-red-500 dark:hover:text-red-600"
+                  />
                   <ul className="space-y-2 flex flex-col mt-10 pl-4 text-center text-base font-light md:text-lg md:font-medium dark:text-white ">
                     <Link href={"/"}>
                       <li
-                       className={`my-2 flex items-center rounded-md ${
-                        currentPath === "/"?
-                        "text-slate-500":"hover:text-blue-800 "
-                      }`}
-                      ><IoHomeOutline className="mr-3" />
-                      Home
+                        className={`my-2 flex items-center rounded-md ${
+                          currentPath === "/"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
+                        }`}
+                      >
+                        <IoHomeOutline className="mr-3" />
+                        Home
                       </li>
                     </Link>
                     <Link href={"/league"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/league"?
-                          "text-slate-500":"hover:text-blue-800 "
+                          currentPath === "/league"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
                         }`}
-                      ><TbSoccerField className="mr-2" />
-                       Leagues
+                      >
+                        <TbSoccerField className="mr-2" />
+                        Leagues
                       </li>
                     </Link>
                     <Link href={"/match"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/match"?
-                          "text-slate-500":"hover:text-blue-800 "
+                          currentPath === "/match"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
                         }`}
-                      ><IoFootballOutline className="mr-3" />
+                      >
+                        <IoFootballOutline className="mr-3" />
                         Fixtures
                       </li>
                     </Link>
                     <Link href={"/team"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/team"?
-                          "text-slate-500":"hover:text-blue-800 "
+                          currentPath === "/team"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
                         }`}
-                      ><RiTeamLine className="mr-3" />
+                      >
+                        <RiTeamLine className="mr-3" />
                         Teams
                       </li>
                     </Link>
                     <Link href={"/news"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/news"?
-                          "text-slate-500":"hover:text-blue-800 "
+                          currentPath === "/news"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
                         }`}
-                      ><TiNews className="mr-2" />
+                      >
+                        <TiNews className="mr-2" />
                         News
                       </li>
                     </Link>
                     <Link href={"/shop"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/shop"?
-                          "text-slate-500":"hover:text-blue-800 "
+                          currentPath === "/shop"
+                            ? "text-slate-500"
+                            : "hover:text-blue-800 "
                         }`}
-                      ><FaShoppingBag className="mr-3" />
+                      >
+                        <FaShoppingBag className="mr-3" />
                         Shop
                       </li>
                     </Link>
@@ -130,10 +150,12 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                       <Link href={"/security"}>
                         <li
                           className={`my-2 flex items-center rounded-md ${
-                            currentPath === "/security"?
-                            "text-slate-500":"hover:text-blue-800 "
+                            currentPath === "/security"
+                              ? "text-slate-500"
+                              : "hover:text-blue-800 "
                           }`}
-                        ><MdSecurity className="mr-3" />
+                        >
+                          <MdSecurity className="mr-3" />
                           Security
                         </li>
                       </Link>
@@ -145,7 +167,8 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                             currentPath === "/logout" && "font-bold"
                           }`}
                           onClick={logout}
-                        ><MdOutlineLogout className="mr-3" />
+                        >
+                          <MdOutlineLogout className="mr-3" />
                           Logout
                         </li>
                       </Link>

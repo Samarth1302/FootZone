@@ -7,10 +7,10 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
+import useCart from "@/lib/useCart";
 
 const Shop = ({ user, dark }) => {
-  const [cart, setCart] = useState({});
-  const [total, setTotal] = useState(0);
+  const { cart, total, addtoCart, removefromCart, clearCart } = useCart();
   const [showCart, setShowCart] = useState(false);
   const router = useRouter();
   const ref = useRef();
@@ -40,86 +40,8 @@ const Shop = ({ user, dark }) => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    try {
-      if (localStorage.getItem("cart")) {
-        setCart(JSON.parse(localStorage.getItem("cart")));
-        saveCart(JSON.parse(localStorage.getItem("cart")));
-      }
-    } catch (error) {
-      console.error(error);
-      localStorage.clear();
-    }
-
-    const handleStorageChange = (event) => {
-      if (event.key === "myCart") {
-        try {
-          const storedCart = JSON.parse(event.newValue);
-          const sanitizedCart = DOMPurify.sanitize(storedCart);
-          setCart(sanitizedCart);
-          computeTotal(sanitizedCart);
-        } catch (error) {
-          localStorage.removeItem("myCart");
-        }
-      }
-    };
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [router.query]);
-
-  const saveCart = (myCart) => {
-    localStorage.setItem("cart", JSON.stringify(myCart));
-    computeTotal(cart);
-  };
-
   const handleSizeSelect = (productId, size) => {
     setSelectedSizes({ ...selectedSizes, [productId]: size });
-  };
-
-  const computeTotal = (cart) => {
-    let subt = 0;
-    if (!cart) return subt;
-    let keys = Object.keys(cart);
-    for (let i = 0; i < keys.length; i++) {
-      subt += cart[keys[i]].price * cart[keys[i]].qty;
-    }
-    setTotal(subt);
-  };
-
-  const addtoCart = (itemId, iName, price, size) => {
-    const cartItemId = size ? `${itemId}-${size}` : itemId;
-    const newCart = { ...cart };
-
-    if (cartItemId in cart) {
-      if (newCart[cartItemId].qty + 1 <= 10) {
-        newCart[cartItemId].qty += 1;
-      }
-    } else {
-      newCart[cartItemId] = { qty: 1, price, iName, size };
-    }
-    setCart(newCart);
-    saveCart(newCart);
-  };
-
-  const removefromCart = (cartItemId) => {
-    if (!cart) return;
-    const newCart = { ...cart };
-    if (cartItemId in cart) {
-      if (newCart[cartItemId].qty == 1) {
-        delete newCart[cartItemId];
-      } else newCart[cartItemId].qty -= 1;
-
-      setCart(newCart);
-      saveCart(newCart);
-    }
-  };
-
-  const clearCart = () => {
-    setCart({});
-    saveCart({});
-    setTotal(0);
   };
 
   return (
@@ -148,8 +70,8 @@ const Shop = ({ user, dark }) => {
       {showCart && (
         <div
           ref={ref}
-          className={`md:w-60 h-full items-center justify-end overflow-y-scroll fixed bg-blue-100 dark:bg-slate-950 px-8 py-10 text-base transition-all text-slate-300 z-20 ${
-            showCart ? "right-0" : "-right-40 md:-right-60"
+          className={`w-52 md:w-60 h-full items-center justify-end overflow-y-scroll fixed sidemenu bg-blue-100 dark:bg-slate-950 px-8 py-10 text-base transition-all text-slate-300 z-20 ${
+            showCart ? "right-0" : "-right-52 md:-right-60"
           } `}
         >
           <h2 className="font-bold text-xl text-center text-black dark:text-slate-50">
@@ -170,25 +92,27 @@ const Shop = ({ user, dark }) => {
             {Object.keys(cart).map((cartItemId) => {
               const { iName, size, qty, price } = cart[cartItemId];
               return (
-                <li key={cartItemId}>
-                  <div className="product flex my-5 text-base">
-                    <div className="w-2/3 font-semibold mx-4">
+                <li
+                  className="text-black dark:text-white md:font-semibold font-medium"
+                  key={cartItemId}
+                >
+                  <div className=" flex my-5 text-base">
+                    <div className="w-2/3 font-medium md:font-semibold mx-4 text-black dark:text-white">
                       {iName} {size && `(${size})`}
                     </div>
-                    <div className="flex items-center text-lg font-bold justify-center ">
+                    <div className="flex items-center text-base lg:text-lg font-normal md:font-bold justify-center">
                       <FaMinusCircle
                         onClick={() => {
                           removefromCart(cartItemId);
                         }}
-                        className="cursor-pointer"
+                        className="dark:text-white text-black hover:text-yellow-500 dark:hover:text-yellow-600 cursor-pointer"
                       />
                       <span className="mx-2 text-sm">{qty}</span>
                       <FaPlusCircle
                         onClick={() => {
                           addtoCart(cartItemId, iName, price);
                         }}
-                        className="cursor-pointer disabled:cursor-not-allowed"
-                        aria-disabled={qty === 10}
+                        className="dark:text-white text-black hover:text-green-500 dark:hover:text-green-600 cursor-pointer"
                       />
                     </div>
                   </div>
@@ -196,35 +120,36 @@ const Shop = ({ user, dark }) => {
               );
             })}
           </ol>
-          <span className="text-black dark:text-slate-50 font-bold">
+          <span className="text-black dark:text-slate-50 font-medium md:font-bold">
             SubTotal: ₹ {total}
           </span>
           <div className="flex my-4">
-            <Link href={"/order"} legacyBehavior>
-              <button
-                disabled={Object.keys(cart).length === 0 || !user.user_id}
-                className=" dark:bg-slate-700 dark:text-white flex mr-2 disabled:hover:cursor-not-allowed bg-blue-200 border-0 py-2 px-1 
+            <button
+              onClick={() => {
+                router.push("/order");
+              }}
+              disabled={Object.keys(cart).length === 0 || !user.user_id}
+              className="dark:bg-slate-700 dark:hover:bg-slate-800 hover:bg-blue-300 dark:text-white flex mx-4 disabled:hover:cursor-not-allowed bg-blue-200 border-0 py-2 px-2 font-semibold
             text-black focus:outline-none rounded text-sm"
-              >
-                Order
-              </button>
-            </Link>
+            >
+              Order
+            </button>
             <button
               disabled={Object.keys(cart).length === 0}
               onClick={clearCart}
-              className="  dark:bg-slate-700 dark:text-white flex disabled:hover:cursor-not-allowed bg-blue-200 border-0 py-2 px-1 
+              className="dark:bg-slate-700 dark:text-white flex dark:hover:bg-slate-800 hover:bg-blue-300 font-semibold disabled:hover:cursor-not-allowed bg-blue-200 border-0 py-2 px-2 
             text-black focus:outline-none rounded text-sm"
             >
-              Clear Cart
+              Clear
             </button>
           </div>
         </div>
       )}
       <div className="min-h-screen bg-white dark:bg-slate-900">
-      <h1 className="text-xl md:text-3xl font-bold  text-blue-900 dark:text-blue-200 px-5 pt-4 text-center">
-            FootZone Products
-          </h1>
-        <div className="flex justify-center flex-wrap px-16 pb-16">
+        <h1 className="text-xl md:text-3xl font-bold  text-blue-900 dark:text-blue-200 px-5 pt-4 text-center">
+          FootZone Products
+        </h1>
+        <div className="flex justify-center flex-wrap px-16 pb-8">
           {products.map((product) => (
             <div
               key={product._id}
@@ -244,13 +169,13 @@ const Shop = ({ user, dark }) => {
                 </p>
                 <div className="flex items-center">
                   <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
-                    ₹ {product.price}
+                    ₹ {product.price * (1 - product.offer / 100)}
                   </p>
                   <p className="text-base font-medium text-gray-500 line-through dark:text-gray-300">
-                    ₹ {product.price * 1.2}
+                    ₹ {product.price}
                   </p>
                   <p className="ml-auto text-base font-medium text-green-500">
-                    20% off
+                    {product.offer}% off
                   </p>
                 </div>
                 {product.size && product.size.length > 0 && (
@@ -258,12 +183,12 @@ const Shop = ({ user, dark }) => {
                     <div className="mt-1 relative">
                       <select
                         id={`size-${product._id}`}
+                        defaultValue={product.size[0]}
                         onChange={(e) =>
                           handleSizeSelect(product._id, e.target.value)
                         }
                         className="block w-full pl-3 pr-10 py-2 text-base border-black border-2 dark:text-white dark:bg-slate-800 dark:border-white rounded-md "
                       >
-                        <option className="dark:text-white">Select size</option>
                         {product.size.map((sz) => (
                           <option
                             key={sz}
@@ -278,26 +203,33 @@ const Shop = ({ user, dark }) => {
                   </div>
                 )}
                 <button
-                  disabled={
-                    !selectedSizes[product._id] &&
-                    product.size &&
-                    product.size.length > 0
-                  }
                   onClick={() =>
                     addtoCart(
                       product._id,
                       product.iName,
-                      product.price,
-                      selectedSizes[product._id]
+                      product.price * (1 - product.offer / 100),
+                      selectedSizes[product._id] || product.size[0]
                     )
                   }
-                  className="mt-4 text-sm text-white bg-blue-500 dark:bg-slate-700 border-white border-2 py-1 px-2 focus:outline-none hover:bg-blue-700 dark:hover:bg-slate-600 rounded-md disabled:hover:cursor-not-allowed"
+                  className="mt-4 text-sm text-white bg-blue-500 dark:bg-slate-700 border-white border-2 py-1 px-2 focus:outline-none hover:bg-blue-700 dark:hover:bg-slate-600 rounded-md"
                 >
                   Add
                 </button>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mx-auto text-center  pb-8">
+          <button
+            disabled={Object.keys(cart).length === 0}
+            onClick={() => {
+              router.push("/order");
+            }}
+            className="dark:bg-slate-700 dark:hover:bg-slate-800 hover:bg-blue-300 dark:text-white mr-4 disabled:hover:cursor-not-allowed bg-blue-200 py-3 border-0 px-5 font-semibold
+            text-black focus:outline-none rounded text-lg"
+          >
+            Place Order
+          </button>
         </div>
       </div>
     </div>

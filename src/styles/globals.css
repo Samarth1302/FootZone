@@ -37,14 +37,15 @@
     --primary: #ffffff;
     --secondary: rgb(92, 92, 92);
     --tertiary: rgb(74, 74, 74);
+    --scrollbar-track-background: #bfdbfe;
   }
   *::-webkit-scrollbar {
-    width: 11px;
+    width: 10px;
   }
 
   *::-webkit-scrollbar-track {
-    background: black;
-    border-radius: 2px;
+    background: var(--scrollbar-track-background);
+    border: none;
   }
 
   *::-webkit-scrollbar-thumb {
@@ -55,6 +56,19 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--tertiary);
+  }
+
+  @media (max-width: 768px) {
+    *::-webkit-scrollbar,
+    *::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-thumb {
+      display: none;
+    }
+  }
+  .sidemenu::-webkit-scrollbar,
+  .sidemenu::-webkit-scrollbar-track,
+  .sidemenu::-webkit-scrollbar-thumb {
+    display: none;
   }
 
   ::selection {

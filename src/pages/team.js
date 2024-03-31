@@ -30,17 +30,19 @@ const Teams = ({ dark }) => {
   }, []);
 
   const filterTeams = () => {
+    const searchTerm = searchInput.toLowerCase();
     if (searchInput.trim() === "") {
       setFilteredTeams(originalTeams);
     } else {
       const filtered = originalTeams.filter((team) =>
-        team.name.toLowerCase().includes(searchInput.toLowerCase())
+        team.name.toLowerCase().includes(searchTerm)
       );
       setFilteredTeams(filtered);
     }
   };
 
   useEffect(() => {
+    setCurrentPage(1);
     filterTeams();
   }, [searchInput]);
 
@@ -131,7 +133,7 @@ const Teams = ({ dark }) => {
                     }`}
                     onClick={() => paginate(currentPage - 1)}
                   >
-                    <GrFormPrevious className="mt-1 text-lg"/>
+                    <GrFormPrevious className="mt-1 text-lg" />
                   </li>
                 )}
                 {Array.from({ length: endPage - startPage + 1 }).map(
@@ -161,7 +163,7 @@ const Teams = ({ dark }) => {
                     }`}
                     onClick={() => paginate(currentPage + 1)}
                   >
-                   <GrFormNext className="mt-1 text-lg"/>
+                    <GrFormNext className="mt-1 text-lg" />
                   </li>
                 )}
               </ul>

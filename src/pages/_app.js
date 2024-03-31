@@ -84,6 +84,14 @@ export default function App({ Component, pageProps }) {
     getDarkModePreference();
   }, []);
 
+  useEffect(() => {
+    const scrollbarTrackBackground = dark ? "#000000" : "#bfdbfe";
+    document.documentElement.style.setProperty(
+      "--scrollbar-track-background",
+      scrollbarTrackBackground
+    );
+  }, [dark]);
+
   return (
     <>
       <main className={font.className}>
