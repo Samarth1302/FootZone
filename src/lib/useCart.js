@@ -88,6 +88,7 @@ const useCart = () => {
     removefromCart,
     clearCart,
     setCart,
+    saveCart
   };
 };
 export default useCart;

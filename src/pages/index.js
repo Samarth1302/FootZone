@@ -10,7 +10,7 @@ import {
   FaComments,
 } from "react-icons/fa";
 
-export default function Home({ dark }) {
+export default function Home({ dark, sidebar }) {
   let slides = [
     {
       imgsrc: "/comp.jpg",
@@ -87,7 +87,7 @@ export default function Home({ dark }) {
           </div>
         </div>
       </div>
-      <div className="w-full bg-gray-500 lg:w-[50%] lg:z-20 m-auto mt-24 md:mt-64 lg:mt-16 lg:mb-20 dark:bg-gray-800 lg:rounded-2xl">
+      <div className={`w-full bg-gray-500 lg:w-[50%] lg:z-20 m-auto mt-24 ${sidebar? "md:mt-40":"md:mt-64"} lg:mt-16 lg:mb-20 dark:bg-gray-800 lg:rounded-2xl`}>
         <Carousel slides={slides} />
       </div>
       <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900 text-center">

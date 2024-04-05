@@ -32,6 +32,7 @@ const Comment = ({ user, dark }) => {
       "/privacy",
       "/shop",
       "/order",
+      "/_error"
     ];
     if (nonShow.includes(router.pathname)) {
       setShow(false);
@@ -364,7 +365,7 @@ const Comment = ({ user, dark }) => {
       {show && (
         <div className={`${dark ? "dark" : ""} `}>
           <hr className="border-slate-700" />
-          <section className="bg-white dark:bg-gray-900  py-8 lg:py-16 antialiased">
+          <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
             <div className="md:max-w-xl lg:max-w-5xl mx-auto px-4">
               <div className="flex justify-between items-center mb-6">
                 <h1 className="text-base md:text-2xl font-bold text-gray-900 dark:text-white">
@@ -397,7 +398,7 @@ const Comment = ({ user, dark }) => {
                 comments.slice(0, displayedComments).map((comment) => (
                   <article
                     key={comment._id}
-                    className={`p-3 my-3 mx-6 md:mx-1 text-base bg-slate-100 dark:bg-slate-950 rounded-lg `}
+                    className={`p-3 my-3 mx-6 md:mx-1 text-sm md:text-base bg-slate-100 dark:bg-slate-950 rounded-lg `}
                   >
                     <footer className="flex justify-between items-center mb-2">
                       <div className="flex items-center">

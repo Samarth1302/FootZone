@@ -4,8 +4,8 @@ const BotpressChatWidget = () => {
     
     const initBotpress = ()=>{
         window.botpressWebChat.init({
-            "composerPlaceholder": "Chat with FootBot",
-            "botConversationDescription": "This is a soccer knowledge bot",
+            "composerPlaceholder": "Greet the bot first!",
+            "botConversationDescription": "This is a website bot",
             "botId": "8285e07c-d424-43bf-8196-5dfa61976d8e",
             "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
             "messagingUrl": "https://messaging.botpress.cloud",
@@ -30,3 +30,4 @@ const BotpressChatWidget = () => {
 
 }
 export default BotpressChatWidget;
+

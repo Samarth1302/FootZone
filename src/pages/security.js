@@ -109,7 +109,7 @@ const ChangePassword = ({ dark }) => {
             Change Password
           </h1>
 
-          <div>
+          <div className="tracking-wider">
             <label
               htmlFor="currentPassword"
               className="block mt-4 mb-2 text-sm font-bold text-black dark:text-white"

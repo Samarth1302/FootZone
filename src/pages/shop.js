@@ -153,7 +153,7 @@ const Shop = ({ user, dark }) => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="mx-auto mt-8 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
+              className="mx-auto lg:mx-4 mt-8 w-60 lg:w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
             >
               <img
                 className="h-48 w-full object-cover object-center"
@@ -178,16 +178,17 @@ const Shop = ({ user, dark }) => {
                     {product.offer}% off
                   </p>
                 </div>
+                <div className="flex flex-row justify-between">
                 {product.size && product.size.length > 0 && (
                   <div className="mt-4">
-                    <div className="mt-1 relative">
+                    <div className="relative">
                       <select
                         id={`size-${product._id}`}
                         defaultValue={product.size[0]}
                         onChange={(e) =>
                           handleSizeSelect(product._id, e.target.value)
                         }
-                        className="block w-full pl-3 pr-10 py-2 text-base border-black border-2 dark:text-white dark:bg-slate-800 dark:border-white rounded-md "
+                        className="w-auto px-2 py-1 text-base border-black border-2 dark:text-white dark:bg-slate-800 dark:border-white rounded-md "
                       >
                         {product.size.map((sz) => (
                           <option
@@ -215,6 +216,7 @@ const Shop = ({ user, dark }) => {
                 >
                   Add
                 </button>
+                </div>
               </div>
             </div>
           ))}

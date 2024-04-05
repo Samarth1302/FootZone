@@ -14,15 +14,13 @@ import { TbSoccerField } from "react-icons/tb";
 import { RiTeamLine } from "react-icons/ri";
 import { TiNews } from "react-icons/ti";
 import { FaShoppingBag } from "react-icons/fa";
+import { GiSoccerKick } from "react-icons/gi";
 
-const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
-  const [sidebar, setSidebar] = useState(false);
-  const [hamMenu, setHam] = useState(false);
+const Navbar = ({ user, sidebar, setSidebar, logout, dark, setDark, currentPath }) => {
   const [hamHovered, setHamHovered] = useState(false);
 
   const toggleHam = () => {
-    setHam(!hamMenu);
-    setSidebar(false);
+    setSidebar(!sidebar);
   };
 
   const handleToggle = () => {
@@ -56,11 +54,11 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
               onMouseOver={() => setHamHovered(true)}
               onMouseLeave={() => setHamHovered(false)}
             />
-            {hamMenu && (
+            {sidebar && (
               <aside
                 id="sidebar-multi-level-sidebar"
-                className={`fixed top-0 left-0 z-50 w-32 md:w-40 h-screen transition-transform -translate-x-full sm:translate-x-0 left-ham-menu ${
-                  hamMenu ? "translate-x-0" : ""
+                className={`fixed top-0 left-0 z-50 w-28 md:w-40 h-screen transition-transform -translate-x-full sm:translate-x-0 ${
+                  sidebar ? "translate-x-0" : ""
                 }`}
                 aria-label="Sidebar"
               >
@@ -71,15 +69,15 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                 >
                   <IoMdCloseCircle
                     onClick={toggleHam}
-                    className="absolute top-5 right-2 cursor-pointer text-xl dark:text-white text-black hover:text-red-500 dark:hover:text-red-600"
+                    className="absolute top-5 right-2 cursor-pointer text-lg md:text-xl dark:text-white text-black hover:text-red-500 dark:hover:text-red-600"
                   />
-                  <ul className="space-y-2 flex flex-col mt-10 pl-4 text-center text-base font-light md:text-lg md:font-medium dark:text-white ">
+                  <ul className="space-y-2 flex flex-col mt-10 pl-2 md:pl-4 text-center text-sm font-light md:text-lg md:font-medium dark:text-white ">
                     <Link href={"/"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600"
                         }`}
                       >
                         <IoHomeOutline className="mr-3" />
@@ -91,11 +89,23 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/league"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600"
                         }`}
                       >
                         <TbSoccerField className="mr-2" />
                         Leagues
+                      </li>
+                    </Link>
+                    <Link href={"/stat"}>
+                      <li
+                        className={`my-2 flex items-center rounded-md ${
+                          currentPath === "/match"
+                            ? "text-slate-500"
+                            : "hover:text-blue-600 "
+                        }`}
+                      >
+                        <GiSoccerKick className="mr-3" />
+                        Stats
                       </li>
                     </Link>
                     <Link href={"/match"}>
@@ -103,7 +113,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/match"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600 "
                         }`}
                       >
                         <IoFootballOutline className="mr-3" />
@@ -115,7 +125,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/team"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600 "
                         }`}
                       >
                         <RiTeamLine className="mr-3" />
@@ -127,7 +137,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/news"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600 "
                         }`}
                       >
                         <TiNews className="mr-2" />
@@ -139,7 +149,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/shop"
                             ? "text-slate-500"
-                            : "hover:text-blue-800 "
+                            : "hover:text-blue-600 "
                         }`}
                       >
                         <FaShoppingBag className="mr-3" />
@@ -152,7 +162,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                           className={`my-2 flex items-center rounded-md ${
                             currentPath === "/security"
                               ? "text-slate-500"
-                              : "hover:text-blue-800 "
+                              : "hover:text-blue-600 "
                           }`}
                         >
                           <MdSecurity className="mr-3" />
@@ -163,7 +173,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
                     {user.user_id && (
                       <Link href={"/"}>
                         <li
-                          className={`my-2 flex items-center hover:text-red-800 rounded-md ${
+                          className={`my-2 flex items-center hover:text-red-600 rounded-md ${
                             currentPath === "/logout" && "font-bold"
                           }`}
                           onClick={logout}
@@ -179,7 +189,7 @@ const Navbar = ({ user, logout, dark, setDark, currentPath }) => {
             )}
           </div>
           <Link href={"/"}>
-            <div className={hamMenu ? "ml-32 hidden md:block" : ""}>
+            <div className={sidebar ? "ml-32 hidden md:block" : ""}>
               {dark ? (
                 <Image
                   src="/dark-logo.png"

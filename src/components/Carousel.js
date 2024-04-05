@@ -22,7 +22,7 @@ export default function Carousel({ slides }) {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 9000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [current]);

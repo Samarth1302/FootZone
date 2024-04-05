@@ -202,7 +202,7 @@ const TeamDetails = ({ dark }) => {
                 <path d="M19 12H5"></path>
                 <path d="M12 19l-7-7 7-7"></path>
               </svg>
-              Back
+              League
             </a>
           </Link>
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">

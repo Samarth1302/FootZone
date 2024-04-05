@@ -19,6 +19,7 @@ const font = Inria_Sans({
 
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({});
+  const [sidebar, setSidebar] = useState(false);
   const [key, setKey] = useState();
   const [dark, setDark] = useState(false);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
@@ -128,12 +129,16 @@ export default function App({ Component, pageProps }) {
             dark={dark}
             setDark={setDark}
             currentPath={currentPath}
+            sidebar={sidebar} setSidebar={setSidebar}
           />
         )}
         {!isMobile && <BotpressChatWidget />}
-        <Component user={user} dark={dark} {...pageProps} />
-        <Comment dark={dark} user={user} />
-        <Footer dark={dark} />
+        <div className={`content ${sidebar ? 'sidebar-open' : ''}`}>
+          <Component user={user} dark={dark} sidebar={sidebar} {...pageProps} />
+          <Comment dark={dark} user={user} />
+          <Footer dark={dark} />
+        </div>
+        
         {showLogoutConfirmation && (
           <Confirm
             message="Are you sure you want to logout?"
@@ -143,6 +148,13 @@ export default function App({ Component, pageProps }) {
           />
         )}
       </main>
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .sidebar-open {
+            margin-left: 160px;
+          }
+        }
+      `}</style>
     </>
   );
 }

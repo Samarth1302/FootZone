@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 const Order = ({ dark }) => {
   const router = useRouter();
-  const { cart, total, addtoCart, removefromCart, setCart } = useCart();
+  const { cart, total, addtoCart, removefromCart, setCart,saveCart } = useCart();
   const [cartLoaded, setCartLoaded] = useState(false);
 
   useEffect(() => {
@@ -32,11 +32,13 @@ const Order = ({ dark }) => {
       const newCart = { ...cart };
       newCart[cartItemId].qty = newQuantity;
       setCart(newCart);
+      saveCart(newCart);
     } else {
       toast.error("Quantity not permissible", {
         id: "invalidqty",
       });
     }
+    
   };
 
   return (
@@ -80,7 +82,7 @@ const Order = ({ dark }) => {
                       className=" bg-blue-100 dark:bg-gray-800 rounded-lg p-4 flex relative items-center justify-between"
                     >
                       <div className="flex-1 pr-4">
-                        <h3 className="text-lg font-semibold">{item.iName}</h3>
+                        <h3 className="text-lg font-semibold">{item.iName} {item.size && `(${item.size})`}</h3>
                         <p className="dark:text-gray-300 mt-1">
                           (Item Price: ₹ {item.price})
                         </p>
