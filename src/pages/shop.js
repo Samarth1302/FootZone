@@ -9,7 +9,7 @@ import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 import useCart from "@/lib/useCart";
 
-const Shop = ({ user, dark }) => {
+const Shop = ({ user, dark, sidebar, setSidebar }) => {
   const { cart, total, addtoCart, removefromCart, clearCart } = useCart();
   const [showCart, setShowCart] = useState(false);
   const router = useRouter();
@@ -19,8 +19,18 @@ const Shop = ({ user, dark }) => {
   const [selectedSizes, setSelectedSizes] = useState({});
 
   const toggleCart = () => {
-    setShowCart(!showCart);
+    setShowCart((prevShowCart) => !prevShowCart);
+    if (sidebar) {
+      setSidebar(false);
+    }
   };
+
+  useEffect(() => {
+    if (sidebar && showCart) {
+      setShowCart(false);
+    }
+  }, [sidebar, showCart]);
+
   useEffect(() => {
     setCartCount(Object.keys(cart).length);
   }, [cart]);
@@ -179,43 +189,43 @@ const Shop = ({ user, dark }) => {
                   </p>
                 </div>
                 <div className="flex flex-row justify-between">
-                {product.size && product.size.length > 0 && (
-                  <div className="mt-4">
-                    <div className="relative">
-                      <select
-                        id={`size-${product._id}`}
-                        defaultValue={product.size[0]}
-                        onChange={(e) =>
-                          handleSizeSelect(product._id, e.target.value)
-                        }
-                        className="w-auto px-2 py-1 text-base border-black border-2 dark:text-white dark:bg-slate-800 dark:border-white rounded-md "
-                      >
-                        {product.size.map((sz) => (
-                          <option
-                            key={sz}
-                            value={sz}
-                            className="dark:text-white"
-                          >
-                            {sz}
-                          </option>
-                        ))}
-                      </select>
+                  {product.size && product.size.length > 0 && (
+                    <div className="mt-4">
+                      <div className="relative">
+                        <select
+                          id={`size-${product._id}`}
+                          defaultValue={product.size[0]}
+                          onChange={(e) =>
+                            handleSizeSelect(product._id, e.target.value)
+                          }
+                          className="w-auto px-2 py-1 text-base border-black border-2 dark:text-white dark:bg-slate-800 dark:border-white rounded-md "
+                        >
+                          {product.size.map((sz) => (
+                            <option
+                              key={sz}
+                              value={sz}
+                              className="dark:text-white"
+                            >
+                              {sz}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                )}
-                <button
-                  onClick={() =>
-                    addtoCart(
-                      product._id,
-                      product.iName,
-                      product.price * (1 - product.offer / 100),
-                      selectedSizes[product._id] || product.size[0]
-                    )
-                  }
-                  className="mt-4 text-sm text-white bg-blue-500 dark:bg-slate-700 border-white border-2 py-1 px-2 focus:outline-none hover:bg-blue-700 dark:hover:bg-slate-600 rounded-md"
-                >
-                  Add
-                </button>
+                  )}
+                  <button
+                    onClick={() =>
+                      addtoCart(
+                        product._id,
+                        product.iName,
+                        product.price * (1 - product.offer / 100),
+                        selectedSizes[product._id] || product.size[0]
+                      )
+                    }
+                    className="mt-4 text-sm text-white bg-blue-500 dark:bg-slate-700 border-white border-2 py-1 px-2 focus:outline-none hover:bg-blue-700 dark:hover:bg-slate-600 rounded-md"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </div>

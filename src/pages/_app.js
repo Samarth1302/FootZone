@@ -129,16 +129,23 @@ export default function App({ Component, pageProps }) {
             dark={dark}
             setDark={setDark}
             currentPath={currentPath}
-            sidebar={sidebar} setSidebar={setSidebar}
+            sidebar={sidebar}
+            setSidebar={setSidebar}
           />
         )}
         {!isMobile && <BotpressChatWidget />}
-        <div className={`content ${sidebar ? 'sidebar-open' : ''}`}>
-          <Component user={user} dark={dark} sidebar={sidebar} {...pageProps} />
+        <div className={`content ${sidebar ? "sidebar-open" : ""}`}>
+          <Component
+            user={user}
+            dark={dark}
+            sidebar={sidebar}
+            setSidebar={setSidebar}
+            {...pageProps}
+          />
           <Comment dark={dark} user={user} />
           <Footer dark={dark} />
         </div>
-        
+
         {showLogoutConfirmation && (
           <Confirm
             message="Are you sure you want to logout?"

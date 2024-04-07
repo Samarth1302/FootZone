@@ -9,8 +9,13 @@ import {
   FaShoppingCart,
   FaComments,
 } from "react-icons/fa";
+import { useEffect } from "react";
 
-export default function Home({ dark, sidebar }) {
+export default function Home({ dark, sidebar, setSidebar }) {
+  useEffect(() => {
+    setSidebar(true);
+  }, []);
+
   let slides = [
     {
       imgsrc: "/comp.jpg",
@@ -87,7 +92,11 @@ export default function Home({ dark, sidebar }) {
           </div>
         </div>
       </div>
-      <div className={`w-full bg-gray-500 lg:w-[50%] lg:z-20 m-auto mt-24 ${sidebar? "md:mt-40":"md:mt-64"} lg:mt-16 lg:mb-20 dark:bg-gray-800 lg:rounded-2xl`}>
+      <div
+        className={`w-full bg-gray-500 lg:w-[50%] lg:z-20 m-auto mt-24 ${
+          sidebar ? "md:mt-40" : "md:mt-64"
+        } lg:mt-16 lg:mb-20 dark:bg-gray-800 lg:rounded-2xl`}
+      >
         <Carousel slides={slides} />
       </div>
       <footer className="text-white-600 bg-slate-100 body-font dark:bg-slate-900 text-center">
@@ -122,8 +131,7 @@ export default function Home({ dark, sidebar }) {
                 Soccer News
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Get latest soccer
-                news from popular news sites.
+                Get latest soccer news from popular news sites.
               </p>
             </div>
           </div>
@@ -136,8 +144,7 @@ export default function Home({ dark, sidebar }) {
                 Football World
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Review and follow
-                league standings, fixtures, stats and more.
+                Review and follow league standings, fixtures, stats and more.
               </p>
             </div>
           </div>
