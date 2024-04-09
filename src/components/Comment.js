@@ -32,7 +32,7 @@ const Comment = ({ user, dark }) => {
       "/privacy",
       "/shop",
       "/order",
-      "/_error"
+      "/_error",
     ];
     if (nonShow.includes(router.pathname)) {
       setShow(false);
@@ -365,7 +365,7 @@ const Comment = ({ user, dark }) => {
       {show && (
         <div className={`${dark ? "dark" : ""} `}>
           <hr className="border-slate-700" />
-          <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+          <section className="bg-blue-100 dark:bg-gray-900 py-8 lg:py-16 antialiased">
             <div className="md:max-w-xl lg:max-w-5xl mx-auto px-4">
               <div className="flex justify-between items-center mb-6">
                 <h1 className="text-base md:text-2xl font-bold text-gray-900 dark:text-white">

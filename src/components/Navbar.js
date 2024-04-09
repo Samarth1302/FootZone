@@ -16,7 +16,16 @@ import { TiNews } from "react-icons/ti";
 import { FaShoppingBag } from "react-icons/fa";
 import { GiSoccerKick } from "react-icons/gi";
 
-const Navbar = ({ user, sidebar, setSidebar, logout, dark, setDark, currentPath }) => {
+const Navbar = ({
+  user,
+  sidebar,
+  setSidebar,
+  logout,
+  dark,
+  setDark,
+  currentPath,
+  isMobile,
+}) => {
   const [hamHovered, setHamHovered] = useState(false);
 
   const toggleHam = () => {
@@ -99,7 +108,7 @@ const Navbar = ({ user, sidebar, setSidebar, logout, dark, setDark, currentPath 
                     <Link href={"/stat"}>
                       <li
                         className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/match"
+                          currentPath === "/stat"
                             ? "text-slate-500"
                             : "hover:text-blue-600 "
                         }`}
@@ -194,16 +203,16 @@ const Navbar = ({ user, sidebar, setSidebar, logout, dark, setDark, currentPath 
                 <Image
                   src="/dark-logo.png"
                   alt="FootZone logo"
-                  width={140}
-                  height={140}
+                  width={isMobile ? 95 : 140}
+                  height={isMobile ? 95 : 140}
                   priority
                 />
               ) : (
                 <Image
                   src="/logo.png"
                   alt="FootZone logo"
-                  width={140}
-                  height={140}
+                  width={isMobile ? 95 : 140}
+                  height={isMobile ? 95 : 140}
                   priority
                 />
               )}

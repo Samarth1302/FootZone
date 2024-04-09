@@ -14,6 +14,10 @@ module.exports = {
         protocol: "https",
         hostname: "media.istockphoto.com",
       },
+      {
+        protocol: "https",
+        hostname: "crests.football-data.org",
+      },
     ],
   },
 };

@@ -21,7 +21,7 @@ export default function Home({ dark, sidebar, setSidebar }) {
       imgsrc: "/comp.jpg",
       page: "league",
       content: "Soccer stats",
-      text: "Check out the latest league fixtures, team stats, standings and more.",
+      text: "Join the revolution! View different leagues, team stats, standings and more.",
       buttonText: "Explore",
     },
     {
@@ -33,9 +33,9 @@ export default function Home({ dark, sidebar, setSidebar }) {
     },
     {
       imgsrc: "/save.jpg",
-      page: "team",
-      content: "Discover Teams",
-      text: "Join the revolution! View different teams and support your favorite.",
+      page: "match",
+      content: "Discover Matches",
+      text: "Check out the latest fixtures and cups, support your favorite teams",
       buttonText: "View",
     },
     {
@@ -82,7 +82,7 @@ export default function Home({ dark, sidebar, setSidebar }) {
                   "Explore soccer stats",
                   "Get latest football news",
                   "Join the fan discussion",
-                  "Interact with soccer bot",
+                  "Follow the latest matches",
                 ],
                 delay: 100,
                 loop: true,

@@ -27,7 +27,7 @@ const News = ({ dark, error }) => {
   }, []);
 
   return (
-    <div className={`min-h-screen ${dark ? "dark" : ""} dark:bg-slate-900`}>
+    <div className={`min-h-screen ${dark ? "dark" : ""}`}>
       <Head>
         <title>News - FootZone</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

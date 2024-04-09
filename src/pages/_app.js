@@ -131,6 +131,7 @@ export default function App({ Component, pageProps }) {
             currentPath={currentPath}
             sidebar={sidebar}
             setSidebar={setSidebar}
+            isMobile={isMobile}
           />
         )}
         {!isMobile && <BotpressChatWidget />}
