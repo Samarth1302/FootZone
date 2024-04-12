@@ -18,6 +18,15 @@ export default function RouteLoader({ dark }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const handleBeforeUnload = () => setLoading(true);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
     const handleStart = (url) => {
       setLoading(true);
       setTimeout(() => setLoading(false), DEFAULT_LOADING_DURATION);

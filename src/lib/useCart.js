@@ -47,19 +47,43 @@ const useCart = () => {
     setTotal(subTotal);
   };
 
-  const addtoCart = (itemId, iName, price, size, quantity = 1) => {
+  const addtoCart = async (itemId, iName, price, size, quantity = 1) => {
     const cartItemId = size ? `${itemId}-${size}` : itemId;
     const newCart = { ...cart };
 
-    if (cartItemId in cart) {
-      if (newCart[cartItemId].qty + quantity <= 10) {
-        newCart[cartItemId].qty += quantity;
+    try {
+      const token = JSON.parse(localStorage.getItem("myUser"));
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URI}/shop/image/${itemId}`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const image = await response.json();
+
+      if (cartItemId in cart) {
+        if (newCart[cartItemId].qty + quantity <= 10) {
+          newCart[cartItemId].qty += quantity;
+        }
+      } else {
+        newCart[cartItemId] = {
+          qty: quantity,
+          price,
+          iName,
+          size,
+          image: image,
+        };
       }
-    } else {
-      newCart[cartItemId] = { qty: quantity, price, iName, size };
+      setCart(newCart);
+      saveCart(newCart);
+    } catch (error) {
+      console.error("Error fetching product data:", error);
     }
-    setCart(newCart);
-    saveCart(newCart);
   };
 
   const removefromCart = (cartItemId, quantity = 1) => {
@@ -88,7 +112,7 @@ const useCart = () => {
     removefromCart,
     clearCart,
     setCart,
-    saveCart
+    saveCart,
   };
 };
 export default useCart;

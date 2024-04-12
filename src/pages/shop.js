@@ -38,8 +38,17 @@ const Shop = ({ user, dark, sidebar, setSidebar }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const token = JSON.parse(localStorage.getItem("myUser"));
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URI}/shop/products`
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/shop/products`,
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const products = await response.json();
         setProducts(products);

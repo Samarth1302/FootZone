@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
-const Match = ({ dark, sidebar }) => {
+const Match = ({ dark }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [competitions, setCompetitions] = useState([]);
@@ -128,17 +128,19 @@ const Match = ({ dark, sidebar }) => {
                   value="Today"
                   className="text-left"
                 >{`Today's matches`}</option>
-                {competitions.map((competition) => (
-                  <option
-                    key={competition.compId}
-                    value={competition.compId}
-                    className="text-left"
-                  >
-                    {competition.compName === "Primeira Liga"
-                      ? "La Liga"
-                      : competition.compName}
-                  </option>
-                ))}
+                {competitions
+                  .sort((a, b) => (a.compName > b.compName ? 1 : -1))
+                  .map((competition) => (
+                    <option
+                      key={competition.compId}
+                      value={competition.compId}
+                      className="text-left"
+                    >
+                      {competition.compName === "Primera Division"
+                        ? "La Liga"
+                        : competition.compName}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -185,12 +187,21 @@ const Match = ({ dark, sidebar }) => {
                 </div>
                 <div className="flex justify-between mt-4 space-x-10 mr-8">
                   <div className="flex flex-col items-center">
-                    <Image
-                      src={match.homeTeam.crest}
-                      alt={match.homeTeam.name}
-                      width={50}
-                      height={50}
-                    />
+                    {match.homeTeam.crest ? (
+                      <Image
+                        src={match.homeTeam.crest}
+                        alt={match.homeTeam.name}
+                        width={50}
+                        height={50}
+                      />
+                    ) : (
+                      <Image
+                        src="/no.jpg"
+                        alt="Placeholder"
+                        width={50}
+                        height={50}
+                      />
+                    )}
                     <p
                       className={`dark:text-white max-w-20 md:max-w-32 lg:max-w-40 truncate ${
                         match.score.winner === "HOME_TEAM"
@@ -205,12 +216,21 @@ const Match = ({ dark, sidebar }) => {
                     <div className="w-16 hidden md:block h-0.5 bg-gray-400 transform -rotate-45"></div>
                   </div>
                   <div className="flex flex-col items-center">
-                    <Image
-                      src={match.awayTeam.crest}
-                      alt={match.awayTeam.name}
-                      width={50}
-                      height={50}
-                    />
+                    {match.awayTeam.crest ? (
+                      <Image
+                        src={match.awayTeam.crest}
+                        alt={match.awayTeam.name}
+                        width={50}
+                        height={50}
+                      />
+                    ) : (
+                      <Image
+                        src="/no.jpg"
+                        alt="Placeholder"
+                        width={50}
+                        height={50}
+                      />
+                    )}
                     <p
                       className={`dark:text-white max-w-20 md:max-w-32 lg:max-w-40 truncate ${
                         match.score.winner === "AWAY_TEAM"

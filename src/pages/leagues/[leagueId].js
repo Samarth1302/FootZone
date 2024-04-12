@@ -39,7 +39,7 @@ const LeagueDetails = ({ dark }) => {
   }, [searchInput, leagueDetails]);
 
   const handleBack = () => {
-    router.push("/league");
+    router.back();
   };
 
   return (

@@ -36,6 +36,10 @@ const TeamDetails = ({ dark }) => {
     }
   }, [team, leagueId]);
 
+  const handleBack = () => {
+    router.back();
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (overlayRef.current && !overlayRef.current.contains(event.target)) {
@@ -188,23 +192,24 @@ const TeamDetails = ({ dark }) => {
       </Head>
       {teamDetails && (
         <main className="mx-auto p-4 dark:bg-slate-900">
-          <Link href={`/leagues/${leagueId}`} legacyBehavior>
-            <a className="font-medium text-blue-800 inline-flex items-center mb-4 hover:bg-blue-50 rounded-lg p-2 dark:hover:bg-slate-800 dark:text-blue-200 dark:hover:text-blue-200">
-              <svg
-                className="w-4 h-4 mr-2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-              League
-            </a>
-          </Link>
+          <button
+            onClick={handleBack}
+            className="font-medium text-blue-800 inline-flex items-center mb-4 hover:bg-blue-50 rounded-lg p-2 dark:hover:bg-slate-800 dark:text-blue-200 dark:hover:text-blue-200"
+          >
+            <svg
+              className="w-4 h-4 mr-2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M19 12H5"></path>
+              <path d="M12 19l-7-7 7-7"></path>
+            </svg>
+            Back
+          </button>
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
             <div className="flex flex-col md:flex-row justify-between">
               <div className="flex flex-col mb-4 text-lg dark:text-blue-200">
