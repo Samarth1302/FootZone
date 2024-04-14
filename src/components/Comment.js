@@ -15,6 +15,8 @@ const Comment = ({ user, dark }) => {
   const [showDropdown, setShowDropdown] = useState(null);
   const [displayedComments, setDisplayedComments] = useState(5);
   const [displayedReplies, setDisplayedReplies] = useState({});
+  const [submittingComment, setSubmittingComment] = useState(false);
+  const [replySubmitting, setReplySubmitting] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [newEdit, setNewEdit] = useState("");
   const [editComment, setEditComment] = useState(null);
@@ -99,14 +101,21 @@ const Comment = ({ user, dark }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+    if (submittingComment) {
+      return;
+    }
+    setSubmittingComment(true);
     const sanitizedComment = DOMPurify.sanitize(newComment);
     if (sanitizedComment.length > 300) {
+      setSubmittingComment(false);
       return toast.error("Comment length exceeds the limit (300 characters).", {
         icon: "😬",
         id: "comm",
       });
     }
     if (!user.user_id) {
+      setSubmittingComment(false);
+      router.push("/login");
       return toast.error("Users need to login to comment", {
         id: "notloggedin",
       });
@@ -140,6 +149,8 @@ const Comment = ({ user, dark }) => {
       toast.error(error, {
         id: "commsub",
       });
+    } finally {
+      setSubmittingComment(false);
     }
   };
   const toggleDropdown = (commentId) => {
@@ -280,53 +291,61 @@ const Comment = ({ user, dark }) => {
   };
 
   const handleReplySubmit = async (commentId) => {
-    const sanitizedReply = DOMPurify.sanitize(newReply);
-    if (sanitizedReply.length > 300) {
-      return toast.error("Reply length exceeds the limit (300 characters).", {
-        icon: "😬",
-        id: "reply",
-      });
-    }
-    if (!user.user_id) {
-      return toast.error("Users need to login to reply", {
-        id: "notloggedin",
-      });
-    }
-    const token = JSON.parse(localStorage.getItem("myUser"));
+    setReplySubmitting(true);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URI}/comm/replies/${commentId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            text: sanitizedReply,
-          }),
-        }
-      );
-      const data = await response.json();
-      if (data.error) {
-        return toast.error(data.error, {
-          id: "creperr",
+      const sanitizedReply = DOMPurify.sanitize(newReply);
+      if (sanitizedReply.length > 300) {
+        return toast.error("Reply length exceeds the limit (300 characters).", {
+          icon: "😬",
+          id: "reply",
         });
       }
-      const updatedReplies = await fetchReplies(commentId);
-      const updatedComments = comments.map((comment) => {
-        if (comment._id === commentId) {
-          return { ...comment, replies: updatedReplies };
+      if (!user.user_id) {
+        router.push("/login");
+        return toast.error("Users need to login to reply", {
+          id: "notloggedin",
+        });
+      }
+      const token = JSON.parse(localStorage.getItem("myUser"));
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/comm/replies/${commentId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              text: sanitizedReply,
+            }),
+          }
+        );
+        const data = await response.json();
+        if (data.error) {
+          return toast.error(data.error, {
+            id: "creperr",
+          });
         }
-        return comment;
-      });
-      setComments(updatedComments);
-      setNewReply("");
-      setReplyInput(null);
+        const updatedReplies = await fetchReplies(commentId);
+        const updatedComments = comments.map((comment) => {
+          if (comment._id === commentId) {
+            return { ...comment, replies: updatedReplies };
+          }
+          return comment;
+        });
+        setComments(updatedComments);
+        setNewReply("");
+        setReplyInput(null);
+        setReplySubmitting(false);
+      } catch (error) {
+        toast.error(error, {
+          id: "replysub",
+        });
+        setReplySubmitting(false);
+      }
     } catch (error) {
-      toast.error(error, {
-        id: "replysub",
-      });
+      setReplySubmitting(false);
     }
   };
 
@@ -558,6 +577,7 @@ const Comment = ({ user, dark }) => {
                           </button>
                           <button
                             type="button"
+                            disabled={replySubmitting}
                             className="bg-blue-950 px-2 py-1 rounded-md text-xs md:text-sm hover:bg-blue-900 focus:bg-white dark:focus:bg-slate-900 focus:border-2 focus:border-blue-950 focus:text-blue-950 dark:focus:text-white font-medium text-white"
                             onClick={() => handleReplySubmit(comment._id)}
                           >
