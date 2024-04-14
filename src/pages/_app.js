@@ -111,7 +111,6 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <main className={font.className}>
-        <GoogleAnalytics gaId="G-FSE2NJNNW3" />
         <RouteLoader dark={dark} />
         <Toaster
           position="top-center"
@@ -159,6 +158,7 @@ export default function App({ Component, pageProps }) {
             setSidebar={setSidebar}
             {...pageProps}
           />
+          <GoogleAnalytics gaId="G-FSE2NJNNW3" />
           <Comment dark={dark} user={user} />
           <Footer dark={dark} />
         </div>
