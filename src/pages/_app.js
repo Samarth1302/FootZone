@@ -76,6 +76,20 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
+    const handleRouterChange = () => {
+      if (isMobile) {
+        setSidebar(false);
+      }
+    };
+
+    router.events.on("routeChangeComplete", handleRouterChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouterChange);
+    };
+  }, [isMobile, router.events]);
+
+  useEffect(() => {
     const getDarkModePreference = () => {
       setDark(
         window.matchMedia &&

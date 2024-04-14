@@ -318,7 +318,7 @@ const TeamDetails = ({ dark }) => {
             <hr className="-mt-10 border-t-4 border-gray-300" />
             {players && (
               <div className="min-h-screen bg-white dark:bg-slate-800 flex mt-10 flex-col">
-                <div className="flex flex-row justify-between items-center mb-14">
+                <div className="flex flex-col space-y-3 md:flex-row justify-between items-center mb-14">
                   <h2 className="ml-4 text-2xl text-left font-bold dark:text-blue-100">
                     Players
                   </h2>
@@ -334,7 +334,7 @@ const TeamDetails = ({ dark }) => {
                   {filteredPlayers.map((player, index) => (
                     <div
                       key={index}
-                      className="flex flex-col items-center justify-center mx-3 my-6 w-1/4 md:w-1/6 lg:w-1/12"
+                      className="flex flex-col items-center justify-center my-4 mx-auto md:mx-3 md:my-6 w-auto md:w-1/6 lg:w-1/12"
                       onClick={() => handlePlayerClick(player.playerId)}
                     >
                       <div className="w-20 h-20 rounded-full hover:cursor-pointer overflow-hidden">

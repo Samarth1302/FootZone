@@ -197,7 +197,7 @@ const Stat = ({ dark }) => {
                 <table className="w-full border-collapse text-sm md:text-base rounded-md">
                   <thead>
                     <tr>
-                      <th className="py-2 px-4 bg-blue-300 dark:bg-slate-800 border border-gray-300 text-left max-w-36 md:max-w-56 lg:w-72 truncate ">
+                      <th className="py-2 px-4 bg-blue-300 dark:bg-slate-800 border border-gray-300 text-left max-w-32 md:max-w-56 lg:w-72 truncate ">
                         Player
                       </th>
                       <th className="py-2 px-4 bg-blue-300 dark:bg-slate-800 border border-gray-300 text-center md:text-left md:max-w-60 lg:w-80 truncate">
@@ -251,7 +251,7 @@ const Stat = ({ dark }) => {
                           index % 2 === 0 ? "bg-gray-100 dark:bg-slate-700" : ""
                         }
                       >
-                        <td className="py-2 px-4 border border-gray-300 max-w-40 truncate">
+                        <td className="py-2 px-4 border border-gray-300 max-w-32 truncate">
                           {scorer.name}
                         </td>
                         <td className="py-2 px-4 border  border-gray-300 md:max-w-56 md:truncate">

@@ -218,7 +218,7 @@ const LeagueDetails = ({ dark }) => {
           <hr className="my-8 border-t-4 border-gray-300" />
           {leagueDetails.teams.length !== 0 && (
             <section>
-              <div className="px-5 pt-4 mx-auto flex justify-between items-center mb-14">
+              <div className="px-5 pt-4 mx-auto flex flex-col md:flex-row space-y-3 justify-between items-center mb-14">
                 <h2 className="text-2xl text-blue-900 dark:text-blue-100 text-left font-bold">
                   Teams
                 </h2>{" "}

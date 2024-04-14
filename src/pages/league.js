@@ -58,7 +58,7 @@ const League = ({ dark }) => {
         />
       </Head>
       <div className="text-gray-600 body-font dark:bg-slate-900">
-        <div className="px-5 pt-4 mx-auto flex justify-between items-center">
+        <div className="px-5 pt-4 mx-auto flex flex-col md:flex-row space-y-3 justify-between items-center">
           <h1 className="text-lg md:text-3xl font-bold  text-blue-900 dark:text-blue-200">
             Choose a League
           </h1>

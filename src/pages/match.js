@@ -88,7 +88,7 @@ const Match = ({ dark }) => {
           content="football soccer stadium players leagues athletes sport"
         />
       </Head>
-      <div className="md:min-h-screen text-black body-font dark:bg-slate-900 bg-blue-100">
+      <div className="min-h-screen text-black body-font dark:bg-slate-900 bg-blue-100">
         <h2 className="lg:pb-6 pt-8 md:pb-0 text-center justify-center tracking-wider text-xl md:text-2xl lg:text-3xl font-bold dark:text-white">
           Fixtures
         </h2>
@@ -145,8 +145,8 @@ const Match = ({ dark }) => {
             </div>
           </div>
         </div>
-        <div className="px-4 md:px-10 lg:px-20 md:pt-4 md:pb-10 text-xs md:text-base -mb-8 pb-8">
-          <ul className="lg:w-2/3 m-auto">
+        <div className="px-4 flex md:px-10 lg:px-20 md:pt-4 md:pb-10 text-xs md:text-base -mb-8 pb-8">
+          <ul className="lg:w-2/3 m-auto text-center justify-center">
             {matches.map((match, index) => (
               <li
                 key={index}
@@ -157,7 +157,7 @@ const Match = ({ dark }) => {
                     {formatDate(match.utcDate)} IST
                   </p>
                   {match.area && match.competition && match.id && (
-                    <div className="flex flex-col">
+                    <div className="flex flex-col items-center justify-center">
                       <div className="flex flex-row pb-2">
                         {match.competition.emblem && (
                           <Image
@@ -167,7 +167,7 @@ const Match = ({ dark }) => {
                             height={20}
                           />
                         )}
-                        <p className="dark:text-white pl-2 md:max-w-36 truncate">
+                        <p className="dark:text-white pl-2 md:max-w-36 truncate text-center">
                           {match.competition.name}
                         </p>
                       </div>
@@ -178,7 +178,7 @@ const Match = ({ dark }) => {
                           width={20}
                           height={20}
                         />
-                        <p className="dark:text-white pl-2 md:max-w-36 truncate">
+                        <p className="dark:text-white pl-2 md:max-w-36 truncate justify-center text-center">
                           {match.area.name}
                         </p>
                       </div>
