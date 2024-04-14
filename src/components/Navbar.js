@@ -153,18 +153,20 @@ const Navbar = ({
                         News
                       </li>
                     </Link>
-                    <Link href={"/shop"}>
-                      <li
-                        className={`my-2 flex items-center rounded-md ${
-                          currentPath === "/shop"
-                            ? "text-slate-500"
-                            : "hover:text-blue-600 "
-                        }`}
-                      >
-                        <FaShoppingBag className="mr-3" />
-                        Shop
-                      </li>
-                    </Link>
+                    {user.user_id && (
+                      <Link href={"/shop"}>
+                        <li
+                          className={`my-2 flex items-center rounded-md ${
+                            currentPath === "/shop"
+                              ? "text-slate-500"
+                              : "hover:text-blue-600 "
+                          }`}
+                        >
+                          <FaShoppingBag className="mr-3" />
+                          Shop
+                        </li>
+                      </Link>
+                    )}
                     {user.user_id && (
                       <Link href={"/security"}>
                         <li
