@@ -11,6 +11,7 @@ import "@/styles/globals.css";
 import toast, { Toaster } from "react-hot-toast";
 import { Inria_Sans } from "next/font/google";
 import BotpressChatWidget from "@/components/Bot.js";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const font = Inria_Sans({
   weight: "400",
@@ -110,6 +111,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <main className={font.className}>
+        <GoogleAnalytics gaId="G-FSE2NJNNW3" />
         <RouteLoader dark={dark} />
         <Toaster
           position="top-center"
