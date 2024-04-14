@@ -102,7 +102,7 @@ const Teams = ({ dark }) => {
                   legacyBehavior
                 >
                   <a className="p-4 md:w-1/2 lg:w-1/4 block">
-                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:hover:bg-blue-100 hover:bg-opacity-20 items-center text-blue-900 dark:text-blue-100 dark:hover:text-blue-950 dark:font-semibold font-medium">
+                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:hover:bg-blue-100 hover:bg-opacity-20 items-center text-blue-900 dark:text-blue-100 dark:hover:text-blue-950 dark:font-semibold font-medium min-w-80 md:w-auto">
                       <div className="w-1/3">
                         <Image
                           src={team.logo}

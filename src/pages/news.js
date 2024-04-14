@@ -50,7 +50,7 @@ const News = ({ dark, error }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <div className="border rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-slate-800 dark:text-blue-100">
+                    <div className="border border-gray-400 rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-slate-800 dark:text-blue-100">
                       <img
                         src={article.urlToImage}
                         alt={article.title}

@@ -76,7 +76,7 @@ const League = ({ dark }) => {
               {filteredLeagues.map((league, index) => (
                 <Link key={index} href={`/leagues/${league.id}`} legacyBehavior>
                   <a className="p-4 md:w-1/2 lg:w-1/4 block">
-                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:bg-slate-900 hover:bg-opacity-20 items-center text-blue-900 dark:text-white dark:hover:text-slate-800 dark:hover:bg-blue-200  dark:font-semibold font-medium">
+                    <div className="flex h-full border-2 border-blue-200 dark:border-blue-50 border-opacity-40 rounded-lg overflow-hidden hover:bg-blue-200 dark:bg-slate-900 hover:bg-opacity-20 items-center text-blue-900 dark:text-white dark:hover:text-slate-800 dark:hover:bg-blue-200  dark:font-semibold font-medium min-w-80 md:w-full">
                       <div className="w-1/3">
                         <Image
                           src={league.logo}
