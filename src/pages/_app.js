@@ -9,9 +9,9 @@ import Comment from "@/components/Comment";
 import RouteLoader from "@/components/Loader";
 import "@/styles/globals.css";
 import toast, { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
 import { Inria_Sans } from "next/font/google";
 import BotpressChatWidget from "@/components/Bot.js";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 const font = Inria_Sans({
   weight: "400",
@@ -151,6 +151,7 @@ export default function App({ Component, pageProps }) {
         )}
         {!isMobile && <BotpressChatWidget />}
         <div className={`content ${sidebar ? "sidebar-open" : ""}`}>
+          <Analytics />
           <Component
             user={user}
             dark={dark}
@@ -158,7 +159,6 @@ export default function App({ Component, pageProps }) {
             setSidebar={setSidebar}
             {...pageProps}
           />
-          <GoogleAnalytics gaId="G-FSE2NJNNW3" />
           <Comment dark={dark} user={user} />
           <Footer dark={dark} />
         </div>
