@@ -139,7 +139,7 @@ const Stat = ({ dark }) => {
               </button>
             </div>
             <div className="flex flex-row space-x-4 py-4">
-              <div className="text-sm md:text-lg">
+              <div className="text-sm md:text-lg lg:mr-6">
                 <select
                   value={selectedComp}
                   onChange={(e) => {
@@ -170,7 +170,7 @@ const Stat = ({ dark }) => {
                 onClick={() => {
                   handleFetchData(selectedComp);
                 }}
-                className="bg-blue-300 flex flex-row items-center hover:bg-blue-400 dark:bg-slate-500 dark:hover:bg-slate-600 px-4 py-2 rounded-md"
+                className="bg-blue-300 flex items-center hover:bg-blue-400 dark:bg-slate-500 dark:hover:bg-slate-600 px-4 py-2 rounded-md"
               >
                 Show
                 <TbArrowBigDownLineFilled className="ml-2" />
