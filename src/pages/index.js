@@ -32,19 +32,19 @@ export default function Home({ dark, sidebar, setSidebar }) {
         "The server takes 1-2 mins to startup and fetch the latest information.",
     },
     {
-      question: "How to access the chatbot?",
+      question: "How authentic is the league,team, player information?",
       answer:
-        "The chatbot is only acccessible through laptop or PC. Not provided for mobile phone users.",
-    },
-    {
-      question: "Where to find team and player stats",
-      answer:
-        "You can reach a team page through navbar Teams section or you can enter a league and click a team's icon to view more details about that team.",
+        "Some information may be outdated as it's based on the start of the season and the APIs are responsible for validity.",
     },
     {
       question: "What all features are provided after signup?",
       answer:
-        "You can participate in the discussion section and view the merchandise store after successful signup.",
+        "You can participate in the discussion section and view the merchandise store after successful signup. Chatbot is accessible only on laptop/PC.",
+    },
+    {
+      question: "How to access the chatbot?",
+      answer:
+        "The chatbot is only acccessible through laptop or PC. Not provided for mobile phone users.",
     },
     {
       question: "Why are some images not loading?",
