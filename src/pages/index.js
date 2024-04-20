@@ -39,7 +39,7 @@ export default function Home({ dark, sidebar, setSidebar }) {
     {
       question: "What all features are provided after signup?",
       answer:
-        "You can participate in the discussion section and view the merchandise store after successful signup. Chatbot is accessible only on laptop/PC.",
+        "You can participate in the discussion section and view the merchandise store after successful signup.",
     },
     {
       question: "How to access the chatbot?",
@@ -47,9 +47,8 @@ export default function Home({ dark, sidebar, setSidebar }) {
         "The chatbot is only acccessible through laptop or PC. Not provided for mobile phone users.",
     },
     {
-      question: "Why are some images not loading?",
-      answer:
-        "Since this is a project website the image rendering and image optimisation is disabled to ensure quick delivery and fast operations.",
+      question: "Further questions?",
+      answer: "Use our chatbot through laptop or PC for more queries.",
     },
   ];
 
