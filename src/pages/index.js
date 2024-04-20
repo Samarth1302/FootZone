@@ -8,13 +8,50 @@ import {
   FaUsers,
   FaShoppingCart,
   FaComments,
+  FaChevronDown,
 } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home({ dark, sidebar, setSidebar }) {
   useEffect(() => {
-    setSidebar(true);
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) {
+      setSidebar(true);
+    }
   }, []);
+  const [expanded, setExpanded] = useState(null);
+
+  const toggleQuestion = (index) => {
+    setExpanded((prevExpanded) => (prevExpanded === index ? null : index));
+  };
+
+  const faqItems = [
+    {
+      question: "Why is there no content on some pages?",
+      answer:
+        "The server takes 1-2 mins to startup and fetch the latest information.",
+    },
+    {
+      question: "How to access the chatbot?",
+      answer:
+        "The chatbot is only acccessible through laptop or PC. Not provided for mobile phone users.",
+    },
+    {
+      question: "Where to find team and player stats",
+      answer:
+        "You can reach a team page through navbar Teams section or you can enter a league and click a team's icon to view more details about that team.",
+    },
+    {
+      question: "What all features are provided after signup?",
+      answer:
+        "You can participate in the discussion section and view the merchandise store after successful signup.",
+    },
+    {
+      question: "Why are some images not loading?",
+      answer:
+        "Since this is a project website the image rendering and image optimisation is disabled to ensure quick delivery and fast operations.",
+    },
+  ];
 
   let slides = [
     {
@@ -178,6 +215,39 @@ export default function Home({ dark, sidebar, setSidebar }) {
           </div>
         </div>
       </footer>
+      <section className="bg-blue-200 dark:bg-gray-800 py-6">
+        <div className="container mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white tracking-wider">
+            Frequently Asked Questions
+          </h2>
+          <div className="max-w-3xl mx-auto">
+            {faqItems.map((item, index) => (
+              <div key={index} className="mb-8">
+                <button
+                  className={`flex items-center justify-between w-full px-4 py-3 bg-blue-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 ${
+                    expanded === index ? "rounded-t-md" : "rounded-md"
+                  } focus:outline-none `}
+                  onClick={() => toggleQuestion(index)}
+                >
+                  <span className="font-semibold tracking-wide mr-3">
+                    {item.question}
+                  </span>
+                  <FaChevronDown
+                    className={`${
+                      expanded === index ? "transform rotate-180" : ""
+                    } text-xs md:text-base`}
+                  />
+                </button>
+                {expanded === index && (
+                  <div className="px-4 py-2 bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-b-md">
+                    <p>{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -253,8 +253,10 @@ const Navbar = ({
                     style={{ color: dark ? "white" : "#172554" }}
                   />
                 </div>
-                <p className="text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium">
-                  {user.username}
+                <p className="text-xs -ml-1 font-semibold text-slate-950 dark:text-white dark:font-medium max-w-10 truncate">
+                  <abbr className="no-underline" title={user.username}>
+                    {user.username}
+                  </abbr>
                 </p>
               </span>
             </div>

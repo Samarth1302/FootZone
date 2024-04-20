@@ -95,7 +95,7 @@ const LeagueDetails = ({ dark }) => {
               <h2 className="text-2xl text-blue-900 dark:text-blue-100 font-bold mb-4">
                 Points Table
               </h2>
-              <table className="w-full text-base lg:text-xl">
+              <table className="w-full text-base lg:text-xl border-2 border-gray-400">
                 <thead>
                   <tr className="border-b border-t text-blue-800 dark:text-blue-300 border-gray-200">
                     <th className="text-left p-1 pb-2">&nbsp;</th>
@@ -171,7 +171,7 @@ const LeagueDetails = ({ dark }) => {
                           : "bg-white"
                       } dark:text-blue-100`}
                     >
-                      <td className="text-left p-1">{index + 1}</td>
+                      <td className="text-left p-1 pl-3">{index + 1}</td>
                       <td className="text-left p-1 flex items-center">
                         <Image
                           src={team.team.logo}

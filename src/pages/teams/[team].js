@@ -353,7 +353,7 @@ const TeamDetails = ({ dark }) => {
                   ))}
                 </div>
                 {selectedPlayer && (
-                  <div className="fixed inset-0 bg-gray-700 bg-opacity-95 flex items-center justify-center">
+                  <div className="fixed inset-0 bg-blue-100 dark:bg-gray-700 bg-opacity-95 flex items-center justify-center">
                     <div
                       ref={overlayRef}
                       className="md:w-full max-w-sm md:max-w-md"
