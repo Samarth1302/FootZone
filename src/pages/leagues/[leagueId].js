@@ -171,7 +171,7 @@ const LeagueDetails = ({ dark }) => {
                           : "bg-white"
                       } dark:text-blue-100`}
                     >
-                      <td className="text-left p-1 pl-3">{index + 1}</td>
+                      <td className="text-left p-1 pl-2">{index + 1}</td>
                       <td className="text-left p-1 flex items-center">
                         <Image
                           src={team.team.logo}
@@ -179,7 +179,9 @@ const LeagueDetails = ({ dark }) => {
                           width={20}
                           height={20}
                         />
-                        <p className="ml-4">{team.team.name}</p>
+                        <p className="ml-4 max-w-14 text-wrap md:text-nowrap md:max-w-60 truncate">
+                          {team.team.name}
+                        </p>
                       </td>
                       <td className="text-center p-1">{team.all.played}</td>
                       <td className="text-center p-1">{team.all.win}</td>
