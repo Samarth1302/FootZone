@@ -32,6 +32,8 @@ const Comment = ({ user, dark }) => {
       "/login",
       "/security",
       "/privacy",
+      "/about",
+      "/credit",
       "/shop",
       "/order",
       "/_error",

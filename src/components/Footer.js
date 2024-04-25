@@ -29,13 +29,13 @@ const Footer = ({ dark }) => {
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link
               className="text-base text-black hover:underline underline-offset-4 dark:text-white"
-              href="#"
+              href="/about"
             >
               About
             </Link>
             <Link
               className="text-base text-black hover:underline underline-offset-4 dark:text-white"
-              href="#"
+              href="/credit"
             >
               Credits
             </Link>
