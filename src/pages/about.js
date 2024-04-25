@@ -44,8 +44,8 @@ const About = ({ dark }) => {
           <section className="bg-white rounded-lg p-6 shadow-md mt-4 dark:bg-slate-900 dark:text-white">
             <h2 className="text-xl font-semibold mb-2">Get in Touch</h2>
             <p>
-              Have questions, feedback, or suggestions? We'd love to hear from
-              you! Feel free to reach out to me via email at
+              Have questions, feedback, or suggestions? We&apos;d love to hear
+              from you! Feel free to reach out to me via email at
               samarth.chauhan13022002@gmail.com .
             </p>
           </section>

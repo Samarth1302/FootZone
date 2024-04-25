@@ -30,7 +30,7 @@ const Credits = ({ dark }) => {
             <br />
             <p>
               The UI components and designs are inspired by Tailblocks and
-              Shadcn, contributing to the website's visually appealing and
+              Shadcn, contributing to the website&apos;s visually appealing and
               user-friendly interface.
             </p>
             <br />

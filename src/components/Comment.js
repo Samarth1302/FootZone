@@ -421,7 +421,7 @@ const Comment = ({ user, dark }) => {
                     key={comment._id}
                     className={`p-3 my-3 mx-6 md:mx-1 text-sm md:text-base bg-slate-100 dark:bg-slate-950 rounded-lg `}
                   >
-                    <footer className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       <div className="flex items-center">
                         <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
                           <FaRegUserCircle />
@@ -485,7 +485,7 @@ const Comment = ({ user, dark }) => {
                           )}
                         </div>
                       )}
-                    </footer>
+                    </div>
                     {editComment === comment._id ? (
                       <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <textarea
@@ -494,9 +494,7 @@ const Comment = ({ user, dark }) => {
                           value={newEdit || comment.text}
                           onChange={(e) => setNewEdit(e.target.value)}
                           className="px-0 w-full text-base mb-2 text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:bg-gray-800"
-                          ref={(textarea) => {
-                            commentInputRef.current = textarea;
-                          }}
+                          ref={commentInputRef}
                           required
                         ></textarea>
                         <button
@@ -593,9 +591,9 @@ const Comment = ({ user, dark }) => {
                       comment.replies
                         .slice(0, displayedReplies[comment._id] || 2)
                         .map((reply) => (
-                          <div key={reply._id} className="ml-8 mt-4 mb-4">
+                          <article key={reply._id} className="ml-8 mt-4 mb-4">
                             <hr className="my-4 dark:border-slate-800" />
-                            <footer className="flex justify-between items-center mb-2">
+                            <div className="flex justify-between items-center mb-2">
                               <div className="flex items-center">
                                 <p className="inline-flex items-center mr-3 text-sm text-blue-400 dark:text-blue-200 font-semibold">
                                   <FaRegUserCircle />
@@ -619,14 +617,14 @@ const Comment = ({ user, dark }) => {
                                   />
                                 </div>
                               )}
-                            </footer>
+                            </div>
                             <p
                               className="px-7 text-gray-900 dark:text-white text-wrap"
                               style={{ overflowWrap: "break-word" }}
                             >
                               {reply.text}
                             </p>
-                          </div>
+                          </article>
                         ))}
                     {comment.replies.length >
                       (displayedReplies[comment._id] || 2) && (
