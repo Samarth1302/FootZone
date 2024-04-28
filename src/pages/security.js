@@ -81,7 +81,7 @@ const ChangePassword = ({ dark }) => {
           content="football soccer stadium players athletes sport"
         />
       </Head>
-      <section className="relative h-screen bg-white dark:bg-black flex items-center justify-center">
+      <section className="relative min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center z-0 opacity-85">
           <Image
             src="/stad.jpg"
@@ -101,7 +101,7 @@ const ChangePassword = ({ dark }) => {
             if (e.key === "Enter") {
               e.preventDefault();
               buttonRef.current.focus();
-              handleSubmit(e);
+              handleChangePassword();
             }
           }}
         >
