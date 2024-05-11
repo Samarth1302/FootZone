@@ -1,6 +1,6 @@
 **FootZone**
 
-**Welcome to FootZone - your ultimate destination for everything football/soccer! FootZone is a dynamic web platform that brings you the latest news, fixtures, standings, and user engagement features from the world of football.**
+**Welcome to FootZone - your ultimate destination for everything football! FootZone is a dynamic web platform that brings you the latest news, fixtures, standings, and user engagement features from the world of football.**
 
 **Features**
 
