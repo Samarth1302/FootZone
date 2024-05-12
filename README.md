@@ -36,6 +36,6 @@
 - **Node.js:** A JavaScript runtime for building scalable and efficient server-side applications.
 - **MongoDB Atlas:** A cloud-based MongoDB service for storing and managing data.
 - **JWT Authentication:** Implement JSON Web Token (JWT) authentication to secure user authentication and authorization.
-- **Koyeb:** Deploy your backend on Koyeb's serverless platform, ensuring high availability and scalability.
+- **Render Cloud:** Deploy your backend on Render's serverless platform, ensuring high availability and scalability.
 - **Other:** dompurify: A JavaScript library to sanitize HTML and prevent XSS attacks.
 
