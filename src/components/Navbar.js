@@ -93,7 +93,7 @@ const Navbar = ({
                         Home
                       </li>
                     </Link>
-                    <Link href={"/league"}>
+                    <Link href={"/league"} className="hidden">
                       <li
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/league"
@@ -105,7 +105,7 @@ const Navbar = ({
                         Leagues
                       </li>
                     </Link>
-                    <Link href={"/stat"}>
+                    <Link href={"/stat"} className="hidden">
                       <li
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/stat"
@@ -129,7 +129,7 @@ const Navbar = ({
                         Fixtures
                       </li>
                     </Link>
-                    <Link href={"/team"}>
+                    <Link href={"/team"} className="hidden">
                       <li
                         className={`my-2 flex items-center rounded-md ${
                           currentPath === "/team"
@@ -195,6 +195,9 @@ const Navbar = ({
                       </Link>
                     )}
                   </ul>
+                  <p className="text-red-500 font-semibold text-sm flex-wrap mt-10 text-center">
+                    Currently under maintenance, limited features available
+                  </p>
                 </div>
               </aside>
             )}

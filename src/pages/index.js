@@ -85,7 +85,7 @@ export default function Home({ dark, sidebar, setSidebar }) {
   return (
     <div className={`min-h-screen ${dark ? "dark" : ""} dark:bg-black`}>
       <Head>
-        <title>Home - FootZone</title>
+        <title>Home - FootZone (under maintenance)</title>
         <meta
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
