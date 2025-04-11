@@ -28,16 +28,15 @@ Demo Video- https://drive.google.com/file/d/1jaV8KIcmxgMC8w7JK_31GRP1LJF8AtVd/vi
 
 **Frontend**
 
-- **Next.js:** A React framework for building server-side rendered and statically generated web applications.
-- **Chart.js:** A JavaScript library for creating interactive charts and graphs to visualize football statistics.
-- **Tailwind CSS:** A utility-first CSS framework for creating custom and responsive designs.
-- **Vercel:** Deploy your Next.js application with ease using Vercel's platform for static and Jamstack deployments.
+- **Next.js:** Frontend entirely upported by Next.js
+- **Chart.js:** Interactive charts and graphs to visualize football statistics.
+- **Tailwind CSS:** CSS framework used.
+- **Vercel:** To host the frontend code.
 
 **Backend**
 
-- **Node.js:** A JavaScript runtime for building scalable and efficient server-side applications.
-- **MongoDB Atlas:** A cloud-based MongoDB service for storing and managing data.
-- **JWT Authentication:** Implement JSON Web Token (JWT) authentication to secure user authentication and authorization.
-- **Render Cloud:** Deploy your backend on Render's serverless platform, ensuring high availability and scalability.
-- **Other:** dompurify: A JavaScript library to sanitize HTML and prevent XSS attacks.
+- **Node.js:** Backend code.
+- **MongoDB Atlas:** Cloud-based MongoDB storage.
+- **Render Cloud:** Backend server hosted on Render.
+- **Other:** dompurify to sanitize HTML and prevent XSS attacks.
 
